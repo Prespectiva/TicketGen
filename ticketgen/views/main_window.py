@@ -11,7 +11,8 @@ from PyQt6.QtWidgets import (
 
 from ticketgen.views.question_tab import QuestionTab
 
-# День 9: from ticketgen.views.template_tab import TemplateTab
+from ticketgen.views.template_tab import TemplateTab
+
 # День 10: from ticketgen.views.generation_tab import GenerationTab
 # День 11: from ticketgen.views.results_tab import ResultsTab
 
@@ -36,7 +37,7 @@ class MainWindow(QMainWindow):
 
         tabs = QTabWidget()
         tabs.addTab(QuestionTab(controller), "Банк вопросов")
-        # День 9: tabs.addTab(TemplateTab(controller), "Шаблоны")
+        tabs.addTab(TemplateTab(controller), "Шаблоны")
         # День 10: generation_tab = GenerationTab(controller)
         # День 11: results_tab = ResultsTab(controller)
         # День 10: tabs.addTab(generation_tab, "Генерация")
