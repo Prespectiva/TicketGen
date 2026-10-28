@@ -1,4 +1,5 @@
 """Окно/виджеты: common."""
+
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import (
@@ -116,7 +117,10 @@ def divider() -> QFrame:
 
 
 class ConfirmDialog(QDialog):
-    """Окно подтверждения из макета: заголовок, крестик, текст, две кнопки."""
+    """Окно подтверждения из макета: заголовок, текст, две кнопки.
+
+    Крестик закрытия уже есть в рамке окна Windows, второй не нужен.
+    """
 
     def __init__(self, parent, title: str, body: str, ok_text: str):
         """title — крупный заголовок, body — пояснение, ok_text — красная кнопка."""
@@ -126,13 +130,10 @@ class ConfirmDialog(QDialog):
         self.setMinimumHeight(216)
         heading = QLabel(title)
         heading.setObjectName("dialogTitle")
-        close = make_button("✕", "link")
-        close.clicked.connect(self.reject)
         top = QHBoxLayout()
         top.setContentsMargins(24, 0, 24, 0)
         heading.setFixedHeight(66)
         top.addWidget(heading, 1)
-        top.addWidget(close)
         text = QLabel(body)
         text.setWordWrap(True)
         text.setContentsMargins(24, 14, 24, 12)

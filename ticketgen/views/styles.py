@@ -1,4 +1,5 @@
 """Окно/виджеты: styles."""
+
 from pathlib import Path
 
 ICONS = (Path(__file__).parent / "icons").as_posix()
@@ -56,10 +57,9 @@ QTableWidget {
     outline: none;
 }
 QTableWidget::item {
-    padding: 0 16px; border-bottom: 1px solid #E2E8F0; color: #0F172A;
+    padding: 0 16px; border-bottom: 1px solid #E2E8F0;
 }
-QTableWidget::item:hover { background: #F8FAFC; }
-QTableWidget::item:selected { background: #EFF6FF; color: #0F172A; }
+QTableWidget::item:selected { background: #EFF6FF; }
 QHeaderView::section {
     background: #F1F5F9; color: #64748B; font-size: 12px; font-weight: normal;
     padding: 0 16px; border: none;
@@ -145,3 +145,28 @@ QProgressBar {
 QProgressBar::chunk { background: #2563EB; border-radius: 4px; }
 """
 APP_STYLE = APP_STYLE.replace("@ICONS@", ICONS)
+
+
+def apply_light_theme(app):
+    """Светлая тема всегда, даже если в Windows включена тёмная."""
+    from PyQt6.QtGui import QColor, QPalette
+
+    app.setStyle("Fusion")
+    palette = QPalette()
+    for role, color in {
+        QPalette.ColorRole.Window: "#F8FAFC",
+        QPalette.ColorRole.Base: "#FFFFFF",
+        QPalette.ColorRole.AlternateBase: "#F8FAFC",
+        QPalette.ColorRole.Button: "#FFFFFF",
+        QPalette.ColorRole.WindowText: "#0F172A",
+        QPalette.ColorRole.Text: "#0F172A",
+        QPalette.ColorRole.ButtonText: "#0F172A",
+        QPalette.ColorRole.PlaceholderText: "#94A3B8",
+        QPalette.ColorRole.Highlight: "#EFF6FF",
+        QPalette.ColorRole.HighlightedText: "#0F172A",
+        QPalette.ColorRole.ToolTipBase: "#FFFFFF",
+        QPalette.ColorRole.ToolTipText: "#0F172A",
+    }.items():
+        palette.setColor(role, QColor(color))
+    app.setPalette(palette)
+    app.setStyleSheet(APP_STYLE)

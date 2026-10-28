@@ -1,4 +1,5 @@
 """Импорт вопросов из CSV."""
+
 import csv
 import io
 from dataclasses import dataclass, field
