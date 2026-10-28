@@ -308,6 +308,14 @@ class TemplateRepository(BaseRepository):
             (questions_count, rule_id),
         )
 
+    def update_rule_target(self, rule_id: int, topic_id: int, difficulty_id: int):
+        """Меняет тему и сложность правила."""
+        self._execute(
+            "UPDATE tbl_template_rules SET topic_id = ?, difficulty_id = ? "
+            "WHERE id = ?",
+            (topic_id, difficulty_id, rule_id),
+        )
+
     def delete_rule(self, rule_id: int):
         """Удаляет правило."""
         self._execute("DELETE FROM tbl_template_rules WHERE id = ?", (rule_id,))
