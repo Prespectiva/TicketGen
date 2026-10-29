@@ -33,15 +33,20 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(1280, 720)
         self.resize(self._start_size())
 
+        # Создаем вкладки
         tabs = QTabWidget()
         tabs.addTab(QuestionTab(controller), "Банк вопросов")
         tabs.addTab(TemplateTab(controller), "Шаблоны")
+        
         generation_tab = GenerationTab(controller)
         results_tab = ResultsTab(controller)
+        
         tabs.addTab(generation_tab, "Генерация")
         tabs.addTab(results_tab, "Результаты")
+        
         self.setCentralWidget(tabs)
 
+        # Связь: после генерации переходим на вкладку "Результаты"
         def open_results(series_id: int, export: bool):
             """Переходит на «Результаты» и выбирает новую серию."""
             tabs.setCurrentWidget(results_tab)
@@ -49,13 +54,16 @@ class MainWindow(QMainWindow):
 
         generation_tab.open_series.connect(open_results)
 
+        # Меню
         help_menu = self.menuBar().addMenu("Помощь")
         help_menu.addAction("О программе", self.show_about)
 
+        # Строка состояния
         self.status_label = QLabel()
         self.statusBar().addWidget(self.status_label, 1)
         version_label = QLabel("Версия 1.0")
         self.statusBar().addPermanentWidget(version_label)
+        
         for signal in (
             controller.questions_changed,
             controller.templates_changed,
