@@ -9,13 +9,10 @@ from PyQt6.QtWidgets import (
     QTabWidget,
 )
 
-from ticketgen.views.question_tab import QuestionTab
-
-from ticketgen.views.template_tab import TemplateTab
-
 from ticketgen.views.generation_tab import GenerationTab
-
-# День 11: from ticketgen.views.results_tab import ResultsTab
+from ticketgen.views.question_tab import QuestionTab
+from ticketgen.views.results_tab import ResultsTab
+from ticketgen.views.template_tab import TemplateTab
 
 ABOUT_TEXT = (
     "<b>TicketGen</b> — генератор вариантов экзаменационных билетов.<br>"
@@ -40,10 +37,17 @@ class MainWindow(QMainWindow):
         tabs.addTab(QuestionTab(controller), "Банк вопросов")
         tabs.addTab(TemplateTab(controller), "Шаблоны")
         generation_tab = GenerationTab(controller)
-        # День 11: results_tab = ResultsTab(controller)
+        results_tab = ResultsTab(controller)
         tabs.addTab(generation_tab, "Генерация")
-        # День 11: tabs.addTab(results_tab, "Результаты")
+        tabs.addTab(results_tab, "Результаты")
         self.setCentralWidget(tabs)
+
+        def open_results(series_id: int, export: bool):
+            """Переходит на «Результаты» и выбирает новую серию."""
+            tabs.setCurrentWidget(results_tab)
+            results_tab.select_series(series_id, export)
+
+        generation_tab.open_series.connect(open_results)
 
         help_menu = self.menuBar().addMenu("Помощь")
         help_menu.addAction("О программе", self.show_about)
@@ -76,3 +80,11 @@ class MainWindow(QMainWindow):
     def show_about(self):
         """Окно «О программе»."""
         QMessageBox.about(self, "О программе", ABOUT_TEXT)
+
+    def closeEvent(self, event):  # имя метода задано библиотекой Qt
+        """При закрытии окна делает резервную копию базы."""
+        try:
+            self.controller.backup()
+        except OSError as error:
+            QMessageBox.warning(self, "Резервная копия", f"Не удалось: {error}")
+        event.accept()

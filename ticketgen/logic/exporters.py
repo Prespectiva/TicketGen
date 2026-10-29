@@ -1,4 +1,5 @@
 """Экспорт в DOCX и PDF."""
+
 from abc import ABC, abstractmethod
 from pathlib import Path
 from xml.sax.saxutils import escape
