@@ -2,7 +2,8 @@
 
 import pytest
 
-from ticketgen.domain.models import Question, TicketGenError
+from ticketgen.domain.models import Question, Series, TicketGenError
+from ticketgen.logic.generator import generate_variants
 
 
 def test_question_crud(repos):
@@ -39,3 +40,29 @@ def test_topic_with_questions_cannot_be_deleted(repos):
     topic_id = repos["topics"].get_all()[0].id
     with pytest.raises(TicketGenError):
         repos["topics"].delete(topic_id)
+
+
+def test_search_ignores_case_for_cyrillic(repos):
+    """Поиск находит текст независимо от регистра, в том числе русских букв."""
+    questions = repos["questions"]
+    assert questions.find(text="рекурсия") == questions.find(text="РЕКУРСИЯ")
+    assert len(questions.find(text="Рекурсия")) >= 1
+
+
+def test_template_with_series_cannot_be_deleted(repos):
+    """Шаблон, по которому есть серии, не удаляется, а пользователь видит причину."""
+    template = repos["templates"].get_all()[0]
+    pool = repos["questions"].find(only_active=True)
+    variants = generate_variants(template.rules, pool, 2, seed=1)
+    series = Series(None, template.id, "2026-11-01 12:00", 1, False, 2)
+    repos["series"].save(series, variants)
+    with pytest.raises(TicketGenError, match="серий"):
+        repos["templates"].delete(template.id)
+    assert repos["templates"].get(template.id) is not None
+
+
+def test_template_without_series_is_deleted(repos):
+    """Шаблон без серий удаляется вместе с правилами."""
+    template = repos["templates"].get_all()[0]
+    repos["templates"].delete(template.id)
+    assert repos["templates"].get(template.id) is None

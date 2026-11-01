@@ -115,6 +115,16 @@ def _pick_unique(rules, candidates, rng, used_sets) -> list[Question]:
     raise TicketGenError("Не удалось составить уникальный билет. Пополните банк.")
 
 
+def plain_header(header: str) -> str:
+    """Заголовок без номера билета: метка «{N}» (и «№» перед ней) убирается.
+
+    Нужен там, где заголовок относится ко всей серии, а не к одному билету
+    (файл ответов, сводная ведомость).
+    """
+    text = header.replace("№ {N}", "").replace("{N}", "")
+    return "\n".join(" ".join(line.split()) for line in text.splitlines())
+
+
 def ticket_title(header: str, number: int) -> str:
     """Заголовок билета: «{N}» заменяется номером, иначе номер на второй строке."""
     if "{N}" in header:

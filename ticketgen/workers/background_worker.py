@@ -15,12 +15,28 @@ class BackgroundWorker(QThread):
     finished_ok = pyqtSignal(object)
     failed = pyqtSignal(str)
 
+    # Работающие потоки. Окно обнуляет свою ссылку на поток уже в обработчике
+    # finished_ok, а сам поток в этот момент ещё завершается. Если Python
+    # удалит такой QThread, Qt аварийно закроет программу, поэтому ссылка
+    # хранится здесь до сигнала finished.
+    _running: set = set()
+
     def __init__(self, function, *args, **kwargs):
         """Запоминает функцию и её аргументы."""
         super().__init__()
         self._function = function
         self._args = args
         self._kwargs = kwargs
+
+    def start(self, *args):
+        """Запускает поток и держит на него ссылку до его завершения."""
+        BackgroundWorker._running.add(self)
+        self.finished.connect(self._release)
+        super().start(*args)
+
+    def _release(self):
+        """Забывает поток, когда он полностью завершился."""
+        BackgroundWorker._running.discard(self)
 
     def run(self):
         """Код, который выполняется в фоновом потоке."""

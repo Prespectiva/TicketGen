@@ -8,6 +8,8 @@ PRIMARY = "#2563EB"
 DIFFICULTY_COLORS = {1: "#DCFCE7", 2: "#FEF3C7", 3: "#FEE2E2"}
 DIFFICULTY_TEXT = {1: "#16A34A", 2: "#D97706", 3: "#DC2626"}
 INACTIVE_TEXT = "#94A3B8"
+TAB_HOVER_LINE = "#93C5FD"  # линия под вкладкой при наведении
+ROW_HOVER = "#F1F5F9"  # строка таблицы под курсором
 
 APP_STYLE = """
 QWidget { font-family: "Inter", "Segoe UI"; font-size: 14px; color: #0F172A; }
@@ -46,11 +48,37 @@ QLineEdit:disabled, QComboBox:disabled, QSpinBox:disabled {
 QComboBox::drop-down { border: none; width: 24px; }
 QComboBox::down-arrow { image: url(@ICONS@/chevron.svg); width: 12px; height: 12px; }
 
-QTabBar::tab { padding: 14px 20px; background: transparent; color: #64748B; }
-QTabBar::tab:hover { background: #F1F5F9; }
-QTabBar::tab:selected {
-    color: #2563EB; background: transparent; border-bottom: 2px solid #2563EB;
+/* Выпадающий список: под полем, скруглённый, без квадратной рамки окна. */
+QComboBox { combobox-popup: 0; }
+QComboBoxPrivateContainer { background: transparent; border: none; }
+QComboBox QAbstractItemView {
+    background: white; border: 1px solid #E2E8F0; border-radius: 8px;
+    padding: 4px; outline: none; min-height: 0;
 }
+QComboBox QAbstractItemView::item {
+    min-height: 32px; padding: 0 8px; border-radius: 6px; color: #0F172A;
+}
+QComboBox QAbstractItemView::item:hover { background: #F1F5F9; }
+QComboBox QAbstractItemView::item:selected { background: #EFF6FF; color: #2563EB; }
+QComboBox#plainCombo, QComboBox#plainCombo:focus {
+    border: none; background: transparent; padding: 0; min-height: 34px;
+}
+
+/* Вкладки: нижние линии рисует AnimatedTabBar (widgets.py). */
+QTabWidget::pane { border: none; border-top: 1px solid #E2E8F0; }
+QTabWidget::tab-bar { left: 24px; }
+QTabBar::tab {
+    min-width: 120px; padding: 14px 20px; background: transparent;
+    color: #64748B; border: none;
+}
+QTabBar::tab:hover { color: #0F172A; }
+QTabBar::tab:selected { color: #2563EB; }
+
+QStatusBar {
+    background: #F1F5F9; border-top: 1px solid #E2E8F0; min-height: 24px;
+}
+QStatusBar::item { border: none; }
+QStatusBar QLabel { color: #64748B; font-size: 12px; padding: 0 12px; }
 
 QTableWidget {
     background: white; border: 1px solid #E2E8F0; border-radius: 8px;
@@ -101,7 +129,36 @@ QListWidget#templates::item { border-bottom: 1px solid #E2E8F0; }
 QListWidget#templates::item:selected {
     background: #EFF6FF; border-left: 3px solid #2563EB;
 }
-QWidget#templateItem { background: transparent; }
+QWidget#templateItem, QWidget#listItem { background: transparent; }
+
+/* «Результаты»: серии — скруглённые карточки с синей линией у выбранной,
+   билеты — без рамок, выбранный подсвечен целиком (как в макете). */
+QListWidget#seriesList, QListWidget#ticketList {
+    background: transparent; border: none; padding: 0; min-height: 0;
+    outline: none;
+}
+QListWidget#seriesList::item {
+    background: white; border: 1px solid #E2E8F0; border-radius: 8px;
+}
+QListWidget#seriesList::item:hover { background: #F8FAFC; }
+QListWidget#seriesList::item:selected {
+    background: #EFF6FF; border: 1px solid #BFDBFE; border-left: 3px solid #2563EB;
+}
+QListWidget#ticketList::item { border: none; border-radius: 6px; }
+QListWidget#ticketList::item:hover { background: #F8FAFC; }
+QListWidget#ticketList::item:selected { background: #EFF6FF; }
+QWidget#listItem[selected="true"] QLabel#ticketTitle { color: #2563EB; }
+
+/* «Шаблоны»: плашка-проверка вместе со ссылкой «Добавить вопросы →». */
+QFrame#warningBox {
+    background: #FEF3C7; border: 1px solid #D97706; border-radius: 6px;
+}
+QFrame#successBox {
+    background: #DCFCE7; border: 1px solid #16A34A; border-radius: 6px;
+}
+QFrame#warningBox QLabel, QFrame#successBox QLabel {
+    background: transparent; border: none; padding: 0;
+}
 QLabel#error { color: #DC2626; font-size: 12px; }
 QLabel#warning {
     background: #FEF3C7; border: 1px solid #D97706; border-radius: 6px; padding: 8px;
@@ -170,3 +227,7 @@ def apply_light_theme(app):
         palette.setColor(role, QColor(color))
     app.setPalette(palette)
     app.setStyleSheet(APP_STYLE)
+
+    from ticketgen.views.widgets import install_combo_styler
+
+    install_combo_styler(app)

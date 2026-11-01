@@ -84,6 +84,11 @@ INSERT OR IGNORE INTO tbl_difficulty (id, level_name, weight) VALUES
 """
 
 
+def _lower(value):
+    """Строка в нижнем регистре (для SQL-функции py_lower); NULL остаётся NULL."""
+    return value.lower() if isinstance(value, str) else value
+
+
 class Database:
     """Подключение к файлу базы данных.
 
@@ -104,6 +109,9 @@ class Database:
         self.connection = sqlite3.connect(self.path)
         self.connection.row_factory = sqlite3.Row
         self.connection.execute("PRAGMA foreign_keys = ON")
+        # Встроенный LOWER() в SQLite не понимает кириллицу, поэтому
+        # регистрируем свою функцию для поиска без учёта регистра.
+        self.connection.create_function("py_lower", 1, _lower, deterministic=True)
         self.connection.executescript(SCHEMA)
         self.connection.commit()
 

@@ -143,8 +143,8 @@ class QuestionRepository(BaseRepository):
         """
         conditions, params = [], []
         if text:
-            conditions.append("q.question_text LIKE ?")
-            params.append(f"%{text}%")
+            conditions.append("py_lower(q.question_text) LIKE ?")
+            params.append(f"%{text.lower()}%")
         if topic_id:
             conditions.append("q.topic_id = ?")
             params.append(topic_id)
@@ -288,7 +288,19 @@ class TemplateRepository(BaseRepository):
         )
 
     def delete(self, template_id: int):
-        """Удаляет шаблон (правила удаляются каскадно)."""
+        """Удаляет шаблон (правила удаляются каскадно).
+
+        Raises:
+            TicketGenError: если по шаблону уже созданы серии билетов.
+        """
+        used = self._query(
+            "SELECT COUNT(*) FROM tbl_series WHERE template_id = ?", (template_id,)
+        )[0][0]
+        if used:
+            raise TicketGenError(
+                f"Шаблон нельзя удалить: по нему создано серий билетов: {used}. "
+                "Сначала удалите эти серии на вкладке «Результаты»."
+            )
         self._execute("DELETE FROM tbl_templates WHERE id = ?", (template_id,))
 
     def add_rule(self, rule: TemplateRule) -> int:

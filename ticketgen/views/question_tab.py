@@ -31,6 +31,7 @@ from ticketgen.views.dialogs import (
     fill_combo,
 )
 from ticketgen.views.styles import INACTIVE_TEXT
+from ticketgen.views.widgets import RowHoverHighlighter
 
 HEADERS = ["№", "Текст вопроса", "Тема", "Сложность", "Тип", "Активен", "Действия"]
 TEXT_COLUMN, DIFFICULTY_COLUMN, ACTIVE_COLUMN, ACTIONS_COLUMN = 1, 3, 5, 6
@@ -91,6 +92,8 @@ class QuestionTab(QWidget):
             HEADERS, stretch_column=TEXT_COLUMN, widths=COLUMN_WIDTHS
         )
         self.table.verticalHeader().setDefaultSectionSize(48)
+        # Строка под курсором становится чуть серой, как в макете.
+        self.row_hover = RowHoverHighlighter(self.table)
         self.empty_label = QLabel(
             "Ничего не найдено\nИзмените фильтры или добавьте новый вопрос."
         )
@@ -151,7 +154,7 @@ class QuestionTab(QWidget):
         self._reload_combo(
             self.difficulty_filter,
             self.controller.get_difficulties(),
-            lambda d: d.level_name,
+            lambda d: d.level_name.capitalize(),
             "Любая сложность",
         )
         self.refresh_table()
@@ -198,6 +201,7 @@ class QuestionTab(QWidget):
         self.questions = found[start : start + PAGE_SIZE]
 
         self.table.blockSignals(True)
+        self.row_hover.reset()
         self.table.setRowCount(len(self.questions))
         for row, question in enumerate(self.questions):
             self._fill_row(row, start + row + 1, question)
@@ -231,7 +235,9 @@ class QuestionTab(QWidget):
             self.table.setItem(row, column, item)
         self.table.item(row, DIFFICULTY_COLUMN).setText("")
         chip = make_chip(question.level_name, question.difficulty_id)
-        self.table.setCellWidget(row, DIFFICULTY_COLUMN, left_cell(chip))
+        chip_cell = left_cell(chip)
+        self.row_hover.watch(chip_cell, row)
+        self.table.setCellWidget(row, DIFFICULTY_COLUMN, chip_cell)
         active = QTableWidgetItem()
         active.setFlags(
             Qt.ItemFlag.ItemIsEnabled
@@ -256,6 +262,8 @@ class QuestionTab(QWidget):
         cell_layout.addStretch()
         cell_layout.addWidget(edit_button)
         cell_layout.addWidget(delete_button)
+        for widget in (cell, edit_button, delete_button):
+            self.row_hover.watch(widget, row)
         self.table.setItem(row, ACTIONS_COLUMN, QTableWidgetItem())
         self.table.setCellWidget(row, ACTIONS_COLUMN, cell)
 

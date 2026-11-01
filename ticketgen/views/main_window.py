@@ -13,6 +13,7 @@ from ticketgen.views.generation_tab import GenerationTab
 from ticketgen.views.question_tab import QuestionTab
 from ticketgen.views.results_tab import ResultsTab
 from ticketgen.views.template_tab import TemplateTab
+from ticketgen.views.widgets import AnimatedTabBar
 
 ABOUT_TEXT = (
     "<b>TicketGen</b> — генератор вариантов экзаменационных билетов.<br>"
@@ -35,15 +36,16 @@ class MainWindow(QMainWindow):
 
         # Создаем вкладки
         tabs = QTabWidget()
+        tabs.setTabBar(AnimatedTabBar())  # анимированная линия под вкладками
         tabs.addTab(QuestionTab(controller), "Банк вопросов")
         tabs.addTab(TemplateTab(controller), "Шаблоны")
-        
+
         generation_tab = GenerationTab(controller)
         results_tab = ResultsTab(controller)
-        
+
         tabs.addTab(generation_tab, "Генерация")
         tabs.addTab(results_tab, "Результаты")
-        
+
         self.setCentralWidget(tabs)
 
         # Связь: после генерации переходим на вкладку "Результаты"
@@ -63,7 +65,7 @@ class MainWindow(QMainWindow):
         self.statusBar().addWidget(self.status_label, 1)
         version_label = QLabel("Версия 1.0")
         self.statusBar().addPermanentWidget(version_label)
-        
+
         for signal in (
             controller.questions_changed,
             controller.templates_changed,

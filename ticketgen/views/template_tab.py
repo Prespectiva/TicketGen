@@ -27,11 +27,13 @@ from ticketgen.views.common import (
     show_error,
 )
 from ticketgen.views.dialogs import QuestionDialog, fill_combo
+from ticketgen.views.widgets import RowHoverHighlighter
 
 HEADERS = ["№", "Тема", "Сложность", "Кол-во вопросов", "Баллы всего", "В банке", ""]
 TOPIC_COLUMN, LEVEL_COLUMN, COUNT_COLUMN, POINTS_COLUMN = 1, 2, 3, 4
 BANK_COLUMN, DELETE_COLUMN = 5, 6
-COLUMN_WIDTHS = {0: 56, 2: 200, 3: 200, 4: 160, 5: 224}
+COLUMN_WIDTHS = {0: 56, 2: 200, 3: 200, 4: 160, 5: 224, 6: 80}
+LEVEL_COMBO_WIDTH = 168
 GREEN, ORANGE = "#16A34A", "#D97706"
 NEW_NAME = "Новый шаблон"
 NEW_HEADER = "Экзаменационный билет № {N} по дисциплине «ОАиП»"
@@ -79,14 +81,26 @@ class TemplateTab(QWidget):
         list_card = QFrame()
         list_card.setObjectName("card")
         list_card.setFixedWidth(360)
+        # Тот же вид, что у «Серий билетов» на вкладке «Результаты»:
+        # скруглённые карточки с отступом, у выбранной синяя линия слева.
+        self.template_list.setObjectName("seriesList")
+        self.template_list.setSpacing(3)
+        self.template_list.setHorizontalScrollBarPolicy(
+            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
+        )
         list_header = QHBoxLayout()
+        list_header.setContentsMargins(16, 0, 16, 0)
         list_header.addWidget(self._label("Шаблоны", "h2"))
         list_header.addStretch()
         list_header.addWidget(new_button)
+        list_inset = QVBoxLayout()
+        list_inset.setContentsMargins(8, 0, 8, 0)
+        list_inset.addWidget(self.template_list)
         list_layout = QVBoxLayout(list_card)
-        list_layout.setContentsMargins(16, 16, 16, 0)
+        list_layout.setContentsMargins(0, 16, 0, 12)
+        list_layout.setSpacing(8)
         list_layout.addLayout(list_header)
-        list_layout.addWidget(self.template_list)
+        list_layout.addLayout(list_inset, 1)
 
         self.name_edit = QLineEdit()
         self.header_edit = QLineEdit()
@@ -108,9 +122,10 @@ class TemplateTab(QWidget):
         rules_header.addStretch()
         rules_header.addWidget(add_rule_button)
         self.rules_table = make_table(
-            HEADERS, stretch_column=DELETE_COLUMN, widths=COLUMN_WIDTHS
+            HEADERS, stretch_column=TOPIC_COLUMN, widths=COLUMN_WIDTHS
         )
         self.rules_table.verticalHeader().setDefaultSectionSize(48)
+        self.row_hover = RowHoverHighlighter(self.rules_table)
 
         self.questions_label = self._label("", "value")
         self.score_label = self._label("", "valueBlue")
@@ -137,7 +152,11 @@ class TemplateTab(QWidget):
         self.banner = QLabel()
         self.banner.setWordWrap(True)
         self.add_questions_button = make_button("Добавить вопросы →", "link")
-        banner_row = QHBoxLayout()
+        self.banner_box = QFrame()
+        self.banner_box.setMinimumHeight(56)
+        banner_row = QHBoxLayout(self.banner_box)
+        banner_row.setContentsMargins(12, 10, 24, 10)
+        banner_row.setSpacing(16)
         banner_row.addWidget(self.banner, 1)
         banner_row.addWidget(self.add_questions_button)
 
@@ -156,7 +175,7 @@ class TemplateTab(QWidget):
         right.addLayout(rules_header)
         right.addWidget(self.rules_table)
         right.addWidget(summary)
-        right.addLayout(banner_row)
+        right.addWidget(self.banner_box)
         right.addStretch()
         right.addLayout(bottom)
 
@@ -211,7 +230,7 @@ class TemplateTab(QWidget):
         item.setSizeHint(QSize(0, 66))
         self.template_list.addItem(item)
         holder = QWidget()
-        holder.setObjectName("templateItem")
+        holder.setObjectName("listItem")
         column = QVBoxLayout(holder)
         column.setContentsMargins(13, 12, 12, 12)
         column.setSpacing(2)
@@ -246,9 +265,9 @@ class TemplateTab(QWidget):
             if not c.ok
         ]
         self.add_questions_button.setVisible(bool(problems))
-        self.banner.setVisible(bool(checks))
+        self.banner_box.setVisible(bool(checks))
         if problems:
-            self.banner.setObjectName("warning")
+            self.banner_box.setObjectName("warningBox")
             text = (
                 "⚠ "
                 + " ".join(problems)
@@ -256,22 +275,24 @@ class TemplateTab(QWidget):
             )
         elif len(checks) == 1:
             check = checks[0]
-            self.banner.setObjectName("success")
+            self.banner_box.setObjectName("successBox")
             text = (
                 "✓ Вопросов в банке хватает: нужно "
                 f"{need_text(check.required, check.rule.level_name)} "
                 f"по теме «{check.rule.topic_name}», в банке {check.available}."
             )
         else:
-            self.banner.setObjectName("success")
+            self.banner_box.setObjectName("successBox")
             text = "✓ Вопросов в банке хватает по всем правилам"
         self.banner.setText(text)
-        self.banner.style().unpolish(self.banner)
-        self.banner.style().polish(self.banner)
+        for widget in (self.banner_box, self.banner):
+            widget.style().unpolish(widget)
+            widget.style().polish(widget)
 
     def _fill_rules(self, checks):
         """Заполняет таблицу правил: поля прямо в строках, как в макете."""
         table = self.rules_table
+        self.row_hover.reset()
         table.clearContents()
         table.clearSpans()
         table.setRowCount(max(1, len(checks)))
@@ -300,8 +321,9 @@ class TemplateTab(QWidget):
                 POINTS_COLUMN: rule.questions_count * rule.weight,
                 BANK_COLUMN: bank_text,
             }
-            for column, value in values.items():
-                table.setItem(row, column, QTableWidgetItem(str(value)))
+            for column in range(len(HEADERS)):
+                text = str(values[column]) if column in values else ""
+                table.setItem(row, column, QTableWidgetItem(text))
             bank_item = table.item(row, BANK_COLUMN)
             bank_item.setForeground(QBrush(QColor(color)))
             font = QFont(bank_item.font())
@@ -309,9 +331,11 @@ class TemplateTab(QWidget):
             bank_item.setFont(font)
 
             topic_combo = QComboBox()
+            topic_combo.setObjectName("plainCombo")
             fill_combo(topic_combo, topics, lambda t: t.topic_name)
             topic_combo.setCurrentIndex(max(0, topic_combo.findData(rule.topic_id)))
             level_combo = QComboBox()
+            level_combo.setMaximumWidth(LEVEL_COMBO_WIDTH)
             fill_combo(level_combo, levels, lambda d: d.level_name.capitalize())
             level_combo.setCurrentIndex(
                 max(0, level_combo.findData(rule.difficulty_id))
@@ -322,8 +346,12 @@ class TemplateTab(QWidget):
                         r, t.currentData(), v.currentData()
                     )
                 )
-            table.setCellWidget(row, TOPIC_COLUMN, self._cell(topic_combo, True))
-            table.setCellWidget(row, LEVEL_COLUMN, self._cell(level_combo, True))
+            table.setCellWidget(
+                row, TOPIC_COLUMN, self._cell(topic_combo, True, row=row)
+            )
+            table.setCellWidget(
+                row, LEVEL_COLUMN, self._cell(level_combo, True, row=row)
+            )
 
             spin = QSpinBox()
             spin.setRange(1, 50)
@@ -333,21 +361,27 @@ class TemplateTab(QWidget):
             spin.editingFinished.connect(
                 lambda r=rule, s=spin: self._count_edited(r, s.value())
             )
-            table.setCellWidget(row, COUNT_COLUMN, self._cell(spin))
+            table.setCellWidget(row, COUNT_COLUMN, self._cell(spin, row=row))
             delete_button = make_button("", "link", "Удалить правило")
             delete_button.setIcon(icon("trash"))
             delete_button.clicked.connect(lambda _, r=rule: self.delete_rule(r))
-            table.setCellWidget(row, DELETE_COLUMN, self._cell(delete_button))
+            table.setCellWidget(row, DELETE_COLUMN, self._cell(delete_button, row=row))
 
-    @staticmethod
-    def _cell(widget, stretch: bool = False) -> QWidget:
-        """Оборачивает поле в ячейку с отступами 16px, как в макете."""
+    def _cell(self, widget, stretch: bool = False, row: int = -1) -> QWidget:
+        """Оборачивает поле в ячейку.
+
+        Своих отступов нет: Qt сам ставит поле с отступом ячейки (16 px из
+        стилей), поэтому поле начинается ровно под заголовком колонки.
+        """
         cell = QWidget()
         cell_layout = QHBoxLayout(cell)
-        cell_layout.setContentsMargins(16, 0, 16, 0)
+        cell_layout.setContentsMargins(0, 0, 0, 0)
         cell_layout.addWidget(widget)
         if not stretch:
             cell_layout.addStretch()
+        if row >= 0:
+            self.row_hover.watch(cell, row)
+            self.row_hover.watch(widget, row)
         return cell
 
     def _run(self, action):
@@ -413,12 +447,13 @@ class TemplateTab(QWidget):
         text = (
             f"Удалить шаблон?\n\nШаблон «{self.current.template_name}» и его "
             f"{plural(len(self.current.rules), ('правило', 'правила', 'правил'))} "
-            "будут удалены. Серии билетов, созданные по этому шаблону, останутся "
-            "на вкладке «Результаты»."
+            "будут удалены. Если по шаблону уже создавались серии билетов, "
+            "сначала удалите их на вкладке «Результаты»."
         )
         if confirm(self, text):
             template_id = self.current.id
-            self.current = None
+            # Выбор обновится сам после сигнала контроллера; при ошибке
+            # шаблон остаётся выбранным.
             self._run(lambda: self.controller.delete_template(template_id))
 
     def add_rule(self):
