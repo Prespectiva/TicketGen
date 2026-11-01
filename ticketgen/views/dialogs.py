@@ -30,7 +30,13 @@ from ticketgen.domain.models import (
     Question,
     TicketGenError,
 )
-from ticketgen.logic.exporters import ExporterFactory, build_summary, export_series
+from ticketgen.logic.exporters import (
+    ExporterFactory,
+    build_summary,
+    export_series,
+    topics_text,
+)
+from ticketgen.logic.generator import plain_header
 from ticketgen.views.common import (
     build_dialog,
     confirm,
@@ -384,11 +390,11 @@ class ImportDialog(QDialog):
             fill_table(self.errors_table, [list(error) for error in result.errors])
             self.errors_table.setVisible(True)
             self.report_button.setVisible(True)
-            self.path_edit.setEnabled(False)
-            self.cancel_button.setVisible(False)
-            self.load_button.setText("Готово")
-            self.load_button.setEnabled(True)
-            self.setFixedHeight(524 if result.errors else 300)
+        self.path_edit.setEnabled(False)
+        self.cancel_button.setVisible(False)
+        self.load_button.setText("Готово")
+        self.load_button.setEnabled(True)
+        self.setFixedHeight(524 if result.errors else 300)
 
     def _save_report(self):
         """Сохраняет список ошибок в текстовый файл."""
@@ -736,16 +742,6 @@ class ExportDialog(QDialog):
             super().reject()
 
 
-def topics_text(questions) -> str:
-    """Темы билета со счётчиком: «Циклы ×2, Функции»."""
-    counts: dict[str, int] = {}
-    for question in questions:
-        counts[question.topic_name] = counts.get(question.topic_name, 0) + 1
-    return ", ".join(
-        f"{name} ×{count}" if count > 1 else name for name, count in counts.items()
-    )
-
-
 class SummaryDialog(QDialog):
     """Сводная ведомость серии: состав и баллы всех билетов."""
 
@@ -818,7 +814,7 @@ class SummaryDialog(QDialog):
         )
         document = QTextDocument()
         document.setHtml(
-            f"<h2>{self.header}</h2><table border='1' cellspacing='0' "
+            f"<h2>{plain_header(self.header)}</h2><table border='1' cellspacing='0' "
             "cellpadding='4'><tr><th>Билет</th><th>Вопросы</th><th>Темы</th>"
             f"<th>Баллы</th></tr>{rows}</table>"
         )

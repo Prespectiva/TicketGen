@@ -6,7 +6,7 @@ from xml.sax.saxutils import escape
 
 from ticketgen.config import AppConfig
 from ticketgen.domain.models import TicketGenError, Variant
-from ticketgen.logic.generator import ticket_title
+from ticketgen.logic.generator import plain_header, ticket_title
 
 # Блок — кортеж (вид, значение): ("title", str), ("text", str),
 # ("table", список строк таблицы), ("break", None).
@@ -24,9 +24,19 @@ def build_tickets(header: str, variants: list[Variant]) -> list[tuple]:
     return blocks
 
 
+def topics_text(questions) -> str:
+    """Темы билета со счётчиком: «Циклы ×2, Функции»."""
+    counts: dict[str, int] = {}
+    for question in questions:
+        counts[question.topic_name] = counts.get(question.topic_name, 0) + 1
+    return ", ".join(
+        f"{name} ×{count}" if count > 1 else name for name, count in counts.items()
+    )
+
+
 def build_answers(header: str, variants: list[Variant]) -> list[tuple]:
     """Блоки файла с эталонными ответами для преподавателя."""
-    blocks = [("title", f"{header}\nОтветы для преподавателя")]
+    blocks = [("title", f"{plain_header(header)}\nОтветы для преподавателя")]
     for variant in variants:
         blocks.append(("text", f"Билет № {variant.variant_no}"))
         for number, question in enumerate(variant.questions, 1):
@@ -43,11 +53,12 @@ def build_summary(header: str, variants: list[Variant]) -> list[tuple]:
             [
                 str(variant.variant_no),
                 ", ".join(str(question.id) for question in variant.questions),
-                ", ".join(question.topic_name for question in variant.questions),
+                topics_text(variant.questions),
                 str(variant.total_score),
             ]
         )
-    return [("title", f"{header}\nСводная ведомость"), ("table", rows)]
+    title = f"{plain_header(header)}\nСводная ведомость"
+    return [("title", title), ("table", rows)]
 
 
 class BaseExporter(ABC):

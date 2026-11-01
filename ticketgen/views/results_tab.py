@@ -33,8 +33,9 @@ class ResultsTab(QWidget):
         self.series = []
         self.variants = []
 
-        self.series_list = self._make_list()
-        self.variant_list = self._make_list()
+        self.series_list = self._make_list("seriesList")
+        self.series_list.setSpacing(3)  # небольшой отступ между карточками серий
+        self.variant_list = self._make_list("ticketList")
         self.score_label = QLabel()
         self.score_label.setObjectName("okText")
         delete_button = make_button("Удалить серию", "danger")
@@ -89,6 +90,9 @@ class ResultsTab(QWidget):
 
         self.series_list.currentRowChanged.connect(self.show_series)
         self.variant_list.currentRowChanged.connect(self.show_variant)
+        self.variant_list.currentRowChanged.connect(
+            lambda: self._mark_selected(self.variant_list)
+        )
         delete_button.clicked.connect(self.delete_series)
         summary_button.clicked.connect(self.show_summary)
         export_button.clicked.connect(self.export)
@@ -96,10 +100,10 @@ class ResultsTab(QWidget):
         self.refresh()
 
     @staticmethod
-    def _make_list() -> QListWidget:
-        """Список без рамки внутри белой карточки."""
+    def _make_list(name: str) -> QListWidget:
+        """Список без рамки внутри белой карточки (вид задаёт имя стиля)."""
         widget = QListWidget()
-        widget.setObjectName("templates")
+        widget.setObjectName(name)
         widget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         return widget
 
@@ -116,7 +120,10 @@ class ResultsTab(QWidget):
         heading.setObjectName("h2")
         heading.setContentsMargins(16, 0, 16, 0)
         column.addWidget(heading)
-        column.addWidget(content, 1)
+        inset = QVBoxLayout()
+        inset.setContentsMargins(8, 0, 8, 0)  # строки списка не касаются рамки
+        inset.addWidget(content)
+        column.addLayout(inset, 1)
         return frame
 
     def current_series(self):
@@ -160,7 +167,7 @@ class ResultsTab(QWidget):
         item.setSizeHint(QSize(0, height))
         widget.addItem(item)
         holder = QWidget()
-        holder.setObjectName("templateItem")
+        holder.setObjectName("listItem")
         row = QHBoxLayout(holder)
         row.setContentsMargins(13, 8, 16, 8)
         column = QVBoxLayout()
@@ -176,6 +183,18 @@ class ResultsTab(QWidget):
             row.addWidget(tail)
         widget.setItemWidget(item, holder)
 
+    @staticmethod
+    def _mark_selected(widget: QListWidget):
+        """Красит название выбранного билета в синий (как в макете)."""
+        for row in range(widget.count()):
+            holder = widget.itemWidget(widget.item(row))
+            if holder is None:
+                continue
+            holder.setProperty("selected", row == widget.currentRow())
+            for child in (holder, *holder.findChildren(QLabel)):
+                child.style().unpolish(child)
+                child.style().polish(child)
+
     def show_series(self):
         """Показывает билеты выбранной серии."""
         series = self.current_series()
@@ -186,7 +205,7 @@ class ResultsTab(QWidget):
             self._add_item(
                 self.variant_list,
                 40,
-                [(f"Билет № {variant.variant_no}", "")],
+                [(f"Билет № {variant.variant_no}", "ticketTitle")],
                 f"{variant.total_score} б.",
             )
         self.variant_list.blockSignals(False)
