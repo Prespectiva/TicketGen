@@ -1,5 +1,6 @@
 """Свои виджеты: вкладки с анимированной линией и скруглённые выпадающие списки."""
 
+from PyQt6 import sip
 from PyQt6.QtCore import (
     QEasingCurve,
     QEvent,
@@ -208,6 +209,10 @@ class RowHoverHighlighter(QObject):
 
     def eventFilter(self, obj, event):  # имя метода задано библиотекой Qt
         """Следит за мышью над таблицей и над полями в ячейках."""
+        if sip.isdeleted(self.table):
+            # Окно закрывается: Qt уже удалил таблицу, но ещё присылает
+            # последние события. Обращаться к таблице теперь нельзя.
+            return False
         kind = event.type()
         if obj is self.table.viewport():
             if kind == QEvent.Type.MouseMove:
