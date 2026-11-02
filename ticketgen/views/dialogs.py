@@ -76,7 +76,7 @@ class QuestionDialog(QDialog):
     """Добавление и изменение вопроса."""
 
     def __init__(self, controller, question: Question | None = None, parent=None):
-        """Строит форму; если question передан --- заполняет её."""
+        """Строит форму; если question передан — заполняет её."""
         super().__init__(parent)
         self.controller = controller
         self.question = question
@@ -134,7 +134,7 @@ class QuestionDialog(QDialog):
         body.addWidget(self.error_label)
         body.addLayout(
             column(
-                "Эталонный ответ --- попадёт только в файл ответов", self.answer_edit
+                "Эталонный ответ — попадёт только в файл ответов", self.answer_edit
             )
         )
         body.addWidget(self.active_check)
@@ -294,7 +294,7 @@ class ImportDialog(QDialog):
         caption.setObjectName("hint")
         format_hint = QLabel(
             "Формат строки: дисциплина;тема;сложность;тип;вопрос;ответ. "
-            "Кодировка UTF-8, первая строка --- заголовки."
+            "Кодировка UTF-8, первая строка — заголовки."
         )
         format_hint.setObjectName("hint")
         format_hint.setWordWrap(True)
@@ -383,7 +383,7 @@ class ImportDialog(QDialog):
         self.ok_banner.setVisible(True)
         if result.errors:
             self.warn_banner.setText(
-                f"⚠ Пропущено строк с ошибками: {len(result.errors)} --- "
+                f"⚠ Пропущено строк с ошибками: {len(result.errors)} — "
                 "они не добавлены"
             )
             self.warn_banner.setVisible(True)
@@ -414,7 +414,7 @@ def used_text(count: int) -> str:
 
 
 class ReplaceQuestionDialog(QDialog):
-    """Выбор вопроса для замены; usage --- в скольких билетах серии он уже есть."""
+    """Выбор вопроса для замены; usage — в скольких билетах серии он уже есть."""
 
     def __init__(
         self, number, variant_no, old_question, candidates, usage, parent=None
@@ -549,7 +549,7 @@ class ExportDialog(QDialog):
         self.docx_radio.setChecked(True)
         self.tickets_check = QCheckBox("Билеты (без ответов)")
         self.tickets_check.setChecked(True)
-        self.answers_check = QCheckBox("Файл ответов для преподавателя --- отдельно")
+        self.answers_check = QCheckBox("Файл ответов для преподавателя — отдельно")
         self.answers_check.setChecked(True)
         self.summary_check = QCheckBox("Сводная ведомость")
         self.folder_edit = QLineEdit(str(folder))
@@ -787,7 +787,7 @@ class SummaryDialog(QDialog):
         footer.addWidget(print_button)
         footer.addWidget(save_button)
         footer.addWidget(close_button)
-        build_dialog(self, f"Сводная ведомость --- {title}", body, footer)
+        build_dialog(self, f"Сводная ведомость — {title}", body, footer)
 
     @staticmethod
     def summary_text(variants) -> str:
