@@ -8,3 +8,5 @@ export/
 build/
 dist/
 *.spec
+htmlcov/
+.coverage
