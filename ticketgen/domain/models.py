@@ -4,6 +4,23 @@ from dataclasses import dataclass, field
 
 QUESTION_TYPES = ["теория", "задача", "практика"]
 
+# Вид документа → слово перед номером («Билет № 3», «Вариант № 3»).
+DOC_KINDS = {
+    "Экзаменационный билет": "Билет",
+    "Зачётный билет": "Билет",
+    "Контрольная работа": "Вариант",
+    "Самостоятельная работа": "Вариант",
+    "Тест": "Вариант",
+}
+DEFAULT_DOC_KIND = "Экзаменационный билет"
+DEFAULT_SIGN_TEXT = "Преподаватель ________________ / ________________"
+STUDENT_LINE_TEXT = "ФИО студента ________________________  Группа ________"
+
+
+def kind_number_word(doc_kind: str) -> str:
+    """Слово перед номером для вида документа; для своего вида — «Вариант»."""
+    return DOC_KINDS.get(doc_kind, "Вариант")
+
 
 class TicketGenError(Exception):
     """Ошибка, текст которой можно показать пользователю."""
@@ -54,6 +71,7 @@ class Question:
     topic_name: str = ""
     level_name: str = ""
     weight: int = 0
+    discipline: str = ""
 
 
 @dataclass
@@ -72,12 +90,27 @@ class TemplateRule:
 
 @dataclass
 class Template:
-    """Шаблон билета (таблица tbl_templates) со списком правил."""
+    """Шаблон билета (таблица tbl_templates) со списком правил.
+
+    Кроме правил шаблон хранит оформление: предмет, вид документа
+    (экзамен, контрольная...), эмблему и места для подписей.
+    """
 
     id: int | None
     template_name: str
     header_text: str = ""
     rules: list[TemplateRule] = field(default_factory=list)
+    subject: str = ""
+    doc_kind: str = DEFAULT_DOC_KIND
+    logo_path: str = ""
+    teacher_sign: bool = False
+    sign_text: str = DEFAULT_SIGN_TEXT
+    student_line: bool = False
+
+    @property
+    def number_word(self) -> str:
+        """«Билет» или «Вариант» в зависимости от вида документа."""
+        return kind_number_word(self.doc_kind)
 
 
 @dataclass

@@ -8,6 +8,19 @@ from pathlib import Path
 from ticketgen.domain.models import QUESTION_TYPES, Question, TicketGenError
 
 COLUMNS = ["дисциплина", "тема", "сложность", "тип", "вопрос", "ответ"]
+# Первый столбец можно назвать и «предмет»: это то же самое.
+COLUMN_ALIASES = {"предмет": "дисциплина"}
+
+
+def write_template(path: Path):
+    """Сохраняет пустой шаблон CSV: только строка заголовков.
+
+    Остаётся заполнить строки под заголовками. Кодировка UTF-8 с BOM и
+    разделитель «;»: так Excel на русской Windows сразу открывает файл по
+    столбцам и без «кракозябр».
+    """
+    with open(path, "w", encoding="utf-8-sig", newline="") as file:
+        csv.writer(file, delimiter=";").writerow(COLUMNS)
 
 
 @dataclass
@@ -63,6 +76,7 @@ def parse_csv(text: str, difficulty_ids: dict[str, int]):
     delimiter = ";" if ";" in lines[0] else ","
     reader = csv.reader(io.StringIO(text), delimiter=delimiter)
     header = [cell.strip().lower() for cell in next(reader)]
+    header = [COLUMN_ALIASES.get(name, name) for name in header]
     if header[:5] != COLUMNS[:5]:
         raise TicketGenError(
             "Неверный заголовок. Нужны столбцы: " + delimiter.join(COLUMNS)

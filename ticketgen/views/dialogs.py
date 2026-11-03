@@ -1,6 +1,8 @@
 """Диалоговые окна: вопрос, темы, импорт, замена, экспорт, ведомость."""
 
+import copy
 import random
+from html import escape as html_escape
 from pathlib import Path
 
 from PyQt6.QtCore import QSize, Qt, QUrl
@@ -21,12 +23,17 @@ from PyQt6.QtWidgets import (
     QPlainTextEdit,
     QProgressBar,
     QRadioButton,
+    QTextBrowser,
     QVBoxLayout,
     QWidget,
 )
 
 from ticketgen.domain.models import (
+    DEFAULT_DOC_KIND,
+    DEFAULT_SIGN_TEXT,
+    DOC_KINDS,
     QUESTION_TYPES,
+    STUDENT_LINE_TEXT,
     Question,
     TicketGenError,
 )
@@ -36,7 +43,7 @@ from ticketgen.logic.exporters import (
     export_series,
     topics_text,
 )
-from ticketgen.logic.generator import plain_header
+from ticketgen.logic.generator import plain_header, ticket_title
 from ticketgen.views.common import (
     build_dialog,
     confirm,
@@ -47,6 +54,7 @@ from ticketgen.views.common import (
     plural,
     set_error,
     show_error,
+    show_info,
 )
 from ticketgen.workers.background_worker import BackgroundWorker
 
@@ -85,8 +93,11 @@ class QuestionDialog(QDialog):
         )
         self.resize(560, 600)
 
+        self.subject_combo = QComboBox()
+        self.subject_combo.addItems(controller.get_disciplines())
         self.topic_combo = QComboBox()
-        fill_combo(self.topic_combo, controller.get_topics(), lambda t: t.topic_name)
+        self.subject_combo.currentIndexChanged.connect(self._fill_topics)
+        self._fill_topics()
         self.difficulty_combo = QComboBox()
         fill_combo(
             self.difficulty_combo,
@@ -128,14 +139,16 @@ class QuestionDialog(QDialog):
         pair.addLayout(column("Тип *", self.type_combo), 1)
         body = QVBoxLayout()
         body.setSpacing(12)
-        body.addLayout(column("Тема *", self.topic_combo))
+        subject_and_topic = QHBoxLayout()
+        subject_and_topic.setSpacing(16)
+        subject_and_topic.addLayout(column("Предмет *", self.subject_combo), 1)
+        subject_and_topic.addLayout(column("Тема *", self.topic_combo), 1)
+        body.addLayout(subject_and_topic)
         body.addLayout(pair)
         body.addLayout(column("Текст вопроса *", self.text_edit))
         body.addWidget(self.error_label)
         body.addLayout(
-            column(
-                "Эталонный ответ — попадёт только в файл ответов", self.answer_edit
-            )
+            column("Эталонный ответ — попадёт только в файл ответов", self.answer_edit)
         )
         body.addWidget(self.active_check)
         cancel = make_button("Отмена")
@@ -151,8 +164,19 @@ class QuestionDialog(QDialog):
         if question:
             self._load(question)
 
+    def _fill_topics(self):
+        """Темы выбранного предмета."""
+        fill_combo(
+            self.topic_combo,
+            self.controller.get_topics(self.subject_combo.currentText()),
+            lambda t: t.topic_name,
+        )
+
     def _load(self, question: Question):
         """Переносит данные вопроса в поля формы."""
+        self.subject_combo.setCurrentIndex(
+            max(0, self.subject_combo.findText(question.discipline))
+        )
         self.topic_combo.setCurrentIndex(self.topic_combo.findData(question.topic_id))
         self.difficulty_combo.setCurrentIndex(
             self.difficulty_combo.findData(question.difficulty_id)
@@ -171,7 +195,7 @@ class QuestionDialog(QDialog):
             self.error_label.setVisible(True)
             return
         if self.topic_combo.currentData() is None:
-            show_error(self, "Сначала создайте тему (кнопка «Темы...»).")
+            show_error(self, "Сначала создайте тему (кнопка «Предметы и темы…»).")
             return
         question = Question(
             id=self.question.id if self.question else None,
@@ -191,17 +215,25 @@ class QuestionDialog(QDialog):
 
 
 class TopicsDialog(QDialog):
-    """Управление темами: добавить, переименовать, удалить (CRUD tbl_topics)."""
+    """Предметы и темы: добавить, переименовать, удалить (CRUD tbl_topics).
+
+    Предмет (дисциплина) хранится у каждой темы. Новый предмет появляется,
+    когда в него добавлена первая тема.
+    """
 
     def __init__(self, controller, parent=None):
         """Строит список тем и поля ввода."""
         super().__init__(parent)
         self.controller = controller
-        self.setWindowTitle("Темы")
-        self.resize(480, 400)
+        self.setWindowTitle("Предметы и темы")
+        self.resize(520, 440)
         self.topic_list = QListWidget()
         self.topic_list.currentRowChanged.connect(self._on_select)
-        self.discipline_edit = QLineEdit("ОАиП")
+        # Предмет можно выбрать из списка или вписать новый.
+        self.discipline_edit = QComboBox()
+        self.discipline_edit.setEditable(True)
+        self.discipline_edit.addItems(controller.get_disciplines() or ["ОАиП"])
+        self.discipline_edit.lineEdit().setPlaceholderText("Например, ОАиП")
         self.name_edit = QLineEdit()
         add_button = make_button("Добавить", "primary")
         rename_button = make_button("Переименовать")
@@ -211,7 +243,7 @@ class TopicsDialog(QDialog):
         delete_button.clicked.connect(self._delete)
 
         form = QFormLayout()
-        form.addRow("Дисциплина", self.discipline_edit)
+        form.addRow("Предмет", self.discipline_edit)
         form.addRow("Тема", self.name_edit)
         buttons = QHBoxLayout()
         for button in (add_button, rename_button, delete_button):
@@ -223,20 +255,26 @@ class TopicsDialog(QDialog):
         self._refresh()
 
     def _refresh(self):
-        """Перечитывает список тем из базы."""
+        """Перечитывает список тем и предметов из базы."""
         self.topics = self.controller.get_topics()
         self.topic_list.clear()
         self.topic_list.addItems([topic.title for topic in self.topics])
+        typed = self.discipline_edit.currentText()
+        self.discipline_edit.blockSignals(True)
+        self.discipline_edit.clear()
+        self.discipline_edit.addItems(self.controller.get_disciplines())
+        self.discipline_edit.setCurrentText(typed)
+        self.discipline_edit.blockSignals(False)
 
     def _on_select(self, row: int):
         """Подставляет выбранную тему в поля ввода."""
         if 0 <= row < len(self.topics):
-            self.discipline_edit.setText(self.topics[row].discipline)
+            self.discipline_edit.setCurrentText(self.topics[row].discipline)
             self.name_edit.setText(self.topics[row].topic_name)
 
     def _values(self):
-        """Возвращает (дисциплина, тема) или None, если поле пустое."""
-        discipline = self.discipline_edit.text().strip()
+        """Возвращает (предмет, тема) или None, если поле пустое."""
+        discipline = self.discipline_edit.currentText().strip()
         name = self.name_edit.text().strip()
         set_error(self.name_edit, not name)
         set_error(self.discipline_edit, not discipline)
@@ -293,11 +331,12 @@ class ImportDialog(QDialog):
         caption = QLabel("Файл")
         caption.setObjectName("hint")
         format_hint = QLabel(
-            "Формат строки: дисциплина;тема;сложность;тип;вопрос;ответ. "
+            "Формат строки: дисциплина (предмет);тема;сложность;тип;вопрос;ответ. "
             "Кодировка UTF-8, первая строка — заголовки."
         )
         format_hint.setObjectName("hint")
         format_hint.setWordWrap(True)
+
         self.error_banner = QLabel()
         self.error_banner.setObjectName("errorBanner")
         self.error_banner.setWordWrap(True)
@@ -530,15 +569,27 @@ class ExportDialog(QDialog):
     """Настройки экспорта серии: формат, что сохранить, папка."""
 
     def __init__(
-        self, folder: Path, base_name: str, subtitle: str, header, variants, parent=None
+        self,
+        folder: Path,
+        base_name: str,
+        subtitle: str,
+        header,
+        variants,
+        parent=None,
+        template=None,
     ):
-        """Строит окно экспорта; сам запускает сохранение файлов в потоке."""
+        """Строит окно экспорта; сам запускает сохранение файлов в потоке.
+
+        template — шаблон серии: по нему оформляются билеты (эмблема,
+        вид документа, подписи). Может быть None, если шаблон удалён.
+        """
         super().__init__(parent)
         self.setWindowTitle("Экспорт серии")
         self.resize(560, 524)
         self.base_name = base_name
         self.header = header
         self.variants = variants
+        self.template = template
         self.worker = None
         self.files = []
         sub = QLabel(subtitle)
@@ -579,7 +630,11 @@ class ExportDialog(QDialog):
         body.addLayout(format_row)
         body.addSpacing(8)
         body.addWidget(self._caption("Что сохранить"))
-        for check in (self.tickets_check, self.answers_check, self.summary_check):
+        for check in (
+            self.tickets_check,
+            self.answers_check,
+            self.summary_check,
+        ):
             body.addWidget(check)
         body.addSpacing(8)
         body.addWidget(folder_caption)
@@ -687,6 +742,7 @@ class ExportDialog(QDialog):
             self.answers_check.isChecked(),
             self.summary_check.isChecked(),
             with_tickets=self.tickets_check.isChecked(),
+            template=self.template,
         )
         self.worker.progress.connect(self._on_progress)
         self.worker.finished_ok.connect(self._on_done)
@@ -833,3 +889,338 @@ class SummaryDialog(QDialog):
             )
         except (OSError, TicketGenError) as error:
             show_error(self, str(error))
+
+
+def style_preview_html(template, header: str) -> str:
+    """HTML-предпросмотр билета по настройкам оформления (номер 1)."""
+    lines = []
+    title = ticket_title(header or template.template_name, 1, template.number_word)
+    title_html = "<br>".join(html_escape(line) for line in title.splitlines())
+    logo = template.logo_path
+    if logo and Path(logo).is_file():
+        # Эмблема в левом верхнем углу, заголовок по центру рядом с ней.
+        url = QUrl.fromLocalFile(logo).toString()
+        lines.append(
+            "<table width='100%'><tr>"
+            f"<td width='80' valign='middle'><img src='{url}' width='72'></td>"
+            f"<td align='center' valign='middle'><h3>{title_html}</h3></td>"
+            "</tr></table>"
+        )
+    else:
+        lines.append(f"<h3 align='center'>{title_html}</h3>")
+    if template.student_line:
+        lines.append(f"<p>{html_escape(STUDENT_LINE_TEXT)}</p>")
+    lines.append("<p>1. Текст первого вопроса билета…</p>")
+    lines.append("<p>2. Текст второго вопроса билета…</p>")
+    if template.teacher_sign and template.sign_text.strip():
+        lines.append(f"<p><br>{html_escape(template.sign_text.strip())}</p>")
+    return "".join(lines)
+
+
+def suggested_header(doc_kind: str, subject: str) -> str:
+    """Заголовок по виду документа: «Контрольная работа по дисциплине «ОАиП»».
+
+    Номер в заголовок не входит: он выводится второй строкой
+    («Билет № 1» или «Вариант № 1»).
+    """
+    if subject:
+        return f"{doc_kind} по дисциплине «{subject}»"
+    return doc_kind
+
+
+class TicketStyleDialog(QDialog):
+    """Оформление билета: вид документа, заголовок, эмблема, подписи.
+
+    Справа сразу видно, как будет выглядеть первый билет.
+    """
+
+    def __init__(self, controller, template, header: str, parent=None):
+        """Заполняет поля из шаблона; header — текущий текст заголовка."""
+        super().__init__(parent)
+        self.controller = controller
+        self.template = copy.copy(template)
+        self.setWindowTitle("Оформление билета")
+        self.resize(920, 560)
+
+        self.kind_combo = QComboBox()
+        self.kind_combo.setEditable(True)
+        self.kind_combo.addItems(list(DOC_KINDS))
+        self.kind_combo.setCurrentText(template.doc_kind)
+        self.header_edit = QLineEdit(header)
+        header_button = make_button(
+            "По виду документа", "link", "Составить заголовок из вида и предмета"
+        )
+        header_button.clicked.connect(self._suggest_header)
+        header_row = QHBoxLayout()
+        header_row.addWidget(self.header_edit, 1)
+        header_row.addWidget(header_button)
+        header_hint = QLabel(
+            "Метка {N} заменяется номером. Без неё номер выводится второй "
+            "строкой: «Билет № 1» для билетов, «Вариант № 1» для остальных."
+        )
+        header_hint.setObjectName("hint")
+        header_hint.setWordWrap(True)
+
+        self.logo_label = QLabel()
+        self.logo_label.setObjectName("hint")
+        self.logo_label.setWordWrap(True)
+        logo_button = make_button("Выбрать картинку…")
+        logo_button.clicked.connect(self._choose_logo)
+        # Быстрый доступ: последняя использованная эмблема одним нажатием.
+        self.last_logo = controller.last_logo()
+        self.last_logo_button = make_button(
+            "Последняя эмблема",
+            tooltip=Path(self.last_logo).name if self.last_logo else "",
+        )
+        self.last_logo_button.clicked.connect(self._use_last_logo)
+        self.clear_logo_button = make_button("Убрать", "link")
+        self.clear_logo_button.clicked.connect(self._clear_logo)
+        logo_row = QHBoxLayout()
+        logo_row.addWidget(logo_button)
+        logo_row.addWidget(self.last_logo_button)
+        logo_row.addWidget(self.clear_logo_button)
+        logo_row.addStretch()
+
+        self.student_check = QCheckBox("Строка для ФИО и группы студента")
+        self.student_check.setChecked(template.student_line)
+        self.sign_check = QCheckBox("Место для подписи преподавателя")
+        self.sign_check.setChecked(template.teacher_sign)
+        self.sign_edit = QLineEdit(template.sign_text)
+
+        form = QVBoxLayout()
+        form.setSpacing(8)
+        for caption, widget in (
+            ("Вид документа", self.kind_combo),
+            ("Заголовок билета", header_row),
+        ):
+            form.addWidget(self._caption(caption))
+            if isinstance(widget, QHBoxLayout):
+                form.addLayout(widget)
+            else:
+                form.addWidget(widget)
+        form.addWidget(header_hint)
+        form.addSpacing(8)
+        form.addWidget(self._caption("Эмблема (левый верхний угол)"))
+        form.addLayout(logo_row)
+        form.addWidget(self.logo_label)
+        form.addSpacing(8)
+        form.addWidget(self._caption("Места для заполнения от руки"))
+        form.addWidget(self.student_check)
+        form.addWidget(self.sign_check)
+        form.addWidget(self.sign_edit)
+        form.addStretch()
+
+        self.preview = QTextBrowser()
+        self.preview.setMinimumWidth(380)
+        preview_column = QVBoxLayout()
+        preview_column.addWidget(self._caption("Предпросмотр"))
+        preview_column.addWidget(self.preview, 1)
+
+        body = QHBoxLayout()
+        body.setSpacing(24)
+        body.addLayout(form, 1)
+        body.addLayout(preview_column, 1)
+        cancel = make_button("Отмена")
+        cancel.clicked.connect(self.reject)
+        save = make_button("Сохранить", "primary")
+        save.clicked.connect(self.accept)
+        footer = QHBoxLayout()
+        footer.addStretch()
+        footer.addWidget(cancel)
+        footer.addWidget(save)
+        build_dialog(self, "Оформление билета", body, footer)
+
+        self.kind_combo.currentTextChanged.connect(self._update)
+        self.header_edit.textChanged.connect(self._update)
+        self.student_check.toggled.connect(self._update)
+        self.sign_check.toggled.connect(self._update)
+        self.sign_edit.textChanged.connect(self._update)
+        self._update()
+
+    @staticmethod
+    def _caption(text: str) -> QLabel:
+        """Жирная подпись раздела."""
+        label = QLabel(text)
+        label.setObjectName("caption")
+        return label
+
+    def _suggest_header(self):
+        """Подставляет заголовок по виду документа и предмету шаблона."""
+        self.header_edit.setText(
+            suggested_header(
+                self.kind_combo.currentText().strip(), self.template.subject
+            )
+        )
+
+    def _choose_logo(self):
+        """Выбор картинки; копия сохраняется в папке программы."""
+        path, _ = QFileDialog.getOpenFileName(
+            self, "Эмблема", "", "Картинки (*.png *.jpg *.jpeg *.bmp *.gif)"
+        )
+        if not path:
+            return
+        try:
+            self.template.logo_path = self.controller.store_logo(path)
+        except (TicketGenError, OSError) as error:
+            show_error(self, str(error))
+            return
+        self._update()
+
+    def _use_last_logo(self):
+        """Ставит эмблему, которой пользовались последней."""
+        if self.last_logo:
+            self.template.logo_path = self.last_logo
+            self._update()
+
+    def _clear_logo(self):
+        """Убирает эмблему из шаблона (файл картинки не удаляется)."""
+        self.template.logo_path = ""
+        self._update()
+
+    def _update(self):
+        """Переносит поля в копию шаблона и перерисовывает предпросмотр."""
+        template = self.template
+        template.doc_kind = self.kind_combo.currentText().strip() or DEFAULT_DOC_KIND
+        template.student_line = self.student_check.isChecked()
+        template.teacher_sign = self.sign_check.isChecked()
+        template.sign_text = self.sign_edit.text()
+        self.sign_edit.setEnabled(template.teacher_sign)
+        has_logo = bool(template.logo_path)
+        self.logo_label.setText(
+            Path(template.logo_path).name if has_logo else "Эмблема не выбрана"
+        )
+        self.clear_logo_button.setVisible(has_logo)
+        self.last_logo_button.setVisible(
+            bool(self.last_logo) and template.logo_path != self.last_logo
+        )
+        self.preview.setHtml(style_preview_html(template, self.header_edit.text()))
+
+    def accept(self):
+        """Сохраняет оформление в шаблон."""
+        self._update()
+        self.template.header_text = self.header_edit.text().strip()
+        if self.template.teacher_sign and not self.template.sign_text.strip():
+            self.template.sign_text = DEFAULT_SIGN_TEXT
+        try:
+            self.controller.update_template(self.template)
+        except TicketGenError as error:
+            show_error(self, str(error))
+            return
+        super().accept()
+
+
+class MoodleExportDialog(QDialog):
+    """Выгрузка билетов в Moodle: вся серия или один выбранный билет.
+
+    Каждый билет становится категорией вопросов, из которой в Moodle
+    собирается тест: вся серия — по тесту на каждый билет, один билет —
+    один тест.
+    """
+
+    def __init__(
+        self, controller, title, subtitle, variants, current, word, parent=None
+    ):
+        """title — заголовок серии без номера; current — выбранный билет."""
+        super().__init__(parent)
+        self.controller = controller
+        self.title = title
+        self.variants = variants
+        self.current = current
+        self.word = word
+        self.setWindowTitle("Экспорт в Moodle")
+        self.resize(560, 420)
+        sub = QLabel(subtitle)
+        sub.setObjectName("subtitle")
+        count = len(variants)
+        self.all_radio = QRadioButton(
+            f"Все {word.lower()}ы серии ({count}) — каждый в своей категории, "
+            f"по тесту на {word.lower()}"
+        )
+        self.one_radio = QRadioButton(
+            f"Только {word.lower()} № {current.variant_no} — один тест"
+            if current
+            else f"Только выбранный {word.lower()} — один тест"
+        )
+        self.one_radio.setEnabled(current is not None)
+        self.all_radio.setChecked(True)
+        self.xml_radio = QRadioButton("Moodle XML (.xml)")
+        self.gift_radio = QRadioButton("GIFT (.txt)")
+        self.xml_radio.setChecked(True)
+        # Две группы переключателей не должны мешать друг другу.
+        what_box, format_box = QWidget(), QWidget()
+        what_layout = QVBoxLayout(what_box)
+        what_layout.setContentsMargins(0, 0, 0, 0)
+        what_layout.addWidget(self.all_radio)
+        what_layout.addWidget(self.one_radio)
+        format_layout = QHBoxLayout(format_box)
+        format_layout.setContentsMargins(0, 0, 0, 0)
+        format_layout.setSpacing(32)
+        format_layout.addWidget(self.xml_radio)
+        format_layout.addWidget(self.gift_radio)
+        format_layout.addStretch()
+        hint = QLabel(
+            "В Moodle: Банк вопросов → Импорт → выбрать формат и файл. Вопросы "
+            "станут «Эссе», эталонный ответ увидит только преподаватель, "
+            "балл вопроса равен весу сложности."
+        )
+        hint.setObjectName("hint")
+        hint.setWordWrap(True)
+        body = QVBoxLayout()
+        body.setSpacing(8)
+        body.addWidget(sub)
+        body.addSpacing(4)
+        body.addWidget(ExportDialog._caption("Что выгрузить"))
+        body.addWidget(what_box)
+        body.addSpacing(8)
+        body.addWidget(ExportDialog._caption("Формат"))
+        body.addWidget(format_box)
+        body.addSpacing(8)
+        body.addWidget(hint)
+        body.addStretch()
+        cancel = make_button("Отмена")
+        cancel.clicked.connect(self.reject)
+        save = make_button("Сохранить…", "primary")
+        save.clicked.connect(self.accept)
+        footer = QHBoxLayout()
+        footer.addStretch()
+        footer.addWidget(cancel)
+        footer.addWidget(save)
+        build_dialog(self, "Экспорт в Moodle", body, footer)
+
+    def chosen_variants(self) -> list:
+        """Билеты для выгрузки: вся серия или один выбранный."""
+        if self.one_radio.isChecked() and self.current is not None:
+            return [self.current]
+        return list(self.variants)
+
+    def default_name(self) -> str:
+        """Имя файла по умолчанию."""
+        extension = "txt" if self.gift_radio.isChecked() else "xml"
+        if self.one_radio.isChecked() and self.current is not None:
+            return f"moodle_{self.word.lower()}_{self.current.variant_no}.{extension}"
+        return f"moodle_серия.{extension}"
+
+    def accept(self):
+        """Спрашивает файл и сохраняет билеты."""
+        file_format = "gift" if self.gift_radio.isChecked() else "xml"
+        file_filter = "GIFT (*.txt)" if file_format == "gift" else "Moodle XML (*.xml)"
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Экспорт в Moodle", self.default_name(), file_filter
+        )
+        if not path:
+            return
+        variants = self.chosen_variants()
+        try:
+            self.controller.export_moodle(
+                path, self.title, variants, self.word, file_format
+            )
+        except (TicketGenError, OSError) as error:
+            show_error(self, str(error))
+            return
+        show_info(
+            self,
+            "Сохранено: "
+            + plural(len(variants), ("тест", "теста", "тестов"))
+            + f" для Moodle.\n{path}",
+        )
+        super().accept()

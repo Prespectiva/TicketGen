@@ -1,10 +1,11 @@
 """Вкладка «Банк вопросов»: поиск, фильтры, таблица, страницы, импорт."""
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QBrush, QColor
+from PyQt6.QtCore import Qt, QUrl
+from PyQt6.QtGui import QBrush, QColor, QDesktopServices
 from PyQt6.QtWidgets import (
     QCheckBox,
     QComboBox,
+    QFileDialog,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -33,10 +34,25 @@ from ticketgen.views.dialogs import (
 from ticketgen.views.styles import INACTIVE_TEXT
 from ticketgen.views.widgets import RowHoverHighlighter
 
-HEADERS = ["№", "Текст вопроса", "Тема", "Сложность", "Тип", "Активен", "Действия"]
+HEADERS = [
+    "№",
+    "Текст вопроса",
+    "Предмет / тема",
+    "Сложность",
+    "Тип",
+    "Активен",
+    "Действия",
+]
 TEXT_COLUMN, DIFFICULTY_COLUMN, ACTIVE_COLUMN, ACTIONS_COLUMN = 1, 3, 5, 6
 PAGE_SIZE = 15
 COLUMN_WIDTHS = {0: 56, 2: 320, 3: 160, 4: 160, 5: 110, 6: 146}
+
+
+def topic_column_text(question) -> str:
+    """Текст столбца «Предмет / тема»: «ОАиП / Циклы»."""
+    if question.discipline:
+        return f"{question.discipline} / {question.topic_name}"
+    return question.topic_name
 
 
 def page_numbers(current: int, pages: int) -> list:
@@ -71,22 +87,28 @@ class QuestionTab(QWidget):
         self.search_edit.addAction(
             icon("search"), QLineEdit.ActionPosition.LeadingPosition
         )
-        self.search_edit.setFixedWidth(560)
+        self.search_edit.setFixedWidth(400)
+        self.subject_filter = QComboBox()
+        self.subject_filter.setFixedWidth(240)
         self.topic_filter = QComboBox()
         self.difficulty_filter = QComboBox()
         self.type_filter = QComboBox()
         self.type_filter.addItem("Все типы", None)
         for q_type in QUESTION_TYPES:
             self.type_filter.addItem(q_type.capitalize(), q_type)
-        self.topic_filter.setFixedWidth(296)
-        self.difficulty_filter.setFixedWidth(216)
-        self.type_filter.setFixedWidth(216)
+        self.topic_filter.setFixedWidth(240)
+        self.difficulty_filter.setFixedWidth(190)
+        self.type_filter.setFixedWidth(190)
         self.inactive_check = QCheckBox("Показывать отключённые")
         self.inactive_check.setChecked(True)
         reset_button = make_button("Сбросить фильтры", "link")
 
-        topics_button = make_button("Темы…")
+        topics_button = make_button("Предметы и темы…")
         import_button = make_button("Импорт CSV")
+        csv_template_button = make_button(
+            "Шаблон CSV",
+            tooltip="Сохранить пустой шаблон CSV для импорта и открыть его",
+        )
         add_button = make_button("+ Добавить вопрос", "primary")
         self.table = make_table(
             HEADERS, stretch_column=TEXT_COLUMN, widths=COLUMN_WIDTHS
@@ -106,11 +128,16 @@ class QuestionTab(QWidget):
         top_row = QHBoxLayout()
         top_row.addWidget(title)
         top_row.addStretch()
-        for button in (topics_button, import_button, add_button):
+        for button in (topics_button, csv_template_button, import_button, add_button):
             top_row.addWidget(button)
         filter_row = QHBoxLayout()
         filter_row.addWidget(self.search_edit)
-        for combo in (self.topic_filter, self.difficulty_filter, self.type_filter):
+        for combo in (
+            self.subject_filter,
+            self.topic_filter,
+            self.difficulty_filter,
+            self.type_filter,
+        ):
             filter_row.addWidget(combo)
         filter_row.addSpacing(8)
         filter_row.addWidget(self.inactive_check)
@@ -131,12 +158,14 @@ class QuestionTab(QWidget):
         layout.addLayout(bottom_row)
 
         self.search_edit.textChanged.connect(self.filters_changed)
+        self.subject_filter.currentIndexChanged.connect(self.subject_changed)
         for combo in (self.topic_filter, self.difficulty_filter, self.type_filter):
             combo.currentIndexChanged.connect(self.filters_changed)
         self.inactive_check.toggled.connect(self.filters_changed)
         reset_button.clicked.connect(self.reset_filters)
         topics_button.clicked.connect(self.open_topics)
         import_button.clicked.connect(self.import_csv)
+        csv_template_button.clicked.connect(self.save_csv_template)
         add_button.clicked.connect(self.add_question)
         self.table.cellDoubleClicked.connect(lambda row, _: self.edit_question(row))
         self.table.itemChanged.connect(self.on_item_changed)
@@ -145,12 +174,17 @@ class QuestionTab(QWidget):
 
     def refresh(self):
         """Обновляет списки фильтров и таблицу (вызывается по сигналу)."""
-        self._reload_combo(
-            self.topic_filter,
-            self.controller.get_topics(),
-            lambda t: t.topic_name,
-            "Все темы",
+        current = self.subject_filter.currentData()
+        self.subject_filter.blockSignals(True)
+        self.subject_filter.clear()
+        self.subject_filter.addItem("Все предметы", None)
+        for name in self.controller.get_disciplines():
+            self.subject_filter.addItem(name, name)
+        self.subject_filter.setCurrentIndex(
+            max(0, self.subject_filter.findData(current))
         )
+        self.subject_filter.blockSignals(False)
+        self._reload_topics()
         self._reload_combo(
             self.difficulty_filter,
             self.controller.get_difficulties(),
@@ -158,6 +192,20 @@ class QuestionTab(QWidget):
             "Любая сложность",
         )
         self.refresh_table()
+
+    def _reload_topics(self):
+        """Темы в фильтре — только выбранного предмета."""
+        self._reload_combo(
+            self.topic_filter,
+            self.controller.get_topics(self.subject_filter.currentData()),
+            lambda t: t.topic_name,
+            "Все темы",
+        )
+
+    def subject_changed(self):
+        """Сменили предмет: перестраиваем список тем и таблицу."""
+        self._reload_topics()
+        self.filters_changed()
 
     @staticmethod
     def _reload_combo(combo, items, text_of, first_item):
@@ -175,26 +223,41 @@ class QuestionTab(QWidget):
 
     def reset_filters(self):
         """Сбрасывает поиск и все фильтры."""
-        for widget in (self.search_edit, self.topic_filter, self.difficulty_filter):
+        widgets = (
+            self.search_edit,
+            self.subject_filter,
+            self.topic_filter,
+            self.difficulty_filter,
+            self.type_filter,
+            self.inactive_check,
+        )
+        for widget in widgets:
             widget.blockSignals(True)
         self.search_edit.clear()
+        self.subject_filter.setCurrentIndex(0)
+        self._reload_topics()
         self.topic_filter.setCurrentIndex(0)
         self.difficulty_filter.setCurrentIndex(0)
         self.type_filter.setCurrentIndex(0)
         self.inactive_check.setChecked(True)
-        for widget in (self.search_edit, self.topic_filter, self.difficulty_filter):
+        for widget in widgets:
             widget.blockSignals(False)
         self.filters_changed()
 
-    def refresh_table(self):
-        """Ищет вопросы по фильтрам и заполняет таблицу текущей страницы."""
-        found = self.controller.find_questions(
+    def found_questions(self):
+        """Все вопросы, подходящие под текущие поиск и фильтры (без страниц)."""
+        return self.controller.find_questions(
             text=self.search_edit.text().strip(),
+            discipline=self.subject_filter.currentData(),
             topic_id=self.topic_filter.currentData(),
             difficulty_id=self.difficulty_filter.currentData(),
             q_type=self.type_filter.currentData(),
             only_active=not self.inactive_check.isChecked(),
         )
+
+    def refresh_table(self):
+        """Ищет вопросы по фильтрам и заполняет таблицу текущей страницы."""
+        found = self.found_questions()
         pages = max(1, -(-len(found) // PAGE_SIZE))
         self.page = min(self.page, pages)
         start = (self.page - 1) * PAGE_SIZE
@@ -221,10 +284,11 @@ class QuestionTab(QWidget):
 
     def _fill_row(self, row: int, number: int, question):
         """Заполняет одну строку таблицы."""
+        topic = topic_column_text(question)
         values = [
             number,
             question.question_text,
-            question.topic_name,
+            topic,
             question.level_name,
             question.q_type.capitalize(),
         ]
@@ -333,3 +397,20 @@ class QuestionTab(QWidget):
     def import_csv(self):
         """Открывает окно импорта вопросов из CSV."""
         ImportDialog(self.controller, self).exec()
+
+    def save_csv_template(self):
+        """Сохраняет пустой шаблон CSV и открывает его (обычно в Excel).
+
+        В шаблоне только строка заголовков: остаётся вписать вопросы.
+        """
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Шаблон CSV", "шаблон_вопросов.csv", "CSV-файлы (*.csv)"
+        )
+        if not path:
+            return
+        try:
+            self.controller.write_csv_template(path)
+        except OSError as error:
+            show_error(self, f"Не удалось сохранить шаблон: {error}")
+            return
+        QDesktopServices.openUrl(QUrl.fromLocalFile(path))

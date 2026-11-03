@@ -56,6 +56,13 @@ class TopicRepository(BaseRepository):
         rows = self._query("SELECT * FROM tbl_topics ORDER BY discipline, topic_name")
         return [Topic(row["id"], row["discipline"], row["topic_name"]) for row in rows]
 
+    def disciplines(self) -> list[str]:
+        """Названия предметов (дисциплин), у которых есть темы, по алфавиту."""
+        rows = self._query(
+            "SELECT DISTINCT discipline FROM tbl_topics ORDER BY discipline"
+        )
+        return [row["discipline"] for row in rows]
+
     def add(self, discipline: str, topic_name: str) -> int:
         """Добавляет тему и возвращает её id."""
         cursor = self._execute(
@@ -102,7 +109,7 @@ class DifficultyRepository(BaseRepository):
 
 
 QUESTION_SELECT = """
-    SELECT q.*, t.topic_name, d.level_name, d.weight
+    SELECT q.*, t.topic_name, t.discipline, d.level_name, d.weight
     FROM tbl_questions q
     JOIN tbl_topics t ON t.id = q.topic_id
     JOIN tbl_difficulty d ON d.id = q.difficulty_id
@@ -122,6 +129,7 @@ def _row_to_question(row) -> Question:
         topic_name=row["topic_name"],
         level_name=row["level_name"],
         weight=row["weight"],
+        discipline=row["discipline"],
     )
 
 
@@ -135,6 +143,7 @@ class QuestionRepository(BaseRepository):
         difficulty_id=None,
         q_type=None,
         only_active=False,
+        discipline=None,
     ) -> list[Question]:
         """Ищет вопросы по тексту и фильтрам.
 
@@ -145,6 +154,9 @@ class QuestionRepository(BaseRepository):
         if text:
             conditions.append("py_lower(q.question_text) LIKE ?")
             params.append(f"%{text.lower()}%")
+        if discipline:
+            conditions.append("t.discipline = ?")
+            params.append(discipline)
         if topic_id:
             conditions.append("q.topic_id = ?")
             params.append(topic_id)
@@ -244,7 +256,17 @@ class TemplateRepository(BaseRepository):
 
     def _build(self, row) -> Template:
         """Собирает объект Template и загружает его правила."""
-        template = Template(row["id"], row["template_name"], row["header_text"] or "")
+        template = Template(
+            id=row["id"],
+            template_name=row["template_name"],
+            header_text=row["header_text"] or "",
+            subject=row["subject"],
+            doc_kind=row["doc_kind"],
+            logo_path=row["logo_path"],
+            teacher_sign=bool(row["teacher_sign"]),
+            sign_text=row["sign_text"],
+            student_line=bool(row["student_line"]),
+        )
         template.rules = self.get_rules(template.id)
         return template
 
@@ -272,19 +294,32 @@ class TemplateRepository(BaseRepository):
             for row in rows
         ]
 
-    def add(self, template_name: str, header_text: str = "") -> int:
+    def add(self, template_name: str, header_text: str = "", subject: str = "") -> int:
         """Создаёт шаблон и возвращает его id."""
         cursor = self._execute(
-            "INSERT INTO tbl_templates (template_name, header_text) VALUES (?, ?)",
-            (template_name, header_text),
+            "INSERT INTO tbl_templates (template_name, header_text, subject) "
+            "VALUES (?, ?, ?)",
+            (template_name, header_text, subject),
         )
         return cursor.lastrowid
 
     def update(self, template: Template):
-        """Сохраняет название и заголовок шаблона."""
+        """Сохраняет название, заголовок, предмет и оформление шаблона."""
         self._execute(
-            "UPDATE tbl_templates SET template_name = ?, header_text = ? WHERE id = ?",
-            (template.template_name, template.header_text, template.id),
+            "UPDATE tbl_templates SET template_name = ?, header_text = ?, "
+            "subject = ?, doc_kind = ?, logo_path = ?, teacher_sign = ?, "
+            "sign_text = ?, student_line = ? WHERE id = ?",
+            (
+                template.template_name,
+                template.header_text,
+                template.subject,
+                template.doc_kind,
+                template.logo_path,
+                int(template.teacher_sign),
+                template.sign_text,
+                int(template.student_line),
+                template.id,
+            ),
         )
 
     def delete(self, template_id: int):

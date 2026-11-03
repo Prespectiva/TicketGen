@@ -84,6 +84,20 @@ INSERT OR IGNORE INTO tbl_difficulty (id, level_name, weight) VALUES
 """
 
 
+# Столбцы оформления билета, добавленные в tbl_templates позже первой версии.
+# Для старой базы они дописываются командой ALTER TABLE при открытии.
+TEMPLATE_STYLE_COLUMNS = {
+    "subject": "TEXT NOT NULL DEFAULT ''",
+    "doc_kind": "TEXT NOT NULL DEFAULT 'Экзаменационный билет'",
+    "logo_path": "TEXT NOT NULL DEFAULT ''",
+    "teacher_sign": "INTEGER NOT NULL DEFAULT 0",
+    "sign_text": (
+        "TEXT NOT NULL DEFAULT 'Преподаватель ________________ / ________________'"
+    ),
+    "student_line": "INTEGER NOT NULL DEFAULT 0",
+}
+
+
 def _lower(value):
     """Строка в нижнем регистре (для SQL-функции py_lower); NULL остаётся NULL."""
     return value.lower() if isinstance(value, str) else value
@@ -113,7 +127,24 @@ class Database:
         # регистрируем свою функцию для поиска без учёта регистра.
         self.connection.create_function("py_lower", 1, _lower, deterministic=True)
         self.connection.executescript(SCHEMA)
+        self._add_missing_columns()
         self.connection.commit()
+
+    def _add_missing_columns(self):
+        """Дописывает в tbl_templates столбцы оформления, если база старая.
+
+        Данные при этом сохраняются: у старых шаблонов появляются значения
+        по умолчанию (экзаменационный билет без эмблемы и подписей).
+        """
+        existing = {
+            row["name"]
+            for row in self.connection.execute("PRAGMA table_info(tbl_templates)")
+        }
+        for name, definition in TEMPLATE_STYLE_COLUMNS.items():
+            if name not in existing:
+                self.connection.execute(
+                    f"ALTER TABLE tbl_templates ADD COLUMN {name} {definition}"
+                )
 
     @classmethod
     def instance(cls):

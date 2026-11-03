@@ -102,6 +102,7 @@ def fill_database(db: Database) -> int:
     template_id = template_repo.add(
         "Экзамен ОАиП, 2 курс",
         "Экзаменационный билет № {N} по дисциплине «ОАиП»",
+        "ОАиП",
     )
     for topic_name, difficulty_id in [
         ("Циклы", 1),
