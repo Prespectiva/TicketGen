@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import (
 )
 
 from ticketgen.config import AppConfig
+from ticketgen.logic.generator import plain_header
 from ticketgen.views.common import (
     confirm,
     format_dt,
@@ -20,7 +21,12 @@ from ticketgen.views.common import (
     plural,
     show_error,
 )
-from ticketgen.views.dialogs import ExportDialog, ReplaceQuestionDialog, SummaryDialog
+from ticketgen.views.dialogs import (
+    ExportDialog,
+    MoodleExportDialog,
+    ReplaceQuestionDialog,
+    SummaryDialog,
+)
 
 
 class ResultsTab(QWidget):
@@ -55,6 +61,9 @@ class ResultsTab(QWidget):
         scroll.setWidgetResizable(True)
         scroll.setWidget(cards_host)
         summary_button = make_button("Сводная ведомость")
+        moodle_button = make_button(
+            "Экспорт в Moodle…", tooltip="Все билеты серии или выбранный билет"
+        )
         export_button = make_button("Экспорт…", "primary")
 
         series_card = self._card_frame(240 + 120, "Серии билетов", self.series_list)
@@ -75,6 +84,7 @@ class ResultsTab(QWidget):
         buttons.addWidget(delete_button)
         buttons.addStretch()
         buttons.addWidget(summary_button)
+        buttons.addWidget(moodle_button)
         buttons.addWidget(export_button)
         right = QVBoxLayout()
         right.setSpacing(12)
@@ -96,6 +106,7 @@ class ResultsTab(QWidget):
         delete_button.clicked.connect(self.delete_series)
         summary_button.clicked.connect(self.show_summary)
         export_button.clicked.connect(self.export)
+        moodle_button.clicked.connect(self.export_moodle)
         controller.series_changed.connect(self.refresh)
         self.refresh()
 
@@ -335,5 +346,23 @@ class ResultsTab(QWidget):
             f"{format_dt(series.created_at)[:10]}",
             series.header_text or series.template_name,
             self.variants,
+            self,
+            template=self.controller.get_template(series.template_id),
+        ).exec()
+
+    def export_moodle(self):
+        """Выгружает в Moodle все билеты серии или только выбранный."""
+        series = self.current_series()
+        if series is None or not self.variants:
+            show_error(self, "Сначала сгенерируйте серию.")
+            return
+        template = self.controller.get_template(series.template_id)
+        MoodleExportDialog(
+            self.controller,
+            plain_header(series.header_text or series.template_name),
+            self._subtitle(series),
+            self.variants,
+            self.current_variant(),
+            template.number_word if template else "Билет",
             self,
         ).exec()

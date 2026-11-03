@@ -362,7 +362,12 @@ class GenerationTab(QWidget):
             elif item.layout():
                 self._clear(item.layout())
         title = _label(
-            ticket_title(template.header_text or template.template_name, 1), "h2"
+            ticket_title(
+                template.header_text or template.template_name,
+                1,
+                template.number_word,
+            ),
+            "h2",
         )
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.ticket_layout.addWidget(title)
@@ -372,7 +377,11 @@ class GenerationTab(QWidget):
             text = QLabel(f"{number}. {question.question_text}")
             text.setWordWrap(True)
             row.addWidget(text, 1)
-            row.addWidget(make_chip(question.level_name, question.difficulty_id))
+            row.addWidget(
+                make_chip(question.level_name, question.difficulty_id),
+                0,
+                Qt.AlignmentFlag.AlignTop,
+            )
             self.ticket_layout.addLayout(row)
             self.ticket_layout.addSpacing(8)
         self.ticket_layout.addStretch()

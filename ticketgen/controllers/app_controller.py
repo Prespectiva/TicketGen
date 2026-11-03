@@ -1,5 +1,7 @@
 """Контроллер (MVC)."""
 
+import os
+import shutil
 from datetime import datetime
 from pathlib import Path
 
@@ -14,8 +16,17 @@ from ticketgen.data.repositories import (
     TemplateRepository,
     TopicRepository,
 )
-from ticketgen.domain.models import Question, Series, Template, TemplateRule, Topic
-from ticketgen.logic import csv_importer, scoring
+from ticketgen.domain.models import (
+    Question,
+    Series,
+    Template,
+    TemplateRule,
+    TicketGenError,
+    Topic,
+)
+from ticketgen.logic import csv_importer, moodle, scoring
+
+LOGO_TYPES = {".png", ".jpg", ".jpeg", ".bmp", ".gif"}
 
 
 class AppController(QObject):
@@ -39,9 +50,16 @@ class AppController(QObject):
 
     # ----- Темы -----
 
-    def get_topics(self) -> list[Topic]:
-        """Список всех тем."""
-        return self.topics.get_all()
+    def get_topics(self, discipline: str | None = None) -> list[Topic]:
+        """Список тем; если указан предмет — только темы этого предмета."""
+        topics = self.topics.get_all()
+        if discipline:
+            topics = [topic for topic in topics if topic.discipline == discipline]
+        return topics
+
+    def get_disciplines(self) -> list[str]:
+        """Предметы (дисциплины), по которым есть темы."""
+        return self.topics.disciplines()
 
     def add_topic(self, discipline: str, topic_name: str):
         """Создаёт тему."""
@@ -94,6 +112,10 @@ class AppController(QObject):
         self.questions_changed.emit()
         return result
 
+    def write_csv_template(self, path):
+        """Сохраняет пустой шаблон CSV (только заголовки) для импорта вопросов."""
+        csv_importer.write_template(Path(path))
+
     def available_counts(self) -> dict:
         """Число активных вопросов по парам (тема, сложность)."""
         return self.questions.count_by_topic_and_difficulty()
@@ -108,16 +130,62 @@ class AppController(QObject):
         """Один шаблон с правилами."""
         return self.templates.get(template_id)
 
-    def create_template(self, name: str, header: str = "") -> int:
+    def create_template(self, name: str, header: str = "", subject: str = "") -> int:
         """Создаёт шаблон."""
-        template_id = self.templates.add(name, header)
+        template_id = self.templates.add(name, header, subject)
         self.templates_changed.emit()
         return template_id
 
     def update_template(self, template: Template):
-        """Сохраняет название и заголовок шаблона."""
+        """Сохраняет название, заголовок и оформление шаблона."""
         self.templates.update(template)
+        self._mark_logo_used(template.logo_path)
         self.templates_changed.emit()
+
+    @staticmethod
+    def logos_dir() -> Path:
+        """Папка с копиями эмблем."""
+        return AppConfig().base_dir / "logos"
+
+    def last_logo(self) -> str:
+        """Эмблема, которой пользовались последней (по времени файла), или ""."""
+        folder = self.logos_dir()
+        if not folder.is_dir():
+            return ""
+        logos = [
+            path
+            for path in folder.iterdir()
+            if path.is_file() and path.suffix.lower() in LOGO_TYPES
+        ]
+        if not logos:
+            return ""
+        return str(max(logos, key=lambda path: path.stat().st_mtime))
+
+    @staticmethod
+    def _mark_logo_used(logo_path: str):
+        """Обновляет время файла эмблемы: так она становится «последней»."""
+        if logo_path and Path(logo_path).is_file():
+            os.utime(logo_path)
+
+    def store_logo(self, source) -> str:
+        """Копирует картинку эмблемы в папку logos программы.
+
+        Копия нужна, чтобы эмблема не пропала, если исходный файл
+        переместят или удалят.
+
+        Returns:
+            Путь к копии.
+        """
+        source = Path(source)
+        if source.suffix.lower() not in LOGO_TYPES:
+            raise TicketGenError("Эмблема должна быть картинкой PNG, JPG, BMP или GIF.")
+        folder = self.logos_dir()
+        folder.mkdir(parents=True, exist_ok=True)
+        target = folder / source.name
+        if source.resolve() != target.resolve():
+            shutil.copyfile(source, target)
+        self._mark_logo_used(str(target))
+        return str(target)
 
     def delete_template(self, template_id: int):
         """Удаляет шаблон."""
@@ -188,6 +256,13 @@ class AppController(QObject):
             only_active=True,
         )
         return [q for q in same if q.id not in used]
+
+    def export_moodle(self, path, title: str, variants, word: str, file_format: str):
+        """Сохраняет билеты для Moodle: «xml» (Moodle XML) или «gift».
+
+        variants — все билеты серии или один выбранный (один тест).
+        """
+        moodle.save_tickets(Path(path), title, variants, word, file_format)
 
     def replace_question(self, variant_id: int, old_id: int, new_id: int):
         """Заменяет вопрос в билете."""

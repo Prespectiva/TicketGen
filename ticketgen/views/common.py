@@ -11,6 +11,7 @@ from PyQt6.QtWidgets import (
     QLabel,
     QMessageBox,
     QPushButton,
+    QSizePolicy,
     QTableWidget,
     QTableWidgetItem,
     QVBoxLayout,
@@ -204,7 +205,14 @@ def make_chip(level_name: str, difficulty_id: int) -> QLabel:
     chip.setAlignment(Qt.AlignmentFlag.AlignCenter)
     background = DIFFICULTY_COLORS.get(difficulty_id, "#F1F5F9")
     color = DIFFICULTY_TEXT.get(difficulty_id, "#64748B")
-    chip.setStyleSheet(f"background: {background}; color: {color};")
+    # Скругление задаётся в том же правиле, что и фон: если фон задать
+    # отдельно от общего стиля, Qt рисует метку прямоугольником.
+    chip.setStyleSheet(
+        f"QLabel#chip {{ background: {background}; color: {color}; "
+        "border-radius: 11px; padding: 0 10px; font-size: 12px; }"
+    )
+    chip.setFixedHeight(22)
+    chip.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
     return chip
 
 

@@ -125,8 +125,14 @@ def plain_header(header: str) -> str:
     return "\n".join(" ".join(line.split()) for line in text.splitlines())
 
 
-def ticket_title(header: str, number: int) -> str:
-    """Заголовок билета: «{N}» заменяется номером, иначе номер на второй строке."""
+def ticket_title(header: str, number: int, word: str = "Билет") -> str:
+    """Заголовок билета: «{N}» заменяется номером, иначе номер на второй строке.
+
+    Args:
+        header: заголовок из шаблона.
+        number: номер билета (варианта).
+        word: слово перед номером на второй строке: «Билет» или «Вариант».
+    """
     if "{N}" in header:
         return header.replace("{N}", str(number))
-    return f"{header}\nБилет № {number}"
+    return f"{header}\n{word} № {number}"

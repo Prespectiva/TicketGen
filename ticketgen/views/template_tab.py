@@ -26,7 +26,12 @@ from ticketgen.views.common import (
     plural,
     show_error,
 )
-from ticketgen.views.dialogs import QuestionDialog, fill_combo
+from ticketgen.views.dialogs import (
+    QuestionDialog,
+    TicketStyleDialog,
+    fill_combo,
+    suggested_header,
+)
 from ticketgen.views.widgets import RowHoverHighlighter
 
 HEADERS = ["№", "Тема", "Сложность", "Кол-во вопросов", "Баллы всего", "В банке", ""]
@@ -36,7 +41,7 @@ COLUMN_WIDTHS = {0: 56, 2: 200, 3: 200, 4: 160, 5: 224, 6: 80}
 LEVEL_COMBO_WIDTH = 168
 GREEN, ORANGE = "#16A34A", "#D97706"
 NEW_NAME = "Новый шаблон"
-NEW_HEADER = "Экзаменационный билет № {N} по дисциплине «ОАиП»"
+ALL_SUBJECTS = "Любой предмет"
 
 
 def template_summary(template) -> str:
@@ -50,6 +55,12 @@ def template_summary(template) -> str:
         f"{plural(questions, ('вопрос', 'вопроса', 'вопросов'))} · "
         f"{plural(ticket_score(rules), ('балл', 'балла', 'баллов'))}"
     )
+
+
+def template_kind_line(template) -> str:
+    """Вторая подпись в списке: «ОАиП · Контрольная работа»."""
+    parts = [template.subject, template.doc_kind]
+    return " · ".join(part for part in parts if part)
 
 
 ADJECTIVES = {"лёгкий": "лёгких", "средний": "средних", "сложный": "сложных"}
@@ -104,22 +115,30 @@ class TemplateTab(QWidget):
 
         self.name_edit = QLineEdit()
         self.header_edit = QLineEdit()
-        name_column = QVBoxLayout()
-        name_column.setSpacing(4)
-        name_column.addWidget(self._label("Название шаблона *", "hint"))
-        name_column.addWidget(self.name_edit)
-        header_column = QVBoxLayout()
-        header_column.setSpacing(4)
-        header_column.addWidget(self._label("Заголовок билета", "hint"))
-        header_column.addWidget(self.header_edit)
+        # Предмет шаблона: в правилах предлагаются только его темы.
+        self.subject_combo = QComboBox()
+        self.subject_combo.setFixedWidth(240)
         form = QHBoxLayout()
-        form.addLayout(name_column, 1)
-        form.addLayout(header_column, 1)
+        for caption, widget, stretch in (
+            ("Название шаблона *", self.name_edit, 1),
+            ("Предмет", self.subject_combo, 0),
+            ("Заголовок билета", self.header_edit, 1),
+        ):
+            column = QVBoxLayout()
+            column.setSpacing(4)
+            column.addWidget(self._label(caption, "hint"))
+            column.addWidget(widget)
+            form.addLayout(column, stretch)
 
+        self.style_button = make_button(
+            "Оформление билета…",
+            tooltip="Вид документа (экзамен, контрольная…), эмблема, подписи",
+        )
         add_rule_button = make_button("+ Добавить правило")
         rules_header = QHBoxLayout()
         rules_header.addWidget(self._label("Правила билета", "h2"))
         rules_header.addStretch()
+        rules_header.addWidget(self.style_button)
         rules_header.addWidget(add_rule_button)
         self.rules_table = make_table(
             HEADERS, stretch_column=TOPIC_COLUMN, widths=COLUMN_WIDTHS
@@ -191,6 +210,8 @@ class TemplateTab(QWidget):
         self.save_button.clicked.connect(self.save_template)
         cancel_button.clicked.connect(lambda: self.show_template(self._row()))
         add_rule_button.clicked.connect(self.add_rule)
+        self.style_button.clicked.connect(self.edit_style)
+        self.subject_combo.activated.connect(self.subject_changed)
         self.add_questions_button.clicked.connect(
             lambda: QuestionDialog(self.controller, parent=self).exec()
         )
@@ -210,9 +231,29 @@ class TemplateTab(QWidget):
         return self.template_list.currentRow()
 
     def refresh(self):
-        """Перечитывает шаблоны, сохраняя выбранный."""
+        """Перечитывает шаблоны, сохраняя выбранный.
+
+        Несохранённые название, заголовок и предмет не теряются: правила
+        сохраняются сразу, после этого список перечитывается, и без этого
+        поля вернулись бы к значениям из базы.
+        """
         selected_id = self.current.id if self.current else None
+        unsaved = (
+            (
+                self.name_edit.text(),
+                self.header_edit.text(),
+                self.subject_combo.currentData(),
+            )
+            if self.current
+            else None
+        )
         self.templates = self.controller.get_templates()
+        self.subject_combo.blockSignals(True)
+        self.subject_combo.clear()
+        self.subject_combo.addItem(ALL_SUBJECTS, "")
+        for name in self.controller.get_disciplines():
+            self.subject_combo.addItem(name, name)
+        self.subject_combo.blockSignals(False)
         self.template_list.blockSignals(True)
         self.template_list.clear()
         for template in self.templates:
@@ -223,11 +264,22 @@ class TemplateTab(QWidget):
         if self.templates:
             self.template_list.setCurrentRow(row)
         self.show_template(row if self.templates else -1)
+        if unsaved and self.current and self.current.id == selected_id:
+            self._restore_unsaved(*unsaved)
+
+    def _restore_unsaved(self, name: str, header: str, subject):
+        """Возвращает в поля то, что пользователь ввёл, но ещё не сохранил."""
+        self.name_edit.setText(name)
+        self.header_edit.setText(header)
+        index = self.subject_combo.findData(subject)
+        if index >= 0 and subject != self.current.subject:
+            self.subject_combo.setCurrentIndex(index)
+            self.subject_changed()
 
     def _add_list_item(self, template):
         """Добавляет в список карточку шаблона: название и подпись."""
         item = QListWidgetItem()
-        item.setSizeHint(QSize(0, 66))
+        item.setSizeHint(QSize(0, 86))
         self.template_list.addItem(item)
         holder = QWidget()
         holder.setObjectName("listItem")
@@ -235,6 +287,7 @@ class TemplateTab(QWidget):
         column.setContentsMargins(13, 12, 12, 12)
         column.setSpacing(2)
         column.addWidget(self._label(template.template_name, "itemTitle"))
+        column.addWidget(self._label(template_kind_line(template), "hint"))
         column.addWidget(self._label(template_summary(template), "hint"))
         self.template_list.setItemWidget(item, holder)
 
@@ -244,6 +297,12 @@ class TemplateTab(QWidget):
         template = self.current
         self.name_edit.setText(template.template_name if template else "")
         self.header_edit.setText(template.header_text if template else "")
+        subject = template.subject if template else ""
+        if subject and self.subject_combo.findData(subject) < 0:
+            # У предмета не осталось тем, но шаблон его помнит.
+            self.subject_combo.addItem(subject, subject)
+        self.subject_combo.setCurrentIndex(max(0, self.subject_combo.findData(subject)))
+        self.style_button.setEnabled(template is not None)
         rules = template.rules if template else []
         checks, _ = self.controller.check_template(template) if template else ([], 0)
         self._fill_rules(checks)
@@ -308,8 +367,8 @@ class TemplateTab(QWidget):
             table.setItem(0, 0, hint)
             table.setSpan(0, 0, 1, len(HEADERS))
             return
-        topics = self.controller.get_topics()
         levels = self.controller.get_difficulties()
+        subject_topics = self.controller.get_topics(self.current.subject or None)
         for row, check in enumerate(checks):
             rule = check.rule
             if check.ok:
@@ -332,7 +391,18 @@ class TemplateTab(QWidget):
 
             topic_combo = QComboBox()
             topic_combo.setObjectName("plainCombo")
-            fill_combo(topic_combo, topics, lambda t: t.topic_name)
+            topics = list(subject_topics)
+            if rule.topic_id not in {topic.id for topic in topics}:
+                # Тема из другого предмета: оставляем её в списке, чтобы
+                # правило не поменялось само.
+                topics += [
+                    t for t in self.controller.get_topics() if t.id == rule.topic_id
+                ]
+            fill_combo(
+                topic_combo,
+                topics,
+                lambda t: t.topic_name if self.current.subject else t.title,
+            )
             topic_combo.setCurrentIndex(max(0, topic_combo.findData(rule.topic_id)))
             level_combo = QComboBox()
             level_combo.setMaximumWidth(LEVEL_COMBO_WIDTH)
@@ -420,8 +490,13 @@ class TemplateTab(QWidget):
         while name in names:
             number += 1
             name = f"{NEW_NAME} {number}"
+        subject = self.subject_combo.currentData() or ""
+        if not subject:
+            subjects = self.controller.get_disciplines()
+            subject = subjects[0] if subjects else ""
+        header = suggested_header("Экзаменационный билет", subject)
         try:
-            template_id = self.controller.create_template(name, NEW_HEADER)
+            template_id = self.controller.create_template(name, header, subject)
         except TicketGenError as error:
             show_error(self, str(error))
             return
@@ -438,7 +513,25 @@ class TemplateTab(QWidget):
             return
         self.current.template_name = name
         self.current.header_text = self.header_edit.text().strip()
+        self.current.subject = self.subject_combo.currentData() or ""
         self._run(lambda: self.controller.update_template(self.current))
+
+    def subject_changed(self):
+        """Сменили предмет: в правилах сразу предлагаются его темы.
+
+        В базу предмет попадает по кнопке «Сохранить».
+        """
+        if self.current:
+            self.current.subject = self.subject_combo.currentData() or ""
+            checks, _ = self.controller.check_template(self.current)
+            self._fill_rules(checks)
+
+    def edit_style(self):
+        """Открывает окно оформления билета для выбранного шаблона."""
+        if self.current:
+            TicketStyleDialog(
+                self.controller, self.current, self.header_edit.text(), self
+            ).exec()
 
     def delete_template(self):
         """Удаляет выбранный шаблон."""
@@ -461,7 +554,8 @@ class TemplateTab(QWidget):
         if not self.current:
             return
         used = {(r.topic_id, r.difficulty_id) for r in self.current.rules}
-        for topic in self.controller.get_topics():
+        subject = self.subject_combo.currentData() or None
+        for topic in self.controller.get_topics(subject):
             for level in self.controller.get_difficulties():
                 if (topic.id, level.id) not in used:
                     rule = TemplateRule(None, self.current.id, topic.id, level.id, 1)
