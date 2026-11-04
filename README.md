@@ -71,6 +71,16 @@ XML или GIFT:
 
 Справа в окне сразу виден предпросмотр билета. Оформление попадает в DOCX и PDF.
 
+## Документация
+
+Документация собирается Sphinx из папки `docs`: руководство пользователя,
+руководство разработчика, архитектура и справочник API из docstrings.
+
+    poetry add --group dev sphinx sphinx-rtd-theme   # один раз
+    poetry run sphinx-build -b html docs/source docs/build/html
+
+Готовая документация открывается из `docs/build/html/index.html`.
+
 ## Ссылки
 
 - Макет в Figma: <https://www.figma.com/design/vfRLcnWpsTCRWL5SOfZpsi/TicketGen?node-id=3-2&t=4H77UXpki29i7iEi-1>
