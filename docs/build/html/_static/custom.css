@@ -1,0 +1,12 @@
+/* Небольшие правки темы: таблицы переносят текст, а не растягивают страницу. */
+.wy-table-responsive table td,
+.wy-table-responsive table th {
+    white-space: normal;
+}
+.wy-nav-content {
+    max-width: 960px;
+}
+.rst-content .note .admonition-title,
+.rst-content .tip .admonition-title {
+    font-weight: 600;
+}

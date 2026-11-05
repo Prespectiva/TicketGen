@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Слой бизнес-логики (logic) &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="../_static/app_icon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" />
+    <link rel="next" title="Контроллер (controllers)" href="controllers.html" />
+    <link rel="prev" title="Слой данных (data)" href="data.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TicketGen
+              <img src="../_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Справочник API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Справочник API</a></li>
+      <li class="breadcrumb-item active">Слой бизнес-логики (logic)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="logic">
+<h1>Слой бизнес-логики (logic)<a class="headerlink" href="#logic" title="Ссылка на этот заголовок"></a></h1>
+<p>Генерация серий, подсчёт баллов, импорт CSV, экспорт в DOCX и PDF, выгрузка в Moodle. Модули слоя не зависят от интерфейса и проверяются тестами без окон.</p>
+<section id="module-ticketgen.logic.generator">
+<span id="ticketgen-logic-generator"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code><a class="headerlink" href="#module-ticketgen.logic.generator" title="Ссылка на этот заголовок"></a></h2>
+<p>Алгоритм генерации серии билетов по шаблону.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.generator.random_seed">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.generator.</span></span><span class="sig-name descname"><span class="pre">random_seed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/generator.html#random_seed"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.generator.random_seed" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает случайный seed, если пользователь его не задал.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.generator.generate_variants">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.generator.</span></span><span class="sig-name descname"><span class="pre">generate_variants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rules</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants_count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_overlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/generator.html#generate_variants"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.generator.generate_variants" title="Ссылка на это определение"></a></dt>
+<dd><p>Создаёт заданное число билетов.</p>
+<p>Правила алгоритма:</p>
+<ul class="simple">
+<li><p>для каждого правила берётся k разных вопросов нужной темы и сложности,
+поэтому внутри билета вопросы не повторяются;</p></li>
+<li><p>два билета с одинаковым набором вопросов не допускаются;</p></li>
+<li><p>в режиме no_overlap вопрос используется в серии только один раз;</p></li>
+<li><p>одинаковый seed всегда даёт одинаковую серию.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rules</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.TemplateRule" title="ticketgen.domain.models.TemplateRule"><em>TemplateRule</em></a><em>]</em>) – правила шаблона.</p></li>
+<li><p><strong>pool</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a><em>]</em>) – все активные вопросы банка.</p></li>
+<li><p><strong>variants_count</strong> (<em>int</em>) – сколько билетов создать.</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – число для генератора случайных чисел.</p></li>
+<li><p><strong>no_overlap</strong> (<em>bool</em>) – режим «не повторять вопросы между билетами».</p></li>
+<li><p><strong>progress</strong> – функция, которой передаётся процент выполнения (0–100).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="domain.html#ticketgen.domain.models.NotEnoughQuestionsError" title="ticketgen.domain.models.NotEnoughQuestionsError"><strong>NotEnoughQuestionsError</strong></a> – если вопросов не хватает.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.generator.plain_header">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.generator.</span></span><span class="sig-name descname"><span class="pre">plain_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/generator.html#plain_header"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.generator.plain_header" title="Ссылка на это определение"></a></dt>
+<dd><p>Заголовок без номера билета: метка «{N}» (и «№» перед ней) убирается.</p>
+<p>Нужен там, где заголовок относится ко всей серии, а не к одному билету
+(файл ответов, сводная ведомость).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>header</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.generator.ticket_title">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.generator.</span></span><span class="sig-name descname"><span class="pre">ticket_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Билет'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/generator.html#ticket_title"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.generator.ticket_title" title="Ссылка на это определение"></a></dt>
+<dd><p>Заголовок билета: «{N}» заменяется номером, иначе номер на второй строке.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> (<em>str</em>) – заголовок из шаблона.</p></li>
+<li><p><strong>number</strong> (<em>int</em>) – номер билета (варианта).</p></li>
+<li><p><strong>word</strong> (<em>str</em>) – слово перед номером на второй строке: «Билет» или «Вариант».</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.logic.scoring">
+<span id="ticketgen-logic-scoring"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code><a class="headerlink" href="#module-ticketgen.logic.scoring" title="Ссылка на этот заголовок"></a></h2>
+<p>Подсчёт баллов билета и проверка, хватает ли вопросов для шаблона.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.logic.scoring.RuleCheck">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.logic.scoring.</span></span><span class="sig-name descname"><span class="pre">RuleCheck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">available</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/scoring.html#RuleCheck"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.scoring.RuleCheck" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Результат проверки одного правила шаблона.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.TemplateRule" title="ticketgen.domain.models.TemplateRule"><em>TemplateRule</em></a>)</p></li>
+<li><p><strong>available</strong> (<em>int</em>)</p></li>
+<li><p><strong>required</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="ticketgen.logic.scoring.RuleCheck.ok">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ok</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#ticketgen.logic.scoring.RuleCheck.ok" title="Ссылка на это определение"></a></dt>
+<dd><p>True, если подходящих вопросов достаточно.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ticketgen.logic.scoring.RuleCheck.missing">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">missing</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#ticketgen.logic.scoring.RuleCheck.missing" title="Ссылка на это определение"></a></dt>
+<dd><p>Сколько вопросов не хватает (0, если хватает).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.scoring.ticket_score">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.scoring.</span></span><span class="sig-name descname"><span class="pre">ticket_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/scoring.html#ticket_score"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.scoring.ticket_score" title="Ссылка на это определение"></a></dt>
+<dd><p>Суммарный балл билета: S = Σ(kᵢ · wᵢ).</p>
+<p>kᵢ — число вопросов по правилу, wᵢ — вес сложности.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rules</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.TemplateRule" title="ticketgen.domain.models.TemplateRule"><em>TemplateRule</em></a><em>]</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.scoring.score_formula">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.scoring.</span></span><span class="sig-name descname"><span class="pre">score_formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/scoring.html#score_formula"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.scoring.score_formula" title="Ссылка на это определение"></a></dt>
+<dd><p>Строка с расчётом балла для интерфейса, например «1×1 + 2×3 = 7».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rules</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.TemplateRule" title="ticketgen.domain.models.TemplateRule"><em>TemplateRule</em></a><em>]</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.scoring.check_rules">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.scoring.</span></span><span class="sig-name descname"><span class="pre">check_rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rules</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">available</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_overlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/scoring.html#check_rules"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.scoring.check_rules" title="Ссылка на это определение"></a></dt>
+<dd><p>Проверяет каждое правило шаблона.</p>
+<p>Обычный режим требует n ≥ k, режим «без пересечений» — n ≥ m·k,
+где n — вопросов в банке, k — вопросов в правиле, m — число билетов.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rules</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.TemplateRule" title="ticketgen.domain.models.TemplateRule"><em>TemplateRule</em></a><em>]</em>) – правила шаблона.</p></li>
+<li><p><strong>available</strong> (<em>dict</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>, </em><em>int</em><em>]</em>) – число активных вопросов по паре (тема, сложность).</p></li>
+<li><p><strong>variants_count</strong> (<em>int</em>) – сколько билетов нужно создать.</p></li>
+<li><p><strong>no_overlap</strong> (<em>bool</em>) – включён ли режим «без пересечений».</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#ticketgen.logic.scoring.RuleCheck" title="ticketgen.logic.scoring.RuleCheck"><em>RuleCheck</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.scoring.possible_tickets">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.scoring.</span></span><span class="sig-name descname"><span class="pre">possible_tickets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rules</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">available</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/scoring.html#possible_tickets"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.scoring.possible_tickets" title="Ссылка на это определение"></a></dt>
+<dd><p>Сколько разных билетов можно составить: произведение C(n, k).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rules</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.TemplateRule" title="ticketgen.domain.models.TemplateRule"><em>TemplateRule</em></a><em>]</em>)</p></li>
+<li><p><strong>available</strong> (<em>dict</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.logic.csv_importer">
+<span id="ticketgen-logic-csv-importer"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code><a class="headerlink" href="#module-ticketgen.logic.csv_importer" title="Ссылка на этот заголовок"></a></h2>
+<p>Импорт вопросов из CSV.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.csv_importer.write_template">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.csv_importer.</span></span><span class="sig-name descname"><span class="pre">write_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/csv_importer.html#write_template"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.csv_importer.write_template" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет пустой шаблон CSV: только строка заголовков.</p>
+<p>Остаётся заполнить строки под заголовками. Кодировка UTF-8 с BOM и
+разделитель «;»: так Excel на русской Windows сразу открывает файл по
+столбцам и без «кракозябр».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>Path</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.logic.csv_importer.ParsedRow">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.logic.csv_importer.</span></span><span class="sig-name descname"><span class="pre">ParsedRow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discipline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">difficulty_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">answer_text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/csv_importer.html#ParsedRow"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.csv_importer.ParsedRow" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Корректная строка CSV, готовая к добавлению в базу.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>discipline</strong> (<em>str</em>)</p></li>
+<li><p><strong>topic_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>difficulty_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>q_type</strong> (<em>str</em>)</p></li>
+<li><p><strong>question_text</strong> (<em>str</em>)</p></li>
+<li><p><strong>answer_text</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.logic.csv_importer.ImportResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.logic.csv_importer.</span></span><span class="sig-name descname"><span class="pre">ImportResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imported</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/csv_importer.html#ImportResult"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.csv_importer.ImportResult" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Итог импорта: сколько добавлено и какие строки пропущены.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imported</strong> (<em>int</em>)</p></li>
+<li><p><strong>errors</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.csv_importer.read_text">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.csv_importer.</span></span><span class="sig-name descname"><span class="pre">read_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/csv_importer.html#read_text"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.csv_importer.read_text" title="Ссылка на это определение"></a></dt>
+<dd><p>Читает файл в UTF-8, а если не получилось — в Windows-1251.</p>
+<p>Excel на русской Windows часто сохраняет CSV в кодировке cp1251.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>Path</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.csv_importer.parse_csv">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.csv_importer.</span></span><span class="sig-name descname"><span class="pre">parse_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">difficulty_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/csv_importer.html#parse_csv"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.csv_importer.parse_csv" title="Ссылка на это определение"></a></dt>
+<dd><p>Разбирает текст CSV и проверяет каждую строку.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – содержимое файла.</p></li>
+<li><p><strong>difficulty_ids</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>) – соответствие «название сложности → id».</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Кортеж (список ParsedRow, список ошибок (номер строки, причина)).</p>
+</dd>
+<dt class="field-odd">Исключение<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="domain.html#ticketgen.domain.models.TicketGenError" title="ticketgen.domain.models.TicketGenError"><strong>TicketGenError</strong></a> – если файл пустой или в заголовке не те столбцы.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.csv_importer.import_questions">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.csv_importer.</span></span><span class="sig-name descname"><span class="pre">import_questions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_repo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_repo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">difficulty_repo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/csv_importer.html#import_questions"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.csv_importer.import_questions" title="Ссылка на это определение"></a></dt>
+<dd><p>Загружает вопросы из CSV в базу.</p>
+<p>Строки с ошибками пропускаются и попадают в отчёт, все корректные
+строки добавляются одной транзакцией.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ticketgen.logic.csv_importer.ImportResult" title="ticketgen.logic.csv_importer.ImportResult"><em>ImportResult</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.logic.exporters">
+<span id="ticketgen-logic-exporters"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code><a class="headerlink" href="#module-ticketgen.logic.exporters" title="Ссылка на этот заголовок"></a></h2>
+<p>Экспорт в DOCX и PDF.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.ticket_heights">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">ticket_heights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#ticket_heights"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.ticket_heights" title="Ссылка на это определение"></a></dt>
+<dd><p>Примерная высота каждого билета в пунктах (для раскладки по листам).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>blocks</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.logo_file">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">logo_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#logo_file"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.logo_file" title="Ссылка на это определение"></a></dt>
+<dd><p>Путь к эмблеме шаблона, если она задана и файл существует.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Template" title="ticketgen.domain.models.Template"><em>Template</em></a><em> | </em><em>None</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Path</em> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.build_tickets">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">build_tickets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#build_tickets"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.build_tickets" title="Ссылка на это определение"></a></dt>
+<dd><p>Блоки файла с билетами (без ответов).</p>
+<p>Если передан шаблон, учитывается его оформление: эмблема над
+заголовком, слово «Билет» или «Вариант», строка для ФИО студента
+и место для подписи преподавателя.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> (<em>str</em>)</p></li>
+<li><p><strong>variants</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a><em>]</em>)</p></li>
+<li><p><strong>template</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Template" title="ticketgen.domain.models.Template"><em>Template</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[tuple]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.topics_text">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">topics_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">questions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#topics_text"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.topics_text" title="Ссылка на это определение"></a></dt>
+<dd><p>Темы билета со счётчиком: «Циклы ×2, Функции».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.build_answers">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">build_answers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Билет'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#build_answers"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.build_answers" title="Ссылка на это определение"></a></dt>
+<dd><p>Блоки файла с эталонными ответами: одна компактная таблица.</p>
+<p>Столбцы: номер билета, номер вопроса, ответ. Номер билета пишется в
+первой строке билета, остальные ячейки столбца объединяются с ней.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> (<em>str</em>)</p></li>
+<li><p><strong>variants</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a><em>]</em>)</p></li>
+<li><p><strong>word</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[tuple]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.build_summary">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">build_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Билет'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#build_summary"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.build_summary" title="Ссылка на это определение"></a></dt>
+<dd><p>Блоки сводной ведомости: билет, состав, балл.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> (<em>str</em>)</p></li>
+<li><p><strong>variants</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a><em>]</em>)</p></li>
+<li><p><strong>word</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[tuple]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.BaseExporter">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">BaseExporter</span></span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#BaseExporter"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.BaseExporter" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Общий интерфейс экспортёров.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.BaseExporter.save">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#BaseExporter.save"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.BaseExporter.save" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет блоки в файл.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blocks</strong> (<em>list</em><em>[</em><em>tuple</em><em>]</em>) – содержимое документа.</p></li>
+<li><p><strong>path</strong> (<em>Path</em>) – путь к файлу без расширения.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.DocxExporter">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">DocxExporter</span></span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#DocxExporter"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.DocxExporter" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ticketgen.logic.exporters.BaseExporter" title="ticketgen.logic.exporters.BaseExporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExporter</span></code></a></p>
+<p>Сохранение в Word (.docx) через python-docx.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.DocxExporter.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#DocxExporter.save"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.DocxExporter.save" title="Ссылка на это определение"></a></dt>
+<dd><p>Создаёт документ Word из блоков.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.PdfExporter">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">PdfExporter</span></span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#PdfExporter"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.PdfExporter" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ticketgen.logic.exporters.BaseExporter" title="ticketgen.logic.exporters.BaseExporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExporter</span></code></a></p>
+<p>Сохранение в PDF через reportlab с кириллическим шрифтом.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.PdfExporter.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#PdfExporter.save"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.PdfExporter.save" title="Ссылка на это определение"></a></dt>
+<dd><p>Создаёт PDF из блоков.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.ExporterFactory">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">ExporterFactory</span></span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#ExporterFactory"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.ExporterFactory" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Фабрика: возвращает экспортёр по названию формата.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.ExporterFactory.create">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_format</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#ExporterFactory.create"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.ExporterFactory.create" title="Ссылка на это определение"></a></dt>
+<dd><p>Создаёт экспортёр для формата «docx» или «pdf».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_format</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ticketgen.logic.exporters.BaseExporter" title="ticketgen.logic.exporters.BaseExporter"><em>BaseExporter</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.exporters.export_series">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.exporters.</span></span><span class="sig-name descname"><span class="pre">export_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_answers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_summary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_tickets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/exporters.html#export_series"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.exporters.export_series" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет серию: билеты в каждом формате, ответы и ведомость.</p>
+<p>Ответы и ведомость сохраняются в первом выбранном формате. Если
+передан шаблон, билеты оформляются по нему (эмблема, вид документа,
+места для подписей).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Список созданных файлов.</p>
+</dd>
+<dt class="field-even">Параметры<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>folder</strong> (<em>Path</em>)</p></li>
+<li><p><strong>base_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>header</strong> (<em>str</em>)</p></li>
+<li><p><strong>variants</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a><em>]</em>)</p></li>
+<li><p><strong>formats</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>with_answers</strong> (<em>bool</em>)</p></li>
+<li><p><strong>with_summary</strong> (<em>bool</em>)</p></li>
+<li><p><strong>with_tickets</strong> (<em>bool</em>)</p></li>
+<li><p><strong>template</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Template" title="ticketgen.domain.models.Template"><em>Template</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<em>Path</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.logic.moodle">
+<span id="ticketgen-logic-moodle"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code><a class="headerlink" href="#module-ticketgen.logic.moodle" title="Ссылка на этот заголовок"></a></h2>
+<p>Выгрузка билетов в форматы Moodle: Moodle XML и GIFT.</p>
+<p>Каждый билет становится категорией вопросов «Серия / Билет № N», из
+которой в Moodle собирается тест. Вопросы открытые (ответ пишет студент),
+поэтому в Moodle это вопросы типа «Эссе». Эталонный ответ попадает в
+«Информацию для оценщика» (XML) или в общий отзыв (GIFT) — студент его
+не видит. Вес сложности становится баллом вопроса.</p>
+<p>Файл импортируется в Moodle через «Банк вопросов → Импорт».</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.moodle.short_name">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.moodle.</span></span><span class="sig-name descname"><span class="pre">short_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/moodle.html#short_name"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.moodle.short_name" title="Ссылка на это определение"></a></dt>
+<dd><p>Короткое название вопроса для списка в Moodle: номер и начало текста.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>question</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.moodle.ticket_groups">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.moodle.</span></span><span class="sig-name descname"><span class="pre">ticket_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/moodle.html#ticket_groups"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.moodle.ticket_groups" title="Ссылка на это определение"></a></dt>
+<dd><p>Категории для билетов: «Название серии / Билет № N» и вопросы билета.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>)</p></li>
+<li><p><strong>variants</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a><em>]</em>)</p></li>
+<li><p><strong>word</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[tuple[str, list[<a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a>]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.moodle.to_moodle_xml">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.moodle.</span></span><span class="sig-name descname"><span class="pre">to_moodle_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/moodle.html#to_moodle_xml"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.moodle.to_moodle_xml" title="Ссылка на это определение"></a></dt>
+<dd><p>Билеты в формате Moodle XML: категория билета, затем его вопросы.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>groups</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a><em>]</em><em>]</em><em>]</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.moodle.to_gift">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.moodle.</span></span><span class="sig-name descname"><span class="pre">to_gift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/moodle.html#to_gift"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.moodle.to_gift" title="Ссылка на это определение"></a></dt>
+<dd><p>Билеты в формате GIFT (текстовый формат Moodle).</p>
+<p>Пустые фигурные скобки означают вопрос-эссе, эталонный ответ записан
+как общий отзыв после «####».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>groups</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a><em>]</em><em>]</em><em>]</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.logic.moodle.save_tickets">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.logic.moodle.</span></span><span class="sig-name descname"><span class="pre">save_tickets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_format</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/logic/moodle.html#save_tickets"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.logic.moodle.save_tickets" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет билеты для импорта в Moodle.</p>
+<p>Каждый билет попадает в свою категорию «Серия / Билет № N»: из неё в
+Moodle собирается отдельный тест. Если передан один билет, получается
+один тест.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>Path</em>) – файл для сохранения.</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – название серии (заголовок без номера).</p></li>
+<li><p><strong>variants</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a><em>]</em>) – все билеты серии или один выбранный.</p></li>
+<li><p><strong>word</strong> (<em>str</em>) – «Билет» или «Вариант».</p></li>
+<li><p><strong>file_format</strong> (<em>str</em>) – «xml» (Moodle XML) или «gift».</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="data.html" class="btn btn-neutral float-left" title="Слой данных (data)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="controllers.html" class="btn btn-neutral float-right" title="Контроллер (controllers)" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

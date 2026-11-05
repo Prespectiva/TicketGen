@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ticketgen.views.question_tab &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/app_icon.ico"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TicketGen
+              <img src="../../../_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Справочник API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">ticketgen.views.question_tab</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код ticketgen.views.question_tab</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Вкладка «Банк вопросов»: поиск, фильтры, таблица, страницы, импорт."""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt6.QtCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">QUrl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt6.QtGui</span><span class="w"> </span><span class="kn">import</span> <span class="n">QBrush</span><span class="p">,</span> <span class="n">QColor</span><span class="p">,</span> <span class="n">QDesktopServices</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt6.QtWidgets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">QCheckBox</span><span class="p">,</span>
+    <span class="n">QComboBox</span><span class="p">,</span>
+    <span class="n">QFileDialog</span><span class="p">,</span>
+    <span class="n">QHBoxLayout</span><span class="p">,</span>
+    <span class="n">QLabel</span><span class="p">,</span>
+    <span class="n">QLineEdit</span><span class="p">,</span>
+    <span class="n">QTableWidgetItem</span><span class="p">,</span>
+    <span class="n">QVBoxLayout</span><span class="p">,</span>
+    <span class="n">QWidget</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.domain.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">QUESTION_TYPES</span><span class="p">,</span> <span class="n">TicketGenError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.views.common</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">confirm</span><span class="p">,</span>
+    <span class="n">icon</span><span class="p">,</span>
+    <span class="n">left_cell</span><span class="p">,</span>
+    <span class="n">make_button</span><span class="p">,</span>
+    <span class="n">make_chip</span><span class="p">,</span>
+    <span class="n">make_table</span><span class="p">,</span>
+    <span class="n">plural</span><span class="p">,</span>
+    <span class="n">show_error</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.views.dialogs</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ImportDialog</span><span class="p">,</span>
+    <span class="n">QuestionDialog</span><span class="p">,</span>
+    <span class="n">TopicsDialog</span><span class="p">,</span>
+    <span class="n">fill_combo</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.views.styles</span><span class="w"> </span><span class="kn">import</span> <span class="n">INACTIVE_TEXT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.views.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">RowHoverHighlighter</span>
+
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"№"</span><span class="p">,</span>
+    <span class="s2">"Текст вопроса"</span><span class="p">,</span>
+    <span class="s2">"Предмет / тема"</span><span class="p">,</span>
+    <span class="s2">"Сложность"</span><span class="p">,</span>
+    <span class="s2">"Тип"</span><span class="p">,</span>
+    <span class="s2">"Активен"</span><span class="p">,</span>
+    <span class="s2">"Действия"</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">TEXT_COLUMN</span><span class="p">,</span> <span class="n">DIFFICULTY_COLUMN</span><span class="p">,</span> <span class="n">ACTIVE_COLUMN</span><span class="p">,</span> <span class="n">ACTIONS_COLUMN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span>
+<span class="n">PAGE_SIZE</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">COLUMN_WIDTHS</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="mi">146</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="topic_column_text">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.topic_column_text">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">topic_column_text</span><span class="p">(</span><span class="n">question</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Текст столбца «Предмет / тема»: «ОАиП / Циклы»."""</span>
+    <span class="k">if</span> <span class="n">question</span><span class="o">.</span><span class="n">discipline</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">question</span><span class="o">.</span><span class="n">discipline</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">question</span><span class="o">.</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">return</span> <span class="n">question</span><span class="o">.</span><span class="n">topic_name</span></div>
+
+
+
+<div class="viewcode-block" id="page_numbers">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.page_numbers">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">page_numbers</span><span class="p">(</span><span class="n">current</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pages</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Номера кнопок страниц; None обозначает многоточие.</span>
+
+<span class="sd">    Пример: page_numbers(1, 17) → [1, 2, 3, None, 17].</span>
+<span class="sd">    """</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">current</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pages</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">shown</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="n">pages</span><span class="p">,</span> <span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">first</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)}</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pages</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">shown</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">and</span> <span class="n">number</span> <span class="o">-</span> <span class="n">result</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="QuestionTab">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QuestionTab</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Банк вопросов (View). Данные получает только через контроллер."""</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Строит элементы вкладки и подписывается на сигналы контроллера."""</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">controller</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># вопросы текущей страницы</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">title</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">"Банк вопросов"</span><span class="p">)</span>
+        <span class="n">title</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"title"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span> <span class="o">=</span> <span class="n">QLineEdit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span><span class="o">.</span><span class="n">setPlaceholderText</span><span class="p">(</span><span class="s2">"Поиск по тексту вопроса…"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span>
+            <span class="n">icon</span><span class="p">(</span><span class="s2">"search"</span><span class="p">),</span> <span class="n">QLineEdit</span><span class="o">.</span><span class="n">ActionPosition</span><span class="o">.</span><span class="n">LeadingPosition</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">240</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topic_filter</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty_filter</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">"Все типы"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">q_type</span> <span class="ow">in</span> <span class="n">QUESTION_TYPES</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">q_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">q_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topic_filter</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">240</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty_filter</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">190</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">190</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inactive_check</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="s2">"Показывать отключённые"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inactive_check</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">reset_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"Сбросить фильтры"</span><span class="p">,</span> <span class="s2">"link"</span><span class="p">)</span>
+
+        <span class="n">topics_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"Предметы и темы…"</span><span class="p">)</span>
+        <span class="n">import_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"Импорт CSV"</span><span class="p">)</span>
+        <span class="n">csv_template_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span>
+            <span class="s2">"Шаблон CSV"</span><span class="p">,</span>
+            <span class="n">tooltip</span><span class="o">=</span><span class="s2">"Сохранить пустой шаблон CSV для импорта и открыть его"</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">add_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"+ Добавить вопрос"</span><span class="p">,</span> <span class="s2">"primary"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
+            <span class="n">HEADERS</span><span class="p">,</span> <span class="n">stretch_column</span><span class="o">=</span><span class="n">TEXT_COLUMN</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="n">COLUMN_WIDTHS</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">verticalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setDefaultSectionSize</span><span class="p">(</span><span class="mi">48</span><span class="p">)</span>
+        <span class="c1"># Строка под курсором становится чуть серой, как в макете.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_hover</span> <span class="o">=</span> <span class="n">RowHoverHighlighter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">empty_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span>
+            <span class="s2">"Ничего не найдено</span><span class="se">\n</span><span class="s2">Измените фильтры или добавьте новый вопрос."</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">empty_label</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"hint"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">empty_label</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignmentFlag</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">found_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">found_label</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"hint"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages_row</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+
+        <span class="n">top_row</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">top_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">top_row</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">button</span> <span class="ow">in</span> <span class="p">(</span><span class="n">topics_button</span><span class="p">,</span> <span class="n">csv_template_button</span><span class="p">,</span> <span class="n">import_button</span><span class="p">,</span> <span class="n">add_button</span><span class="p">):</span>
+            <span class="n">top_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+        <span class="n">filter_row</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">filter_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">topic_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">difficulty_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="n">filter_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+        <span class="n">filter_row</span><span class="o">.</span><span class="n">addSpacing</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">filter_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inactive_check</span><span class="p">)</span>
+        <span class="n">filter_row</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="n">filter_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">reset_button</span><span class="p">)</span>
+        <span class="n">bottom_row</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">bottom_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">found_label</span><span class="p">)</span>
+        <span class="n">bottom_row</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="n">bottom_row</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages_row</span><span class="p">)</span>
+
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">top_row</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">filter_row</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">empty_label</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">bottom_row</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span><span class="o">.</span><span class="n">textChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filters_changed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject_changed</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_filter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">difficulty_filter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span><span class="p">):</span>
+            <span class="n">combo</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filters_changed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inactive_check</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filters_changed</span><span class="p">)</span>
+        <span class="n">reset_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset_filters</span><span class="p">)</span>
+        <span class="n">topics_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">open_topics</span><span class="p">)</span>
+        <span class="n">import_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">import_csv</span><span class="p">)</span>
+        <span class="n">csv_template_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_csv_template</span><span class="p">)</span>
+        <span class="n">add_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_question</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">cellDoubleClicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">edit_question</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">itemChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_item_changed</span><span class="p">)</span>
+        <span class="n">controller</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+<div class="viewcode-block" id="QuestionTab.refresh">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.refresh">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Обновляет списки фильтров и таблицу (вызывается по сигналу)."""</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">currentData</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">"Все предметы"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_disciplines</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span>
+            <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">findData</span><span class="p">(</span><span class="n">current</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reload_topics</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reload_combo</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">difficulty_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_difficulties</span><span class="p">(),</span>
+            <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">level_name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span>
+            <span class="s2">"Любая сложность"</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_table</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reload_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Темы в фильтре — только выбранного предмета."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reload_combo</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">topic_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">currentData</span><span class="p">()),</span>
+            <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">topic_name</span><span class="p">,</span>
+            <span class="s2">"Все темы"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="QuestionTab.subject_changed">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.subject_changed">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">subject_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сменили предмет: перестраиваем список тем и таблицу."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reload_topics</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filters_changed</span><span class="p">()</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reload_combo</span><span class="p">(</span><span class="n">combo</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">text_of</span><span class="p">,</span> <span class="n">first_item</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Перезаполняет фильтр, сохраняя выбранное значение."""</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">combo</span><span class="o">.</span><span class="n">currentData</span><span class="p">()</span>
+        <span class="n">combo</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">fill_combo</span><span class="p">(</span><span class="n">combo</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">text_of</span><span class="p">,</span> <span class="n">first_item</span><span class="p">)</span>
+        <span class="n">combo</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">combo</span><span class="o">.</span><span class="n">findData</span><span class="p">(</span><span class="n">current</span><span class="p">)))</span>
+        <span class="n">combo</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QuestionTab.filters_changed">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.filters_changed">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filters_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Любой фильтр изменился: возвращаемся на первую страницу."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_table</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.reset_filters">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.reset_filters">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сбрасывает поиск и все фильтры."""</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">topic_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">difficulty_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inactive_check</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="n">widgets</span><span class="p">:</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reload_topics</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topic_filter</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty_filter</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inactive_check</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="n">widgets</span><span class="p">:</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filters_changed</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.found_questions">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.found_questions">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">found_questions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Все вопросы, подходящие под текущие поиск и фильтры (без страниц)."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">find_questions</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search_edit</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+            <span class="n">discipline</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subject_filter</span><span class="o">.</span><span class="n">currentData</span><span class="p">(),</span>
+            <span class="n">topic_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_filter</span><span class="o">.</span><span class="n">currentData</span><span class="p">(),</span>
+            <span class="n">difficulty_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">difficulty_filter</span><span class="o">.</span><span class="n">currentData</span><span class="p">(),</span>
+            <span class="n">q_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">type_filter</span><span class="o">.</span><span class="n">currentData</span><span class="p">(),</span>
+            <span class="n">only_active</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inactive_check</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.refresh_table">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.refresh_table">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">refresh_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Ищет вопросы по фильтрам и заполняет таблицу текущей страницы."""</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">found_questions</span><span class="p">()</span>
+        <span class="n">pages</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">found</span><span class="p">)</span> <span class="o">//</span> <span class="n">PAGE_SIZE</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="p">,</span> <span class="n">pages</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">PAGE_SIZE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions</span> <span class="o">=</span> <span class="n">found</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">start</span> <span class="o">+</span> <span class="n">PAGE_SIZE</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_hover</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">question</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fill_row</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">empty_label</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="ow">not</span> <span class="n">found</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">found</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">found_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Найдено: </span><span class="si">{</span><span class="n">plural</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">found</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">'вопрос'</span><span class="p">,</span><span class="w"> </span><span class="s1">'вопроса'</span><span class="p">,</span><span class="w"> </span><span class="s1">'вопросов'</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span>
+                <span class="sa">f</span><span class="s2">" · показаны </span><span class="si">{</span><span class="n">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="n">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+                <span class="sa">f</span><span class="s2">" · страница </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="si">}</span><span class="s2"> из </span><span class="si">{</span><span class="n">pages</span><span class="si">}</span><span class="s2">"</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">found_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">"Найдено: 0 вопросов"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_build_pages</span><span class="p">(</span><span class="n">pages</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fill_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Заполняет одну строку таблицы."""</span>
+        <span class="n">topic</span> <span class="o">=</span> <span class="n">topic_column_text</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">number</span><span class="p">,</span>
+            <span class="n">question</span><span class="o">.</span><span class="n">question_text</span><span class="p">,</span>
+            <span class="n">topic</span><span class="p">,</span>
+            <span class="n">question</span><span class="o">.</span><span class="n">level_name</span><span class="p">,</span>
+            <span class="n">question</span><span class="o">.</span><span class="n">q_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">question</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setForeground</span><span class="p">(</span><span class="n">QBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="n">INACTIVE_TEXT</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">DIFFICULTY_COLUMN</span><span class="p">)</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+        <span class="n">chip</span> <span class="o">=</span> <span class="n">make_chip</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">level_name</span><span class="p">,</span> <span class="n">question</span><span class="o">.</span><span class="n">difficulty_id</span><span class="p">)</span>
+        <span class="n">chip_cell</span> <span class="o">=</span> <span class="n">left_cell</span><span class="p">(</span><span class="n">chip</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_hover</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">chip_cell</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">DIFFICULTY_COLUMN</span><span class="p">,</span> <span class="n">chip_cell</span><span class="p">)</span>
+        <span class="n">active</span> <span class="o">=</span> <span class="n">QTableWidgetItem</span><span class="p">()</span>
+        <span class="n">active</span><span class="o">.</span><span class="n">setFlags</span><span class="p">(</span>
+            <span class="n">Qt</span><span class="o">.</span><span class="n">ItemFlag</span><span class="o">.</span><span class="n">ItemIsEnabled</span>
+            <span class="o">|</span> <span class="n">Qt</span><span class="o">.</span><span class="n">ItemFlag</span><span class="o">.</span><span class="n">ItemIsSelectable</span>
+            <span class="o">|</span> <span class="n">Qt</span><span class="o">.</span><span class="n">ItemFlag</span><span class="o">.</span><span class="n">ItemIsUserCheckable</span>
+        <span class="p">)</span>
+        <span class="n">active</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span>
+            <span class="n">Qt</span><span class="o">.</span><span class="n">CheckState</span><span class="o">.</span><span class="n">Checked</span> <span class="k">if</span> <span class="n">question</span><span class="o">.</span><span class="n">is_active</span> <span class="k">else</span> <span class="n">Qt</span><span class="o">.</span><span class="n">CheckState</span><span class="o">.</span><span class="n">Unchecked</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">ACTIVE_COLUMN</span><span class="p">,</span> <span class="n">active</span><span class="p">)</span>
+
+        <span class="n">edit_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"link"</span><span class="p">,</span> <span class="s2">"Изменить вопрос"</span><span class="p">)</span>
+        <span class="n">edit_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">(</span><span class="s2">"pencil"</span><span class="p">))</span>
+        <span class="n">delete_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"link"</span><span class="p">,</span> <span class="s2">"Удалить вопрос"</span><span class="p">)</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">(</span><span class="s2">"trash"</span><span class="p">))</span>
+        <span class="n">edit_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">row</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">edit_question</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">row</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete_question</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">cell_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+        <span class="n">cell_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">cell_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">cell_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="n">cell_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">edit_button</span><span class="p">)</span>
+        <span class="n">cell_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">delete_button</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">edit_button</span><span class="p">,</span> <span class="n">delete_button</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">row_hover</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">ACTIONS_COLUMN</span><span class="p">,</span> <span class="n">QTableWidgetItem</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">ACTIONS_COLUMN</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pages</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Перестраивает кнопки страниц под таблицей."""</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages_row</span><span class="o">.</span><span class="n">count</span><span class="p">():</span>
+            <span class="n">widget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages_row</span><span class="o">.</span><span class="n">takeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">widget</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">widget</span><span class="p">:</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pages</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">prev_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"‹"</span><span class="p">)</span>
+        <span class="n">prev_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">prev_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">go_to_page</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">prev_button</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">page_numbers</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="p">,</span> <span class="n">pages</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pages_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">"…"</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="n">button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">),</span> <span class="s2">"primary"</span> <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="k">else</span> <span class="s2">""</span><span class="p">)</span>
+            <span class="n">button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">number</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">go_to_page</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pages_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+        <span class="n">next_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"›"</span><span class="p">)</span>
+        <span class="n">next_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">&lt;</span> <span class="n">pages</span><span class="p">)</span>
+        <span class="n">next_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">go_to_page</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">next_button</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QuestionTab.go_to_page">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.go_to_page">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">go_to_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Переходит на страницу таблицы."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="n">number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_table</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.on_item_changed">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.on_item_changed">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_item_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Флажок «Активен» в таблице: включает или отключает вопрос."""</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="n">ACTIVE_COLUMN</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">item</span><span class="o">.</span><span class="n">row</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">toggle_question</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">row</span><span class="p">()])</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.open_topics">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.open_topics">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">open_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Открывает окно управления темами."""</span>
+        <span class="n">TopicsDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.add_question">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.add_question">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_question</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Открывает окно нового вопроса."""</span>
+        <span class="n">QuestionDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.edit_question">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.edit_question">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">edit_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Открывает окно изменения вопроса из строки row."""</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">):</span>
+            <span class="n">QuestionDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">[</span><span class="n">row</span><span class="p">],</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.delete_question">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.delete_question">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет вопрос из строки row после подтверждения."""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="n">question</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Удалить вопрос?</span><span class="se">\n\n</span><span class="s2">Вопрос «</span><span class="si">{</span><span class="n">question</span><span class="o">.</span><span class="n">question_text</span><span class="si">}</span><span class="s2">» будет удалён "</span>
+            <span class="s2">"из банка. В уже созданных сериях он останется. Если вопрос может "</span>
+            <span class="s2">"понадобиться позже, лучше снимите флажок «Активен»."</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">confirm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">delete_question</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">TicketGenError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+                <span class="n">show_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="se">\n</span><span class="s2">Вместо удаления вопрос можно отключить."</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.import_csv">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.import_csv">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">import_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Открывает окно импорта вопросов из CSV."""</span>
+        <span class="n">ImportDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QuestionTab.save_csv_template">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.question_tab.QuestionTab.save_csv_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_csv_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет пустой шаблон CSV и открывает его (обычно в Excel).</span>
+
+<span class="sd">        В шаблоне только строка заголовков: остаётся вписать вопросы.</span>
+<span class="sd">        """</span>
+        <span class="n">path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s2">"Шаблон CSV"</span><span class="p">,</span> <span class="s2">"шаблон_вопросов.csv"</span><span class="p">,</span> <span class="s2">"CSV-файлы (*.csv)"</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">write_csv_template</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">show_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Не удалось сохранить шаблон: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">QDesktopServices</span><span class="o">.</span><span class="n">openUrl</span><span class="p">(</span><span class="n">QUrl</span><span class="o">.</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">path</span><span class="p">))</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

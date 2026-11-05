@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Архитектура &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="_static/app_icon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e35015f7"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Руководство пользователя" href="user_manual.html" />
+    <link rel="prev" title="Функциональность" href="functionality.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TicketGen
+              <img src="_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">Справочник API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Архитектура</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Архитектура<a class="headerlink" href="#id1" title="Ссылка на этот заголовок"></a></h1>
+<section id="id2">
+<h2>Слои приложения<a class="headerlink" href="#id2" title="Ссылка на этот заголовок"></a></h2>
+<p>Приложение многослойное и построено по паттерну MVC. Каждый слой лежит
+в своём пакете и обращается только к слоям ниже себя:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌──────────────────────────────────────────────────────────┐
+│  views        окна, вкладки, диалоги (PyQt6)       View  │
+├──────────────────────────────────────────────────────────┤
+│  controllers  AppController: действия пользователя       │
+│               и сигналы об изменениях        Controller  │
+├───────────────────────────┬──────────────────────────────┤
+│  logic                    │  workers                     │
+│  генератор, баллы,        │  BackgroundWorker:           │
+│  импорт CSV, экспорт,     │  долгие операции в фоне      │
+│  Moodle                   │                              │
+├───────────────────────────┴──────────────────────────────┤
+│  data         Database, репозитории (весь SQL)    Model  │
+├──────────────────────────────────────────────────────────┤
+│  domain       сущности (dataclass) и ошибки              │
+└──────────────────────────────────────────────────────────┘
+                  SQLite: tickets.db
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Пакет</p></th>
+<th class="head"><p>Ответственность</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen.domain</span></code></p></td>
+<td><p>классы-данные <code class="docutils literal notranslate"><span class="pre">Topic</span></code>, <code class="docutils literal notranslate"><span class="pre">Difficulty</span></code>, <code class="docutils literal notranslate"><span class="pre">Question</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Template</span></code>, <code class="docutils literal notranslate"><span class="pre">TemplateRule</span></code>, <code class="docutils literal notranslate"><span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">Variant</span></code> и ошибки
+<code class="docutils literal notranslate"><span class="pre">TicketGenError</span></code>, <code class="docutils literal notranslate"><span class="pre">NotEnoughQuestionsError</span></code>. Не зависит ни от
+чего, кроме стандартной библиотеки.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen.data</span></code></p></td>
+<td><p>подключение к SQLite, создание схемы, резервное копирование
+(<code class="docutils literal notranslate"><span class="pre">Database</span></code>) и репозитории с операциями CRUD. Только здесь
+есть SQL.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen.logic</span></code></p></td>
+<td><p>алгоритмы без интерфейса: генерация серии, подсчёт баллов
+и проверка банка, импорт CSV, экспорт в DOCX и PDF, выгрузка
+в Moodle. Работает с сущностями и репозиториями.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen.workers</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BackgroundWorker</span></code> — запуск функции в отдельном потоке <code class="docutils literal notranslate"><span class="pre">QThread</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen.controllers</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AppController</span></code> — единая точка входа для окон. Создаёт
+репозитории, вызывает логику и сообщает об изменениях сигналами.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen.views</span></code></p></td>
+<td><p>главное окно, четыре вкладки, диалоги, стили и анимированные
+виджеты. Не содержит SQL и расчётов.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Главное правило зависимостей: окна знают только контроллер, контроллер
+знает репозитории и логику, логика не знает об окнах. Поэтому всё,
+кроме окон, проверяется автоматическими тестами без запуска интерфейса.</p>
+</section>
+<section id="id3">
+<h2>Паттерны проектирования<a class="headerlink" href="#id3" title="Ссылка на этот заголовок"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 32.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Паттерн</p></th>
+<th class="head"><p>Где</p></th>
+<th class="head"><p>Зачем</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MVC</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">views</span></code> — <code class="docutils literal notranslate"><span class="pre">controllers</span></code> — <code class="docutils literal notranslate"><span class="pre">data</span></code>/<code class="docutils literal notranslate"><span class="pre">logic</span></code></p></td>
+<td><p>окна отделены от данных и алгоритмов, логику можно тестировать
+без интерфейса и менять интерфейс, не трогая логику</p></td>
+</tr>
+<tr class="row-odd"><td><p>Singleton</p></td>
+<td><p><a class="reference internal" href="api/app.html#ticketgen.config.AppConfig" title="ticketgen.config.AppConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></a>,
+<a class="reference internal" href="api/data.html#ticketgen.data.database.Database.instance" title="ticketgen.data.database.Database.instance"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Database.instance()</span></code></a></p></td>
+<td><p>одни настройки путей и одно подключение к базе на всю программу.
+В тестах <code class="docutils literal notranslate"><span class="pre">Database(&quot;:memory:&quot;)</span></code> создаётся напрямую, поэтому
+у каждого теста своя база</p></td>
+</tr>
+<tr class="row-even"><td><p>Repository</p></td>
+<td><p><a class="reference internal" href="api/data.html#module-ticketgen.data.repositories" title="ticketgen.data.repositories"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></p></td>
+<td><p>SQL собран в одном месте, запросы параметризованы (защита от
+SQL-инъекций), ошибки SQLite переводятся в понятный текст</p></td>
+</tr>
+<tr class="row-odd"><td><p>Factory</p></td>
+<td><p><a class="reference internal" href="api/logic.html#ticketgen.logic.exporters.ExporterFactory" title="ticketgen.logic.exporters.ExporterFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExporterFactory</span></code></a></p></td>
+<td><p>экспортёр выбирается по названию формата. Новый формат
+добавляется одним классом-наследником <code class="docutils literal notranslate"><span class="pre">BaseExporter</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Observer</p></td>
+<td><p>сигналы <code class="docutils literal notranslate"><span class="pre">questions_changed</span></code>, <code class="docutils literal notranslate"><span class="pre">templates_changed</span></code>,
+<code class="docutils literal notranslate"><span class="pre">series_changed</span></code> контроллера</p></td>
+<td><p>вкладки сами обновляются после любого изменения данных
+и не знают друг о друге</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h2>Сценарий «сгенерировать серию»<a class="headerlink" href="#id4" title="Ссылка на этот заголовок"></a></h2>
+<p>Последовательность вызовов показывает, как слои работают вместе:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GenerationTab</span></code> при смене параметров вызывает
+<code class="docutils literal notranslate"><span class="pre">AppController.check_template()</span></code>. Тот берёт из
+<code class="docutils literal notranslate"><span class="pre">QuestionRepository.count_by_topic_and_difficulty()</span></code> число вопросов
+и передаёт его в <a class="reference internal" href="api/logic.html#ticketgen.logic.scoring.check_rules" title="ticketgen.logic.scoring.check_rules"><code class="xref py py-func docutils literal notranslate"><span class="pre">ticketgen.logic.scoring.check_rules()</span></code></a> и
+<a class="reference internal" href="api/logic.html#ticketgen.logic.scoring.possible_tickets" title="ticketgen.logic.scoring.possible_tickets"><code class="xref py py-func docutils literal notranslate"><span class="pre">possible_tickets()</span></code></a>. Вкладка показывает
+результат проверки.</p></li>
+<li><p>По кнопке «Сгенерировать» вкладка получает от контроллера активные
+вопросы (<code class="docutils literal notranslate"><span class="pre">active_pool()</span></code>) и запускает
+<a class="reference internal" href="api/logic.html#ticketgen.logic.generator.generate_variants" title="ticketgen.logic.generator.generate_variants"><code class="xref py py-func docutils literal notranslate"><span class="pre">ticketgen.logic.generator.generate_variants()</span></code></a> в
+<code class="docutils literal notranslate"><span class="pre">BackgroundWorker</span></code>. Процент выполнения приходит сигналом
+<code class="docutils literal notranslate"><span class="pre">progress</span></code>.</p></li>
+<li><p>По сигналу <code class="docutils literal notranslate"><span class="pre">finished_ok</span></code> вкладка вызывает
+<code class="docutils literal notranslate"><span class="pre">AppController.save_series()</span></code>. <code class="docutils literal notranslate"><span class="pre">SeriesRepository.save()</span></code> записывает
+серию, билеты и их вопросы одной транзакцией.</p></li>
+<li><p>Контроллер отправляет <code class="docutils literal notranslate"><span class="pre">series_changed</span></code>: вкладка «Результаты»
+перечитывает историю, строка состояния обновляется.</p></li>
+</ol>
+</section>
+<section id="id5">
+<h2>База данных<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h2>
+<p>База SQLite из восьми таблиц создаётся при первом запуске
+(константа <code class="docutils literal notranslate"><span class="pre">SCHEMA</span></code> модуля <a class="reference internal" href="api/data.html#module-ticketgen.data.database" title="ticketgen.data.database"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a>). Внешние ключи включены
+(<code class="docutils literal notranslate"><span class="pre">PRAGMA</span> <span class="pre">foreign_keys</span> <span class="pre">=</span> <span class="pre">ON</span></code>), правила шаблона и состав билетов
+удаляются каскадно вместе с шаблоном и серией.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27.0%" />
+<col style="width: 73.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Таблица</p></th>
+<th class="head"><p>Содержимое</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tbl_topics</span></code></p></td>
+<td><p>темы: предмет (<code class="docutils literal notranslate"><span class="pre">discipline</span></code>) и название, пара уникальна</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tbl_difficulty</span></code></p></td>
+<td><p>уровни сложности и вес в баллах: лёгкий 1, средний 2, сложный 3</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tbl_questions</span></code></p></td>
+<td><p>вопросы: тема, сложность, тип, текст, ответ, признак активности</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tbl_templates</span></code></p></td>
+<td><p>шаблоны: название, заголовок и оформление (предмет, вид
+документа, эмблема, подписи)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tbl_template_rules</span></code></p></td>
+<td><p>правила шаблона: тема, сложность, число вопросов</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tbl_series</span></code></p></td>
+<td><p>серии: шаблон, дата, seed, режим без пересечений, число билетов</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tbl_variants</span></code></p></td>
+<td><p>билеты серии: номер и суммарный балл</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tbl_variant_questions</span></code></p></td>
+<td><p>вопросы билета и их порядок</p></td>
+</tr>
+</tbody>
+</table>
+<p>Для быстрого отбора вопросов по правилам есть индекс
+<code class="docutils literal notranslate"><span class="pre">(topic_id,</span> <span class="pre">difficulty_id)</span></code>. Поиск без учёта регистра идёт через
+функцию <code class="docutils literal notranslate"><span class="pre">py_lower</span></code>, зарегистрированную в подключении: встроенная
+функция <code class="docutils literal notranslate"><span class="pre">LOWER()</span></code> SQLite не обрабатывает кириллицу.</p>
+</section>
+<section id="api">
+<h2>Внутренний API<a class="headerlink" href="#api" title="Ссылка на этот заголовок"></a></h2>
+<p>Окна обращаются к данным только через методы
+<a class="reference internal" href="api/controllers.html#ticketgen.controllers.app_controller.AppController" title="ticketgen.controllers.app_controller.AppController"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppController</span></code></a>. Это и есть
+внутренний API приложения:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Группа</p></th>
+<th class="head"><p>Методы</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Темы</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_topics</span></code>, <code class="docutils literal notranslate"><span class="pre">get_disciplines</span></code>, <code class="docutils literal notranslate"><span class="pre">add_topic</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rename_topic</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_topic</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Банк вопросов</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_difficulties</span></code>, <code class="docutils literal notranslate"><span class="pre">find_questions</span></code>, <code class="docutils literal notranslate"><span class="pre">save_question</span></code>,
+<code class="docutils literal notranslate"><span class="pre">toggle_question</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_question</span></code>, <code class="docutils literal notranslate"><span class="pre">import_csv</span></code>,
+<code class="docutils literal notranslate"><span class="pre">write_csv_template</span></code>, <code class="docutils literal notranslate"><span class="pre">available_counts</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Шаблоны</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_templates</span></code>, <code class="docutils literal notranslate"><span class="pre">get_template</span></code>, <code class="docutils literal notranslate"><span class="pre">create_template</span></code>,
+<code class="docutils literal notranslate"><span class="pre">update_template</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_template</span></code>, <code class="docutils literal notranslate"><span class="pre">add_rule</span></code>,
+<code class="docutils literal notranslate"><span class="pre">update_rule_count</span></code>, <code class="docutils literal notranslate"><span class="pre">update_rule_target</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_rule</span></code>,
+<code class="docutils literal notranslate"><span class="pre">check_template</span></code>, <code class="docutils literal notranslate"><span class="pre">store_logo</span></code>, <code class="docutils literal notranslate"><span class="pre">last_logo</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Серии</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">active_pool</span></code>, <code class="docutils literal notranslate"><span class="pre">save_series</span></code>, <code class="docutils literal notranslate"><span class="pre">get_series</span></code>, <code class="docutils literal notranslate"><span class="pre">get_variants</span></code>,
+<code class="docutils literal notranslate"><span class="pre">replacement_candidates</span></code>, <code class="docutils literal notranslate"><span class="pre">replace_question</span></code>,
+<code class="docutils literal notranslate"><span class="pre">delete_series</span></code>, <code class="docutils literal notranslate"><span class="pre">export_moodle</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Служебные</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stats</span></code>, <code class="docutils literal notranslate"><span class="pre">backup</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Ошибки, которые нужно показать пользователю, передаются исключением
+<a class="reference internal" href="api/domain.html#ticketgen.domain.models.TicketGenError" title="ticketgen.domain.models.TicketGenError"><code class="xref py py-class docutils literal notranslate"><span class="pre">TicketGenError</span></code></a>. Окно ловит его и
+выводит текст в сообщении, а не закрывается с ошибкой.</p>
+</section>
+<section id="id6">
+<h2>Потоки<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h2>
+<p>Генерация и экспорт могут занимать заметное время, поэтому выполняются
+в <a class="reference internal" href="api/workers.html#ticketgen.workers.background_worker.BackgroundWorker" title="ticketgen.workers.background_worker.BackgroundWorker"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundWorker</span></code></a>. Поток
+не трогает виджеты: в Qt это можно делать только из главного потока.
+Результат, процент выполнения и ошибка передаются сигналами
+<code class="docutils literal notranslate"><span class="pre">finished_ok</span></code>, <code class="docutils literal notranslate"><span class="pre">progress</span></code> и <code class="docutils literal notranslate"><span class="pre">failed</span></code>. Пока поток работает, ссылка
+на него хранится в <code class="docutils literal notranslate"><span class="pre">BackgroundWorker._running</span></code>: иначе Python может
+удалить объект потока раньше, чем Qt его завершит.</p>
+</section>
+<section id="id7">
+<h2>Структура проекта<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TicketGen/
+├── main.py                  точка входа
+├── pyproject.toml           зависимости и настройки (Poetry, black, pytest)
+├── poetry.lock              точные версии зависимостей
+├── build.bat                сборка TicketGen.exe (PyInstaller)
+├── README.md
+├── ticketgen/
+│   ├── config.py            AppConfig: пути к базе, backup, export
+│   ├── seed_data.py         демонстрационные данные
+│   ├── domain/models.py     сущности и ошибки
+│   ├── data/                database.py, repositories.py
+│   ├── logic/               generator, scoring, csv_importer,
+│   │                        exporters, moodle
+│   ├── workers/             background_worker.py
+│   ├── controllers/         app_controller.py
+│   └── views/               окна, вкладки, диалоги, стили, иконки
+├── tests/                   тесты pytest
+├── scripts/system_check.py  системная проверка требований ТЗ
+├── examples/                пример CSV с вопросами
+└── docs/                    эта документация (Sphinx)
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="functionality.html" class="btn btn-neutral float-left" title="Функциональность" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="user_manual.html" class="btn btn-neutral float-right" title="Руководство пользователя" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

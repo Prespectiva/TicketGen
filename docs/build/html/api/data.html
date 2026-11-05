@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Слой данных (data) &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="../_static/app_icon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" />
+    <link rel="next" title="Слой бизнес-логики (logic)" href="logic.html" />
+    <link rel="prev" title="Слой сущностей (domain)" href="domain.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TicketGen
+              <img src="../_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Справочник API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Справочник API</a></li>
+      <li class="breadcrumb-item active">Слой данных (data)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data">
+<h1>Слой данных (data)<a class="headerlink" href="#data" title="Ссылка на этот заголовок"></a></h1>
+<p>Подключение к SQLite, схема базы и репозитории. Весь SQL программы находится в этом слое.</p>
+<section id="module-ticketgen.data.database">
+<span id="ticketgen-data-database"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code><a class="headerlink" href="#module-ticketgen.data.database" title="Ссылка на этот заголовок"></a></h2>
+<p>Подключение к SQLite, создание схемы и резервное копирование.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.data.database.Database">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.data.database.</span></span><span class="sig-name descname"><span class="pre">Database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/database.html#Database"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.database.Database" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Подключение к файлу базы данных.</p>
+<p>В программе используется одно подключение (паттерн Singleton), его
+возвращает <code class="docutils literal notranslate"><span class="pre">Database.instance()</span></code>. В тестах объект создаётся напрямую:
+<code class="docutils literal notranslate"><span class="pre">Database(&quot;:memory:&quot;)</span></code> — база в оперативной памяти.</p>
+<p>Открывает базу и создаёт таблицы, если их ещё нет.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> – путь к файлу .db или «:memory:».</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.database.Database.instance">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">instance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/database.html#Database.instance"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.database.Database.instance" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает единственное подключение к tickets.db.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.database.Database.backup">
+<span class="sig-name descname"><span class="pre">backup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backup_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/database.html#Database.backup"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.database.Database.backup" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет копию базы и удаляет самые старые копии.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>backup_dir</strong> (<em>Path</em>) – папка для резервных копий.</p></li>
+<li><p><strong>keep</strong> (<em>int</em>) – сколько последних копий хранить.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Путь к созданной копии.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Path</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.database.Database.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/database.html#Database.close"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.database.Database.close" title="Ссылка на это определение"></a></dt>
+<dd><p>Закрывает подключение.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.data.repositories">
+<span id="ticketgen-data-repositories"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code><a class="headerlink" href="#module-ticketgen.data.repositories" title="Ссылка на этот заголовок"></a></h2>
+<p>Репозитории (паттерн Repository): весь SQL программы находится здесь.</p>
+<p>Все запросы параметризованные: значения передаются через «?», а не
+склейкой строк. Это защищает от SQL-инъекций.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.BaseRepository">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.data.repositories.</span></span><span class="sig-name descname"><span class="pre">BaseRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#BaseRepository"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.BaseRepository" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Общий предок репозиториев: хранит подключение к базе.</p>
+<p>Запоминает объект Database.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TopicRepository">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.data.repositories.</span></span><span class="sig-name descname"><span class="pre">TopicRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TopicRepository"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TopicRepository" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ticketgen.data.repositories.BaseRepository" title="ticketgen.data.repositories.BaseRepository"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRepository</span></code></a></p>
+<p>CRUD для таблицы tbl_topics.</p>
+<p>Запоминает объект Database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TopicRepository.get_all">
+<span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TopicRepository.get_all"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TopicRepository.get_all" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает все темы по алфавиту.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="domain.html#ticketgen.domain.models.Topic" title="ticketgen.domain.models.Topic"><em>Topic</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TopicRepository.disciplines">
+<span class="sig-name descname"><span class="pre">disciplines</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TopicRepository.disciplines"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TopicRepository.disciplines" title="Ссылка на это определение"></a></dt>
+<dd><p>Названия предметов (дисциплин), у которых есть темы, по алфавиту.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TopicRepository.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discipline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TopicRepository.add"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TopicRepository.add" title="Ссылка на это определение"></a></dt>
+<dd><p>Добавляет тему и возвращает её id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>discipline</strong> (<em>str</em>)</p></li>
+<li><p><strong>topic_name</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TopicRepository.get_or_create">
+<span class="sig-name descname"><span class="pre">get_or_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discipline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TopicRepository.get_or_create"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TopicRepository.get_or_create" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает id темы, при необходимости создаёт её (для импорта).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>discipline</strong> (<em>str</em>)</p></li>
+<li><p><strong>topic_name</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TopicRepository.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TopicRepository.update"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TopicRepository.update" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет новое название темы.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>topic</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Topic" title="ticketgen.domain.models.Topic"><em>Topic</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TopicRepository.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TopicRepository.delete"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TopicRepository.delete" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет тему. Тему с вопросами удалить нельзя.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>topic_id</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.DifficultyRepository">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.data.repositories.</span></span><span class="sig-name descname"><span class="pre">DifficultyRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#DifficultyRepository"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.DifficultyRepository" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ticketgen.data.repositories.BaseRepository" title="ticketgen.data.repositories.BaseRepository"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRepository</span></code></a></p>
+<p>Чтение и изменение весов в справочнике tbl_difficulty.</p>
+<p>Запоминает объект Database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.DifficultyRepository.get_all">
+<span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#DifficultyRepository.get_all"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.DifficultyRepository.get_all" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает уровни сложности от лёгкого к сложному.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="domain.html#ticketgen.domain.models.Difficulty" title="ticketgen.domain.models.Difficulty"><em>Difficulty</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.DifficultyRepository.update_weight">
+<span class="sig-name descname"><span class="pre">update_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">difficulty_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#DifficultyRepository.update_weight"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.DifficultyRepository.update_weight" title="Ссылка на это определение"></a></dt>
+<dd><p>Меняет вес уровня сложности в баллах.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>difficulty_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>weight</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.data.repositories.</span></span><span class="sig-name descname"><span class="pre">QuestionRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ticketgen.data.repositories.BaseRepository" title="ticketgen.data.repositories.BaseRepository"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRepository</span></code></a></p>
+<p>CRUD для банка вопросов (tbl_questions).</p>
+<p>Запоминает объект Database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.find">
+<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">difficulty_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_active</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discipline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.find"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.find" title="Ссылка на это определение"></a></dt>
+<dd><p>Ищет вопросы по тексту и фильтрам.</p>
+<p>Пустые фильтры не применяются. Условия собираются из готовых строк,
+а значения передаются параметрами.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.get"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.get" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает вопрос по id или None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>question_id</strong> (<em>int</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.add"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.add" title="Ссылка на это определение"></a></dt>
+<dd><p>Добавляет вопрос и возвращает его id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>question</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.add_many">
+<span class="sig-name descname"><span class="pre">add_many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">questions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.add_many"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.add_many" title="Ссылка на это определение"></a></dt>
+<dd><p>Добавляет много вопросов в одной транзакции (для импорта).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>questions</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.update"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.update" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет изменения вопроса.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>question</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.set_active">
+<span class="sig-name descname"><span class="pre">set_active</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.set_active"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.set_active" title="Ссылка на это определение"></a></dt>
+<dd><p>Включает или отключает участие вопроса в генерации.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>question_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>active</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.delete"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.delete" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет вопрос. Вопрос из сохранённых билетов удалить нельзя.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>question_id</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.count"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.count" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает общее число вопросов.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.QuestionRepository.count_by_topic_and_difficulty">
+<span class="sig-name descname"><span class="pre">count_by_topic_and_difficulty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#QuestionRepository.count_by_topic_and_difficulty"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.QuestionRepository.count_by_topic_and_difficulty" title="Ссылка на это определение"></a></dt>
+<dd><p>Считает активные вопросы для каждой пары (тема, сложность).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[tuple[int, int], int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.data.repositories.</span></span><span class="sig-name descname"><span class="pre">TemplateRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ticketgen.data.repositories.BaseRepository" title="ticketgen.data.repositories.BaseRepository"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRepository</span></code></a></p>
+<p>CRUD для шаблонов (tbl_templates) и их правил (tbl_template_rules).</p>
+<p>Запоминает объект Database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.get_all">
+<span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.get_all"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.get_all" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает все шаблоны вместе с правилами.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="domain.html#ticketgen.domain.models.Template" title="ticketgen.domain.models.Template"><em>Template</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.get"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.get" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает шаблон с правилами или None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>template_id</strong> (<em>int</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="domain.html#ticketgen.domain.models.Template" title="ticketgen.domain.models.Template"><em>Template</em></a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.get_rules">
+<span class="sig-name descname"><span class="pre">get_rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.get_rules"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.get_rules" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает правила шаблона с названиями темы и сложности.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>template_id</strong> (<em>int</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="domain.html#ticketgen.domain.models.TemplateRule" title="ticketgen.domain.models.TemplateRule"><em>TemplateRule</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.add"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.add" title="Ссылка на это определение"></a></dt>
+<dd><p>Создаёт шаблон и возвращает его id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>header_text</strong> (<em>str</em>)</p></li>
+<li><p><strong>subject</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.update"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.update" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет название, заголовок, предмет и оформление шаблона.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Template" title="ticketgen.domain.models.Template"><em>Template</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.delete"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.delete" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет шаблон (правила удаляются каскадно).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Исключение<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="domain.html#ticketgen.domain.models.TicketGenError" title="ticketgen.domain.models.TicketGenError"><strong>TicketGenError</strong></a> – если по шаблону уже созданы серии билетов.</p>
+</dd>
+<dt class="field-even">Параметры<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>template_id</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.add_rule">
+<span class="sig-name descname"><span class="pre">add_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.add_rule"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.add_rule" title="Ссылка на это определение"></a></dt>
+<dd><p>Добавляет правило в шаблон.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rule</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.TemplateRule" title="ticketgen.domain.models.TemplateRule"><em>TemplateRule</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.update_rule_count">
+<span class="sig-name descname"><span class="pre">update_rule_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questions_count</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.update_rule_count"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.update_rule_count" title="Ссылка на это определение"></a></dt>
+<dd><p>Меняет количество вопросов в правиле.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>questions_count</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.update_rule_target">
+<span class="sig-name descname"><span class="pre">update_rule_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">difficulty_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.update_rule_target"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.update_rule_target" title="Ссылка на это определение"></a></dt>
+<dd><p>Меняет тему и сложность правила.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>topic_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>difficulty_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.TemplateRepository.delete_rule">
+<span class="sig-name descname"><span class="pre">delete_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#TemplateRepository.delete_rule"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.TemplateRepository.delete_rule" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет правило.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rule_id</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.SeriesRepository">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.data.repositories.</span></span><span class="sig-name descname"><span class="pre">SeriesRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#SeriesRepository"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.SeriesRepository" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ticketgen.data.repositories.BaseRepository" title="ticketgen.data.repositories.BaseRepository"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRepository</span></code></a></p>
+<p>Сохранение и чтение серий билетов (tbl_series, tbl_variants, …).</p>
+<p>Запоминает объект Database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.SeriesRepository.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variants</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#SeriesRepository.save"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.SeriesRepository.save" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет серию со всеми билетами в одной транзакции.</p>
+<p>Если на любом шаге произойдёт ошибка, в базу не попадёт ничего.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>id новой серии.</p>
+</dd>
+<dt class="field-even">Параметры<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>series</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Series" title="ticketgen.domain.models.Series"><em>Series</em></a>)</p></li>
+<li><p><strong>variants</strong> (<em>list</em><em>[</em><a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.SeriesRepository.get_all">
+<span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#SeriesRepository.get_all"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.SeriesRepository.get_all" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает все серии, новые сверху.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="domain.html#ticketgen.domain.models.Series" title="ticketgen.domain.models.Series"><em>Series</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.SeriesRepository.get_variants">
+<span class="sig-name descname"><span class="pre">get_variants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#SeriesRepository.get_variants"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.SeriesRepository.get_variants" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает билеты серии вместе с вопросами по порядку.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>series_id</strong> (<em>int</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="domain.html#ticketgen.domain.models.Variant" title="ticketgen.domain.models.Variant"><em>Variant</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.SeriesRepository.replace_question">
+<span class="sig-name descname"><span class="pre">replace_question</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variant_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#SeriesRepository.replace_question"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.SeriesRepository.replace_question" title="Ссылка на это определение"></a></dt>
+<dd><p>Заменяет вопрос в билете, порядковый номер сохраняется.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variant_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>old_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>new_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.SeriesRepository.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#SeriesRepository.delete"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.SeriesRepository.delete" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет серию (билеты и их вопросы удаляются каскадно).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>series_id</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.data.repositories.SeriesRepository.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/data/repositories.html#SeriesRepository.count"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.data.repositories.SeriesRepository.count" title="Ссылка на это определение"></a></dt>
+<dd><p>Возвращает число сохранённых серий.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="domain.html" class="btn btn-neutral float-left" title="Слой сущностей (domain)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="logic.html" class="btn btn-neutral float-right" title="Слой бизнес-логики (logic)" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

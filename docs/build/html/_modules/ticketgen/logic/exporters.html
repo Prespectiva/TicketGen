@@ -1,0 +1,812 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ticketgen.logic.exporters &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/app_icon.ico"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TicketGen
+              <img src="../../../_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Справочник API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">ticketgen.logic.exporters</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код ticketgen.logic.exporters</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Экспорт в DOCX и PDF."""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xml.sax.saxutils</span><span class="w"> </span><span class="kn">import</span> <span class="n">escape</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">AppConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.domain.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">STUDENT_LINE_TEXT</span><span class="p">,</span> <span class="n">Template</span><span class="p">,</span> <span class="n">TicketGenError</span><span class="p">,</span> <span class="n">Variant</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.logic.generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">plain_header</span><span class="p">,</span> <span class="n">ticket_title</span>
+
+<span class="c1"># Блок — кортеж (вид, значение): ("title", str), ("text", str),</span>
+<span class="c1"># ("table", список строк таблицы), ("break", None),</span>
+<span class="c1"># ("logo_title", (путь к эмблеме, заголовок)) — эмблема в левом верхнем</span>
+<span class="c1"># углу и заголовок рядом с ней, ("field", строка для заполнения от руки:</span>
+<span class="c1"># ФИО студента, подпись преподавателя), ("ticket", None) — начало билета,</span>
+<span class="c1"># ("gap", None) — линия отреза между двумя билетами на одном листе.</span>
+
+<span class="n">TICKETS_PER_PAGE</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Оценка высоты билета в DOCX (в пунктах). Лист A4 с полями по 2,54 см</span>
+<span class="c1"># даёт 698 pt; оценка высоты билета нарочно завышена — это и есть запас.</span>
+<span class="n">DOCX_PAGE_HEIGHT</span> <span class="o">=</span> <span class="mi">698</span>
+<span class="n">GAP_HEIGHT</span> <span class="o">=</span> <span class="mi">48</span>
+<span class="n">CHARS_PER_LINE</span> <span class="o">=</span> <span class="mi">70</span>  <span class="c1"># Times New Roman 14 pt на ширине текста A4</span>
+<span class="n">LINE_HEIGHT</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">TITLE_LINE_HEIGHT</span> <span class="o">=</span> <span class="mi">22</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_lines</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chars_per_line</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">CHARS_PER_LINE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Сколько строк займёт текст с переносами."""</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">//</span> <span class="n">chars_per_line</span><span class="p">))</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="ticket_heights">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.ticket_heights">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ticket_heights</span><span class="p">(</span><span class="n">blocks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Примерная высота каждого билета в пунктах (для раскладки по листам)."""</span>
+    <span class="n">heights</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">kind</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"ticket"</span><span class="p">:</span>
+            <span class="n">heights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">heights</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"title"</span><span class="p">:</span>
+            <span class="n">heights</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">_lines</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="o">*</span> <span class="n">TITLE_LINE_HEIGHT</span> <span class="o">+</span> <span class="mi">30</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"logo_title"</span><span class="p">:</span>
+            <span class="n">title_height</span> <span class="o">=</span> <span class="n">_lines</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">40</span><span class="p">)</span> <span class="o">*</span> <span class="n">TITLE_LINE_HEIGHT</span> <span class="o">+</span> <span class="mi">30</span>
+            <span class="n">heights</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">max</span><span class="p">(</span><span class="n">LOGO_WIDTH_CM</span> <span class="o">*</span> <span class="mf">28.35</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">title_height</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"field"</span><span class="p">:</span>
+            <span class="n">heights</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">_lines</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">*</span> <span class="n">LINE_HEIGHT</span> <span class="o">+</span> <span class="mi">18</span> <span class="o">+</span> <span class="mi">10</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"text"</span><span class="p">:</span>
+            <span class="n">heights</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">_lines</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">*</span> <span class="n">LINE_HEIGHT</span> <span class="o">+</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">heights</span></div>
+
+
+
+<span class="n">LOGO_WIDTH_CM</span> <span class="o">=</span> <span class="mf">3.0</span>
+
+
+<div class="viewcode-block" id="logo_file">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.logo_file">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">logo_file</span><span class="p">(</span><span class="n">template</span><span class="p">:</span> <span class="n">Template</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Путь к эмблеме шаблона, если она задана и файл существует."""</span>
+    <span class="k">if</span> <span class="n">template</span> <span class="ow">and</span> <span class="n">template</span><span class="o">.</span><span class="n">logo_path</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">logo_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">path</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="build_tickets">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.build_tickets">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_tickets</span><span class="p">(</span>
+    <span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variants</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variant</span><span class="p">],</span> <span class="n">template</span><span class="p">:</span> <span class="n">Template</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Блоки файла с билетами (без ответов).</span>
+
+<span class="sd">    Если передан шаблон, учитывается его оформление: эмблема над</span>
+<span class="sd">    заголовком, слово «Билет» или «Вариант», строка для ФИО студента</span>
+<span class="sd">    и место для подписи преподавателя.</span>
+<span class="sd">    """</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">number_word</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="s2">"Билет"</span>
+    <span class="n">logo</span> <span class="o">=</span> <span class="n">logo_file</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">variant</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variants</span><span class="p">):</span>
+        <span class="c1"># Билеты идут парами: второй билет пары ставится на тот же лист</span>
+        <span class="c1"># под линией отреза, если помещается целиком (иначе — на новый</span>
+        <span class="c1"># лист); следующая пара всегда начинается с нового листа.</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">%</span> <span class="n">TICKETS_PER_PAGE</span><span class="p">:</span>
+            <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"gap"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">index</span><span class="p">:</span>
+            <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"break"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"ticket"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">ticket_title</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">variant</span><span class="o">.</span><span class="n">variant_no</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">logo</span><span class="p">:</span>
+            <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"logo_title"</span><span class="p">,</span> <span class="p">(</span><span class="n">logo</span><span class="p">,</span> <span class="n">title</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">title</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">template</span> <span class="ow">and</span> <span class="n">template</span><span class="o">.</span><span class="n">student_line</span><span class="p">:</span>
+            <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"field"</span><span class="p">,</span> <span class="n">STUDENT_LINE_TEXT</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">question</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">questions</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"text"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">question</span><span class="o">.</span><span class="n">question_text</span><span class="si">}</span><span class="s2">"</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">template</span> <span class="ow">and</span> <span class="n">template</span><span class="o">.</span><span class="n">teacher_sign</span> <span class="ow">and</span> <span class="n">template</span><span class="o">.</span><span class="n">sign_text</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"field"</span><span class="p">,</span> <span class="n">template</span><span class="o">.</span><span class="n">sign_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">blocks</span></div>
+
+
+
+<div class="viewcode-block" id="topics_text">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.topics_text">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">topics_text</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Темы билета со счётчиком: «Циклы ×2, Функции»."""</span>
+    <span class="n">counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">question</span> <span class="ow">in</span> <span class="n">questions</span><span class="p">:</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">question</span><span class="o">.</span><span class="n">topic_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">topic_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> ×</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="build_answers">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.build_answers">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_answers</span><span class="p">(</span>
+    <span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variants</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variant</span><span class="p">],</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Билет"</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Блоки файла с эталонными ответами: одна компактная таблица.</span>
+
+<span class="sd">    Столбцы: номер билета, номер вопроса, ответ. Номер билета пишется в</span>
+<span class="sd">    первой строке билета, остальные ячейки столбца объединяются с ней.</span>
+<span class="sd">    """</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="n">word</span><span class="p">,</span> <span class="s2">"№"</span><span class="p">,</span> <span class="s2">"Ответ"</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">variant</span> <span class="ow">in</span> <span class="n">variants</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">question</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">questions</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">variant_no</span><span class="p">)</span> <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">""</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">),</span>
+                    <span class="n">question</span><span class="o">.</span><span class="n">answer_text</span> <span class="ow">or</span> <span class="s2">"—"</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plain_header</span><span class="p">(</span><span class="n">header</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">Ответы для преподавателя"</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">title</span><span class="p">),</span> <span class="p">(</span><span class="s2">"answers"</span><span class="p">,</span> <span class="n">rows</span><span class="p">)]</span></div>
+
+
+
+<div class="viewcode-block" id="build_summary">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.build_summary">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_summary</span><span class="p">(</span>
+    <span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variants</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variant</span><span class="p">],</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Билет"</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Блоки сводной ведомости: билет, состав, балл."""</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="n">word</span><span class="p">,</span> <span class="s2">"Вопросы (id)"</span><span class="p">,</span> <span class="s2">"Темы"</span><span class="p">,</span> <span class="s2">"Балл"</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">variant</span> <span class="ow">in</span> <span class="n">variants</span><span class="p">:</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">variant_no</span><span class="p">),</span>
+                <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="k">for</span> <span class="n">question</span> <span class="ow">in</span> <span class="n">variant</span><span class="o">.</span><span class="n">questions</span><span class="p">),</span>
+                <span class="n">topics_text</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">questions</span><span class="p">),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">total_score</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plain_header</span><span class="p">(</span><span class="n">header</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">Сводная ведомость"</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">title</span><span class="p">),</span> <span class="p">(</span><span class="s2">"table"</span><span class="p">,</span> <span class="n">rows</span><span class="p">)]</span></div>
+
+
+
+<div class="viewcode-block" id="BaseExporter">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.BaseExporter">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseExporter</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Общий интерфейс экспортёров."""</span>
+
+    <span class="n">extension</span> <span class="o">=</span> <span class="s2">""</span>
+
+<div class="viewcode-block" id="BaseExporter.save">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.BaseExporter.save">[документация]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blocks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">],</span> <span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет блоки в файл.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            blocks: содержимое документа.</span>
+<span class="sd">            path: путь к файлу без расширения.</span>
+<span class="sd">        """</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DocxExporter">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.DocxExporter">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DocxExporter</span><span class="p">(</span><span class="n">BaseExporter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Сохранение в Word (.docx) через python-docx."""</span>
+
+    <span class="n">extension</span> <span class="o">=</span> <span class="s2">".docx"</span>
+
+<div class="viewcode-block" id="DocxExporter.save">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.DocxExporter.save">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Создаёт документ Word из блоков."""</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx</span><span class="w"> </span><span class="kn">import</span> <span class="n">Document</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.shared</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cm</span><span class="p">,</span> <span class="n">Pt</span>
+
+        <span class="n">document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">()</span>
+        <span class="c1"># Шаблон python-docx по умолчанию — американский Letter; ставим A4.</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">section</span><span class="o">.</span><span class="n">page_width</span><span class="p">,</span> <span class="n">section</span><span class="o">.</span><span class="n">page_height</span> <span class="o">=</span> <span class="n">Cm</span><span class="p">(</span><span class="mi">21</span><span class="p">),</span> <span class="n">Cm</span><span class="p">(</span><span class="mf">29.7</span><span class="p">)</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">styles</span><span class="p">[</span><span class="s2">"Normal"</span><span class="p">]</span>
+        <span class="n">style</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"Times New Roman"</span>
+        <span class="n">style</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">Pt</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">heights</span> <span class="o">=</span> <span class="n">ticket_heights</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+        <span class="n">ticket_no</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">kind</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"ticket"</span><span class="p">:</span>
+                <span class="n">ticket_no</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"logo_title"</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_logo_title</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="o">*</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"title"</span><span class="p">:</span>
+                <span class="n">document</span><span class="o">.</span><span class="n">add_heading</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"field"</span><span class="p">:</span>
+                <span class="n">paragraph</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">add_paragraph</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">paragraph</span><span class="o">.</span><span class="n">paragraph_format</span><span class="o">.</span><span class="n">space_before</span> <span class="o">=</span> <span class="n">Pt</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"text"</span><span class="p">:</span>
+                <span class="n">document</span><span class="o">.</span><span class="n">add_paragraph</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"gap"</span><span class="p">:</span>
+                <span class="c1"># Word сам не умеет переносить билет целиком, поэтому высоту</span>
+                <span class="c1"># пары оцениваем заранее: не помещается — новый лист.</span>
+                <span class="n">pair</span> <span class="o">=</span> <span class="n">heights</span><span class="p">[</span><span class="n">ticket_no</span><span class="p">]</span> <span class="o">+</span> <span class="n">heights</span><span class="p">[</span><span class="n">ticket_no</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">GAP_HEIGHT</span>
+                <span class="k">if</span> <span class="n">pair</span> <span class="o">&lt;=</span> <span class="n">DOCX_PAGE_HEIGHT</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_cut_line</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">document</span><span class="o">.</span><span class="n">add_page_break</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"break"</span><span class="p">:</span>
+                <span class="n">document</span><span class="o">.</span><span class="n">add_page_break</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"table"</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s2">"Table Grid"</span>
+                <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="n">cells</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">()</span><span class="o">.</span><span class="n">cells</span>
+                    <span class="k">for</span> <span class="n">cell</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+                        <span class="n">cell</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"answers"</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_answers_table</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">document</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extension</span><span class="p">))</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_answers_table</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
+<span class="w">        </span><span class="sd">"""Ответы одной таблицей: шрифт 11 pt, узкие столбцы номеров.</span>
+
+<span class="sd">        Ячейки номера билета объединяются по всем вопросам билета, строка</span>
+<span class="sd">        заголовков повторяется на каждом листе.</span>
+<span class="sd">        """</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.oxml</span><span class="w"> </span><span class="kn">import</span> <span class="n">OxmlElement</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.oxml.ns</span><span class="w"> </span><span class="kn">import</span> <span class="n">qn</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.shared</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cm</span><span class="p">,</span> <span class="n">Pt</span>
+
+        <span class="n">table</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">),</span> <span class="n">cols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s2">"Table Grid"</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">autofit</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">text_width</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">page_width</span> <span class="o">-</span> <span class="n">section</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">-</span> <span class="n">section</span><span class="o">.</span><span class="n">right_margin</span>
+        <span class="n">widths</span> <span class="o">=</span> <span class="p">(</span><span class="n">Cm</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">Cm</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">text_width</span> <span class="o">-</span> <span class="n">Cm</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">row_index</span><span class="p">,</span> <span class="p">(</span><span class="n">row_cells</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">rows</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">row_cells</span><span class="o">.</span><span class="n">cells</span><span class="p">,</span> <span class="n">values</span><span class="p">)):</span>
+                <span class="n">cell</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">widths</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+                <span class="n">paragraph</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">paragraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">paragraph</span><span class="o">.</span><span class="n">paragraph_format</span><span class="o">.</span><span class="n">space_after</span> <span class="o">=</span> <span class="n">Pt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">run</span> <span class="o">=</span> <span class="n">paragraph</span><span class="o">.</span><span class="n">add_run</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+                <span class="n">run</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">Pt</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+                <span class="n">run</span><span class="o">.</span><span class="n">bold</span> <span class="o">=</span> <span class="n">row_index</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">width</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">widths</span><span class="p">):</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_tr</span><span class="o">.</span><span class="n">get_or_add_trPr</span><span class="p">()</span>
+        <span class="n">repeat</span> <span class="o">=</span> <span class="n">OxmlElement</span><span class="p">(</span><span class="s2">"w:tblHeader"</span><span class="p">)</span>
+        <span class="n">repeat</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">qn</span><span class="p">(</span><span class="s2">"w:val"</span><span class="p">),</span> <span class="s2">"true"</span><span class="p">)</span>
+        <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">repeat</span><span class="p">)</span>
+        <span class="c1"># Объединяем ячейки номера билета: от строки с номером до следующего.</span>
+        <span class="n">starts</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="k">if</span> <span class="n">index</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">starts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)]):</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+                <span class="n">merged</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">merged</span><span class="o">.</span><span class="n">paragraphs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="n">paragraph</span><span class="o">.</span><span class="n">_p</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">paragraph</span><span class="o">.</span><span class="n">_p</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">merged</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="n">text</span><span class="p">:</span>
+                    <span class="n">merged</span><span class="o">.</span><span class="n">paragraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_cut_line</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Пунктирная линия отреза между двумя билетами на одном листе."""</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.oxml</span><span class="w"> </span><span class="kn">import</span> <span class="n">OxmlElement</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.oxml.ns</span><span class="w"> </span><span class="kn">import</span> <span class="n">qn</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.shared</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pt</span>
+
+        <span class="n">paragraph</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">add_paragraph</span><span class="p">()</span>
+        <span class="n">paragraph</span><span class="o">.</span><span class="n">paragraph_format</span><span class="o">.</span><span class="n">space_before</span> <span class="o">=</span> <span class="n">Pt</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">paragraph</span><span class="o">.</span><span class="n">paragraph_format</span><span class="o">.</span><span class="n">space_after</span> <span class="o">=</span> <span class="n">Pt</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+        <span class="n">borders</span> <span class="o">=</span> <span class="n">OxmlElement</span><span class="p">(</span><span class="s2">"w:pBdr"</span><span class="p">)</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="n">OxmlElement</span><span class="p">(</span><span class="s2">"w:bottom"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s2">"w:val"</span><span class="p">,</span> <span class="s2">"dashed"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"w:sz"</span><span class="p">,</span> <span class="s2">"6"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"w:space"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"w:color"</span><span class="p">,</span> <span class="s2">"999999"</span><span class="p">),</span>
+        <span class="p">):</span>
+            <span class="n">bottom</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">qn</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">borders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bottom</span><span class="p">)</span>
+        <span class="n">paragraph</span><span class="o">.</span><span class="n">_p</span><span class="o">.</span><span class="n">get_or_add_pPr</span><span class="p">()</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">borders</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_logo_title</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">logo</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Эмблема в левом верхнем углу, заголовок по центру справа от неё.</span>
+
+<span class="sd">        Строится таблицей из двух ячеек без рамок: так эмблема не сдвигает</span>
+<span class="sd">        заголовок вниз.</span>
+<span class="sd">        """</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.enum.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">WD_CELL_VERTICAL_ALIGNMENT</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.enum.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">WD_ALIGN_PARAGRAPH</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">docx.shared</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cm</span>
+
+        <span class="n">table</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">autofit</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">logo_cell</span><span class="p">,</span> <span class="n">title_cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cells</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">text_width</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">page_width</span> <span class="o">-</span> <span class="n">page</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">-</span> <span class="n">page</span><span class="o">.</span><span class="n">right_margin</span>
+        <span class="n">widths</span> <span class="o">=</span> <span class="p">(</span><span class="n">Cm</span><span class="p">(</span><span class="n">LOGO_WIDTH_CM</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">text_width</span> <span class="o">-</span> <span class="n">Cm</span><span class="p">(</span><span class="n">LOGO_WIDTH_CM</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">))</span>
+        <span class="c1"># Ширину задаём и столбцам, и ячейкам: Word смотрит на ячейки,</span>
+        <span class="c1"># LibreOffice — на столбцы.</span>
+        <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">width</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="p">(</span><span class="n">logo_cell</span><span class="p">,</span> <span class="n">title_cell</span><span class="p">),</span> <span class="n">widths</span><span class="p">):</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="n">logo_paragraph</span> <span class="o">=</span> <span class="n">logo_cell</span><span class="o">.</span><span class="n">paragraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">logo_paragraph</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">WD_ALIGN_PARAGRAPH</span><span class="o">.</span><span class="n">LEFT</span>
+        <span class="n">logo_paragraph</span><span class="o">.</span><span class="n">add_run</span><span class="p">()</span><span class="o">.</span><span class="n">add_picture</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">logo</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">Cm</span><span class="p">(</span><span class="n">LOGO_WIDTH_CM</span><span class="p">))</span>
+        <span class="n">title_paragraph</span> <span class="o">=</span> <span class="n">title_cell</span><span class="o">.</span><span class="n">paragraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">title_paragraph</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">styles</span><span class="p">[</span><span class="s2">"Heading 1"</span><span class="p">]</span>
+        <span class="n">title_paragraph</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="n">WD_ALIGN_PARAGRAPH</span><span class="o">.</span><span class="n">CENTER</span>
+        <span class="n">title_paragraph</span><span class="o">.</span><span class="n">add_run</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">title_cell</span><span class="o">.</span><span class="n">vertical_alignment</span> <span class="o">=</span> <span class="n">WD_CELL_VERTICAL_ALIGNMENT</span><span class="o">.</span><span class="n">CENTER</span></div>
+
+
+
+<div class="viewcode-block" id="PdfExporter">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.PdfExporter">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PdfExporter</span><span class="p">(</span><span class="n">BaseExporter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Сохранение в PDF через reportlab с кириллическим шрифтом."""</span>
+
+    <span class="n">extension</span> <span class="o">=</span> <span class="s2">".pdf"</span>
+    <span class="n">font_name</span> <span class="o">=</span> <span class="s2">"TicketGenFont"</span>
+
+<div class="viewcode-block" id="PdfExporter.save">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.PdfExporter.save">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Создаёт PDF из блоков."""</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.lib.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">TA_CENTER</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.lib.pagesizes</span><span class="w"> </span><span class="kn">import</span> <span class="n">A4</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.lib.styles</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParagraphStyle</span><span class="p">,</span> <span class="n">getSampleStyleSheet</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.lib.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">cm</span><span class="p">,</span> <span class="n">inch</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.lib.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageReader</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.platypus</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+            <span class="n">HRFlowable</span><span class="p">,</span>
+            <span class="n">Image</span><span class="p">,</span>
+            <span class="n">KeepTogether</span><span class="p">,</span>
+            <span class="n">PageBreak</span><span class="p">,</span>
+            <span class="n">Paragraph</span><span class="p">,</span>
+            <span class="n">SimpleDocTemplate</span><span class="p">,</span>
+            <span class="n">Spacer</span><span class="p">,</span>
+            <span class="n">Table</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_font</span><span class="p">()</span>
+        <span class="n">styles</span> <span class="o">=</span> <span class="n">getSampleStyleSheet</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">styles</span><span class="o">.</span><span class="n">byName</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">style</span><span class="o">.</span><span class="n">fontName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_name</span>
+        <span class="n">story</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">main_story</span> <span class="o">=</span> <span class="n">story</span>
+        <span class="k">for</span> <span class="n">kind</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">kind</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"ticket"</span><span class="p">,</span> <span class="s2">"gap"</span><span class="p">,</span> <span class="s2">"break"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">story</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">main_story</span><span class="p">:</span>
+                <span class="c1"># Билет целиком: если не помещается на остаток листа,</span>
+                <span class="c1"># переносится на следующий.</span>
+                <span class="n">main_story</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">KeepTogether</span><span class="p">(</span><span class="n">story</span><span class="p">))</span>
+                <span class="n">story</span> <span class="o">=</span> <span class="n">main_story</span>
+            <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"ticket"</span><span class="p">:</span>
+                <span class="n">story</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"gap"</span><span class="p">:</span>
+                <span class="n">story</span> <span class="o">+=</span> <span class="p">[</span>
+                    <span class="n">Spacer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+                    <span class="n">HRFlowable</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">"100%"</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#999999"</span><span class="p">),</span>
+                    <span class="n">Spacer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
+                <span class="p">]</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"logo_title"</span><span class="p">:</span>
+                <span class="n">logo</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span> <span class="o">=</span> <span class="n">ImageReader</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">logo</span><span class="p">))</span><span class="o">.</span><span class="n">getSize</span><span class="p">()</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="n">LOGO_WIDTH_CM</span> <span class="o">*</span> <span class="n">cm</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">logo</span><span class="p">),</span> <span class="n">width</span><span class="p">,</span> <span class="n">width</span> <span class="o">*</span> <span class="n">image_height</span> <span class="o">/</span> <span class="n">image_width</span><span class="p">)</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">escape</span><span class="p">(</span><span class="n">title</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"&lt;br/&gt;"</span><span class="p">)</span>
+                <span class="n">heading</span> <span class="o">=</span> <span class="n">ParagraphStyle</span><span class="p">(</span>
+                    <span class="s2">"centered"</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">styles</span><span class="p">[</span><span class="s2">"Heading2"</span><span class="p">],</span> <span class="n">alignment</span><span class="o">=</span><span class="n">TA_CENTER</span>
+                <span class="p">)</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span>
+                    <span class="p">[[</span><span class="n">image</span><span class="p">,</span> <span class="n">Paragraph</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">heading</span><span class="p">)]],</span>
+                    <span class="c1"># Поля страницы SimpleDocTemplate — по 1 дюйму.</span>
+                    <span class="n">colWidths</span><span class="o">=</span><span class="p">[</span><span class="n">width</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">cm</span><span class="p">,</span> <span class="n">A4</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">inch</span> <span class="o">-</span> <span class="n">width</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">cm</span><span class="p">],</span>
+                <span class="p">)</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="p">(</span><span class="s2">"VALIGN"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">"MIDDLE"</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s2">"LEFTPADDING"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+                <span class="n">story</span> <span class="o">+=</span> <span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">Spacer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"title"</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">escape</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"&lt;br/&gt;"</span><span class="p">)</span>
+                <span class="n">story</span> <span class="o">+=</span> <span class="p">[</span><span class="n">Paragraph</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">styles</span><span class="p">[</span><span class="s2">"Heading2"</span><span class="p">]),</span> <span class="n">Spacer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"field"</span><span class="p">:</span>
+                <span class="n">story</span> <span class="o">+=</span> <span class="p">[</span><span class="n">Spacer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="n">Paragraph</span><span class="p">(</span><span class="n">escape</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">styles</span><span class="p">[</span><span class="s2">"Normal"</span><span class="p">])]</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"text"</span><span class="p">:</span>
+                <span class="n">story</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Paragraph</span><span class="p">(</span><span class="n">escape</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">styles</span><span class="p">[</span><span class="s2">"Normal"</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"break"</span><span class="p">:</span>
+                <span class="n">story</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PageBreak</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"table"</span><span class="p">:</span>
+                <span class="n">cells</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="p">[</span><span class="n">Paragraph</span><span class="p">(</span><span class="n">escape</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="n">styles</span><span class="p">[</span><span class="s2">"Normal"</span><span class="p">])</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">value</span>
+                <span class="p">]</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">colWidths</span><span class="o">=</span><span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">setStyle</span><span class="p">([(</span><span class="s2">"GRID"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">"black"</span><span class="p">)])</span>
+                <span class="n">story</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">"answers"</span><span class="p">:</span>
+                <span class="n">story</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_answers_table</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">styles</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">story</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">main_story</span><span class="p">:</span>
+            <span class="n">main_story</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">KeepTogether</span><span class="p">(</span><span class="n">story</span><span class="p">))</span>
+        <span class="n">SimpleDocTemplate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extension</span><span class="p">)),</span> <span class="n">pagesize</span><span class="o">=</span><span class="n">A4</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">(</span>
+            <span class="n">main_story</span>
+        <span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_answers_table</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">styles</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Ответы одной таблицей мелким шрифтом; номер билета объединён."""</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.lib.pagesizes</span><span class="w"> </span><span class="kn">import</span> <span class="n">A4</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.lib.styles</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParagraphStyle</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.lib.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">inch</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.platypus</span><span class="w"> </span><span class="kn">import</span> <span class="n">Paragraph</span><span class="p">,</span> <span class="n">Table</span>
+
+        <span class="n">small</span> <span class="o">=</span> <span class="n">ParagraphStyle</span><span class="p">(</span><span class="s2">"small"</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">styles</span><span class="p">[</span><span class="s2">"Normal"</span><span class="p">],</span> <span class="n">fontSize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">leading</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+        <span class="n">cells</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Paragraph</span><span class="p">(</span><span class="n">escape</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="n">small</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span>
+            <span class="n">cells</span><span class="p">,</span>
+            <span class="n">colWidths</span><span class="o">=</span><span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="n">A4</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">inch</span> <span class="o">-</span> <span class="mi">70</span><span class="p">],</span>
+            <span class="n">repeatRows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">commands</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">"GRID"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">"black"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"VALIGN"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s2">"TOP"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"BACKGROUND"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">"#F1F5F9"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"TOPPADDING"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"BOTTOMPADDING"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">starts</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="k">if</span> <span class="n">index</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">starts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)]):</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">:</span>
+                <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"SPAN"</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">commands</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">table</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_register_font</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Подключает TTF-шрифт с русскими буквами.</span>
+
+<span class="sd">        Без него reportlab выводит кириллицу квадратиками.</span>
+<span class="sd">        """</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.pdfbase</span><span class="w"> </span><span class="kn">import</span> <span class="n">pdfmetrics</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">reportlab.pdfbase.ttfonts</span><span class="w"> </span><span class="kn">import</span> <span class="n">TTFont</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_name</span> <span class="ow">in</span> <span class="n">pdfmetrics</span><span class="o">.</span><span class="n">getRegisteredFontNames</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">AppConfig</span><span class="p">()</span><span class="o">.</span><span class="n">base_dir</span> <span class="o">/</span> <span class="s2">"fonts"</span> <span class="o">/</span> <span class="s2">"DejaVuSans.ttf"</span><span class="p">,</span>
+            <span class="n">Path</span><span class="p">(</span><span class="s2">"C:/Windows/Fonts/arial.ttf"</span><span class="p">),</span>
+            <span class="n">Path</span><span class="p">(</span><span class="s2">"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">font_path</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">font_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="n">pdfmetrics</span><span class="o">.</span><span class="n">registerFont</span><span class="p">(</span><span class="n">TTFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">font_path</span><span class="p">)))</span>
+                <span class="k">return</span>
+        <span class="k">raise</span> <span class="n">TicketGenError</span><span class="p">(</span><span class="s2">"Не найден шрифт с кириллицей для PDF."</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ExporterFactory">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.ExporterFactory">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExporterFactory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Фабрика: возвращает экспортёр по названию формата."""</span>
+
+    <span class="n">_exporters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"docx"</span><span class="p">:</span> <span class="n">DocxExporter</span><span class="p">,</span> <span class="s2">"pdf"</span><span class="p">:</span> <span class="n">PdfExporter</span><span class="p">}</span>
+
+<div class="viewcode-block" id="ExporterFactory.create">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.ExporterFactory.create">[документация]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseExporter</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Создаёт экспортёр для формата «docx» или «pdf»."""</span>
+        <span class="k">if</span> <span class="n">file_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_exporters</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TicketGenError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Неизвестный формат: </span><span class="si">{</span><span class="n">file_format</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_exporters</span><span class="p">[</span><span class="n">file_format</span><span class="p">]()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="export_series">
+<a class="viewcode-back" href="../../../api/logic.html#ticketgen.logic.exporters.export_series">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_series</span><span class="p">(</span>
+    <span class="n">folder</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">base_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">variants</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variant</span><span class="p">],</span>
+    <span class="n">formats</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">with_answers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">with_summary</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">progress</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">with_tickets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">template</span><span class="p">:</span> <span class="n">Template</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Сохраняет серию: билеты в каждом формате, ответы и ведомость.</span>
+
+<span class="sd">    Ответы и ведомость сохраняются в первом выбранном формате. Если</span>
+<span class="sd">    передан шаблон, билеты оформляются по нему (эмблема, вид документа,</span>
+<span class="sd">    места для подписей).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Список созданных файлов.</span>
+<span class="sd">    """</span>
+    <span class="n">folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+    <span class="n">folder</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">number_word</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="s2">"Билет"</span>
+    <span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">with_tickets</span><span class="p">:</span>
+        <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="s2">"билеты"</span><span class="p">,</span> <span class="n">build_tickets</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">variants</span><span class="p">,</span> <span class="n">template</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="n">formats</span>
+        <span class="p">]</span>
+    <span class="k">if</span> <span class="n">with_answers</span><span class="p">:</span>
+        <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">formats</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"ответы"</span><span class="p">,</span> <span class="n">build_answers</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">variants</span><span class="p">,</span> <span class="n">word</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">with_summary</span><span class="p">:</span>
+        <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">formats</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"ведомость"</span><span class="p">,</span> <span class="n">build_summary</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">variants</span><span class="p">,</span> <span class="n">word</span><span class="p">)))</span>
+
+    <span class="n">created</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">done</span><span class="p">,</span> <span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">blocks</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">exporter</span> <span class="o">=</span> <span class="n">ExporterFactory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">folder</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">exporter</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">PermissionError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TicketGenError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Нет доступа к файлу </span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="si">}{</span><span class="n">exporter</span><span class="o">.</span><span class="n">extension</span><span class="si">}</span><span class="s2">. "</span>
+                <span class="s2">"Возможно, он открыт в Word — закройте его."</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
+        <span class="n">created</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="n">exporter</span><span class="o">.</span><span class="n">extension</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">progress</span><span class="p">:</span>
+            <span class="n">progress</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">done</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">jobs</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">created</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

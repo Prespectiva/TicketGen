@@ -1,0 +1,839 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ticketgen.data.repositories &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/app_icon.ico"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TicketGen
+              <img src="../../../_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Справочник API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">ticketgen.data.repositories</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код ticketgen.data.repositories</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Репозитории (паттерн Repository): весь SQL программы находится здесь.</span>
+
+<span class="sd">Все запросы параметризованные: значения передаются через «?», а не</span>
+<span class="sd">склейкой строк. Это защищает от SQL-инъекций.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.domain.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Difficulty</span><span class="p">,</span>
+    <span class="n">Question</span><span class="p">,</span>
+    <span class="n">Series</span><span class="p">,</span>
+    <span class="n">Template</span><span class="p">,</span>
+    <span class="n">TemplateRule</span><span class="p">,</span>
+    <span class="n">TicketGenError</span><span class="p">,</span>
+    <span class="n">Topic</span><span class="p">,</span>
+    <span class="n">Variant</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="BaseRepository">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.BaseRepository">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseRepository</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Общий предок репозиториев: хранит подключение к базе."""</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Запоминает объект Database."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">db</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">()):</span>
+<span class="w">        </span><span class="sd">"""Выполняет SELECT и возвращает все строки."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">()):</span>
+<span class="w">        </span><span class="sd">"""Выполняет изменяющий запрос в транзакции и возвращает курсор."""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">connection</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TicketGenError</span><span class="p">(</span><span class="n">_integrity_message</span><span class="p">(</span><span class="n">error</span><span class="p">))</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_integrity_message</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Переводит ошибку ограничения SQLite в понятный текст."""</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"FOREIGN KEY"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"Запись используется в других данных, её нельзя удалить."</span>
+    <span class="k">if</span> <span class="s2">"UNIQUE"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"Такая запись уже существует."</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"Данные не прошли проверку: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">"</span>
+
+
+<div class="viewcode-block" id="TopicRepository">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TopicRepository">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TopicRepository</span><span class="p">(</span><span class="n">BaseRepository</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""CRUD для таблицы tbl_topics."""</span>
+
+<div class="viewcode-block" id="TopicRepository.get_all">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TopicRepository.get_all">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Topic</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Возвращает все темы по алфавиту."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s2">"SELECT * FROM tbl_topics ORDER BY discipline, topic_name"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Topic</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">"discipline"</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">"topic_name"</span><span class="p">])</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="TopicRepository.disciplines">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TopicRepository.disciplines">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">disciplines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Названия предметов (дисциплин), у которых есть темы, по алфавиту."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span>
+            <span class="s2">"SELECT DISTINCT discipline FROM tbl_topics ORDER BY discipline"</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">"discipline"</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="TopicRepository.add">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TopicRepository.add">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">discipline</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Добавляет тему и возвращает её id."""</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"INSERT INTO tbl_topics (discipline, topic_name) VALUES (?, ?)"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">discipline</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span></div>
+
+
+<div class="viewcode-block" id="TopicRepository.get_or_create">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TopicRepository.get_or_create">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_or_create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">discipline</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Возвращает id темы, при необходимости создаёт её (для импорта)."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span>
+            <span class="s2">"SELECT id FROM tbl_topics WHERE discipline = ? AND topic_name = ?"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">discipline</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"id"</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">discipline</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TopicRepository.update">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TopicRepository.update">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="n">Topic</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет новое название темы."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"UPDATE tbl_topics SET discipline = ?, topic_name = ? WHERE id = ?"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">discipline</span><span class="p">,</span> <span class="n">topic</span><span class="o">.</span><span class="n">topic_name</span><span class="p">,</span> <span class="n">topic</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TopicRepository.delete">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TopicRepository.delete">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет тему. Тему с вопросами удалить нельзя."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="s2">"DELETE FROM tbl_topics WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">topic_id</span><span class="p">,))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DifficultyRepository">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.DifficultyRepository">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DifficultyRepository</span><span class="p">(</span><span class="n">BaseRepository</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Чтение и изменение весов в справочнике tbl_difficulty."""</span>
+
+<div class="viewcode-block" id="DifficultyRepository.get_all">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.DifficultyRepository.get_all">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Difficulty</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Возвращает уровни сложности от лёгкого к сложному."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s2">"SELECT * FROM tbl_difficulty ORDER BY weight"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Difficulty</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">"level_name"</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">"weight"</span><span class="p">])</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="DifficultyRepository.update_weight">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.DifficultyRepository.update_weight">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">difficulty_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Меняет вес уровня сложности в баллах."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"UPDATE tbl_difficulty SET weight = ? WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">difficulty_id</span><span class="p">)</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<span class="n">QUESTION_SELECT</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">    SELECT q.*, t.topic_name, t.discipline, d.level_name, d.weight</span>
+<span class="s2">    FROM tbl_questions q</span>
+<span class="s2">    JOIN tbl_topics t ON t.id = q.topic_id</span>
+<span class="s2">    JOIN tbl_difficulty d ON d.id = q.difficulty_id</span>
+<span class="s2">"""</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_row_to_question</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Question</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Превращает строку результата запроса в объект Question."""</span>
+    <span class="k">return</span> <span class="n">Question</span><span class="p">(</span>
+        <span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span>
+        <span class="n">topic_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"topic_id"</span><span class="p">],</span>
+        <span class="n">difficulty_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"difficulty_id"</span><span class="p">],</span>
+        <span class="n">q_type</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"q_type"</span><span class="p">],</span>
+        <span class="n">question_text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"question_text"</span><span class="p">],</span>
+        <span class="n">answer_text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"answer_text"</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">is_active</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"is_active"</span><span class="p">]),</span>
+        <span class="n">topic_name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"topic_name"</span><span class="p">],</span>
+        <span class="n">level_name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"level_name"</span><span class="p">],</span>
+        <span class="n">weight</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"weight"</span><span class="p">],</span>
+        <span class="n">discipline</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"discipline"</span><span class="p">],</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="QuestionRepository">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QuestionRepository</span><span class="p">(</span><span class="n">BaseRepository</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""CRUD для банка вопросов (tbl_questions)."""</span>
+
+<div class="viewcode-block" id="QuestionRepository.find">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.find">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">text</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
+        <span class="n">topic_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">difficulty_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">q_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">only_active</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">discipline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Question</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Ищет вопросы по тексту и фильтрам.</span>
+
+<span class="sd">        Пустые фильтры не применяются. Условия собираются из готовых строк,</span>
+<span class="sd">        а значения передаются параметрами.</span>
+<span class="sd">        """</span>
+        <span class="n">conditions</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"py_lower(q.question_text) LIKE ?"</span><span class="p">)</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"%</span><span class="si">{</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">discipline</span><span class="p">:</span>
+            <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"t.discipline = ?"</span><span class="p">)</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">discipline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">topic_id</span><span class="p">:</span>
+            <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"q.topic_id = ?"</span><span class="p">)</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">topic_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">difficulty_id</span><span class="p">:</span>
+            <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"q.difficulty_id = ?"</span><span class="p">)</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">difficulty_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">q_type</span><span class="p">:</span>
+            <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"q.q_type = ?"</span><span class="p">)</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">only_active</span><span class="p">:</span>
+            <span class="n">conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"q.is_active = 1"</span><span class="p">)</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">QUESTION_SELECT</span>
+        <span class="k">if</span> <span class="n">conditions</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">+=</span> <span class="s2">" WHERE "</span> <span class="o">+</span> <span class="s2">" AND "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span>
+        <span class="n">sql</span> <span class="o">+=</span> <span class="s2">" ORDER BY q.id"</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">_row_to_question</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">params</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="QuestionRepository.get">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.get">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Question</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Возвращает вопрос по id или None."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="n">QUESTION_SELECT</span> <span class="o">+</span> <span class="s2">" WHERE q.id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">question_id</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="n">_row_to_question</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">rows</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="QuestionRepository.add">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.add">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">:</span> <span class="n">Question</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Добавляет вопрос и возвращает его id."""</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"INSERT INTO tbl_questions (topic_id, difficulty_id, q_type, "</span>
+            <span class="s2">"question_text, answer_text, is_active) VALUES (?, ?, ?, ?, ?, ?)"</span><span class="p">,</span>
+            <span class="n">_question_values</span><span class="p">(</span><span class="n">question</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span></div>
+
+
+<div class="viewcode-block" id="QuestionRepository.add_many">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.add_many">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_many</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">questions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Question</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">"""Добавляет много вопросов в одной транзакции (для импорта)."""</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">connection</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
+                <span class="s2">"INSERT INTO tbl_questions (topic_id, difficulty_id, q_type, "</span>
+                <span class="s2">"question_text, answer_text, is_active) VALUES (?, ?, ?, ?, ?, ?)"</span><span class="p">,</span>
+                <span class="p">[</span><span class="n">_question_values</span><span class="p">(</span><span class="n">question</span><span class="p">)</span> <span class="k">for</span> <span class="n">question</span> <span class="ow">in</span> <span class="n">questions</span><span class="p">],</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QuestionRepository.update">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.update">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">:</span> <span class="n">Question</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет изменения вопроса."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"UPDATE tbl_questions SET topic_id = ?, difficulty_id = ?, q_type = ?, "</span>
+            <span class="s2">"question_text = ?, answer_text = ?, is_active = ? WHERE id = ?"</span><span class="p">,</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">_question_values</span><span class="p">(</span><span class="n">question</span><span class="p">),</span> <span class="n">question</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QuestionRepository.set_active">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.set_active">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">active</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Включает или отключает участие вопроса в генерации."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"UPDATE tbl_questions SET is_active = ? WHERE id = ?"</span><span class="p">,</span>
+            <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">active</span><span class="p">),</span> <span class="n">question_id</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QuestionRepository.delete">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.delete">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет вопрос. Вопрос из сохранённых билетов удалить нельзя."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="s2">"DELETE FROM tbl_questions WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">question_id</span><span class="p">,))</span></div>
+
+
+<div class="viewcode-block" id="QuestionRepository.count">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.count">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Возвращает общее число вопросов."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s2">"SELECT COUNT(*) FROM tbl_questions"</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="QuestionRepository.count_by_topic_and_difficulty">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.QuestionRepository.count_by_topic_and_difficulty">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_by_topic_and_difficulty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Считает активные вопросы для каждой пары (тема, сложность)."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span>
+            <span class="s2">"SELECT topic_id, difficulty_id, COUNT(*) AS cnt FROM tbl_questions "</span>
+            <span class="s2">"WHERE is_active = 1 GROUP BY topic_id, difficulty_id"</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">{(</span><span class="n">row</span><span class="p">[</span><span class="s2">"topic_id"</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">"difficulty_id"</span><span class="p">]):</span> <span class="n">row</span><span class="p">[</span><span class="s2">"cnt"</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">}</span></div>
+</div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_question_values</span><span class="p">(</span><span class="n">question</span><span class="p">:</span> <span class="n">Question</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Значения полей вопроса в порядке столбцов INSERT/UPDATE."""</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">question</span><span class="o">.</span><span class="n">topic_id</span><span class="p">,</span>
+        <span class="n">question</span><span class="o">.</span><span class="n">difficulty_id</span><span class="p">,</span>
+        <span class="n">question</span><span class="o">.</span><span class="n">q_type</span><span class="p">,</span>
+        <span class="n">question</span><span class="o">.</span><span class="n">question_text</span><span class="p">,</span>
+        <span class="n">question</span><span class="o">.</span><span class="n">answer_text</span><span class="p">,</span>
+        <span class="nb">int</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">is_active</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="TemplateRepository">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TemplateRepository</span><span class="p">(</span><span class="n">BaseRepository</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""CRUD для шаблонов (tbl_templates) и их правил (tbl_template_rules)."""</span>
+
+<div class="viewcode-block" id="TemplateRepository.get_all">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.get_all">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Template</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Возвращает все шаблоны вместе с правилами."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s2">"SELECT * FROM tbl_templates ORDER BY template_name"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_build</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="TemplateRepository.get">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.get">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Возвращает шаблон с правилами или None."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s2">"SELECT * FROM tbl_templates WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">template_id</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">rows</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Собирает объект Template и загружает его правила."""</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span>
+            <span class="n">template_name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"template_name"</span><span class="p">],</span>
+            <span class="n">header_text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"header_text"</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="n">subject</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"subject"</span><span class="p">],</span>
+            <span class="n">doc_kind</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"doc_kind"</span><span class="p">],</span>
+            <span class="n">logo_path</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"logo_path"</span><span class="p">],</span>
+            <span class="n">teacher_sign</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"teacher_sign"</span><span class="p">]),</span>
+            <span class="n">sign_text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"sign_text"</span><span class="p">],</span>
+            <span class="n">student_line</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"student_line"</span><span class="p">]),</span>
+        <span class="p">)</span>
+        <span class="n">template</span><span class="o">.</span><span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span>
+
+<div class="viewcode-block" id="TemplateRepository.get_rules">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.get_rules">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">TemplateRule</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Возвращает правила шаблона с названиями темы и сложности."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span>
+            <span class="s2">"SELECT r.*, t.topic_name, d.level_name, d.weight "</span>
+            <span class="s2">"FROM tbl_template_rules r "</span>
+            <span class="s2">"JOIN tbl_topics t ON t.id = r.topic_id "</span>
+            <span class="s2">"JOIN tbl_difficulty d ON d.id = r.difficulty_id "</span>
+            <span class="s2">"WHERE r.template_id = ? ORDER BY r.id"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">template_id</span><span class="p">,),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">TemplateRule</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span>
+                <span class="n">template_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"template_id"</span><span class="p">],</span>
+                <span class="n">topic_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"topic_id"</span><span class="p">],</span>
+                <span class="n">difficulty_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"difficulty_id"</span><span class="p">],</span>
+                <span class="n">questions_count</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"questions_count"</span><span class="p">],</span>
+                <span class="n">topic_name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"topic_name"</span><span class="p">],</span>
+                <span class="n">level_name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"level_name"</span><span class="p">],</span>
+                <span class="n">weight</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"weight"</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="TemplateRepository.add">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.add">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">header_text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Создаёт шаблон и возвращает его id."""</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"INSERT INTO tbl_templates (template_name, header_text, subject) "</span>
+            <span class="s2">"VALUES (?, ?, ?)"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">template_name</span><span class="p">,</span> <span class="n">header_text</span><span class="p">,</span> <span class="n">subject</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span></div>
+
+
+<div class="viewcode-block" id="TemplateRepository.update">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.update">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">:</span> <span class="n">Template</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет название, заголовок, предмет и оформление шаблона."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"UPDATE tbl_templates SET template_name = ?, header_text = ?, "</span>
+            <span class="s2">"subject = ?, doc_kind = ?, logo_path = ?, teacher_sign = ?, "</span>
+            <span class="s2">"sign_text = ?, student_line = ? WHERE id = ?"</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">template</span><span class="o">.</span><span class="n">template_name</span><span class="p">,</span>
+                <span class="n">template</span><span class="o">.</span><span class="n">header_text</span><span class="p">,</span>
+                <span class="n">template</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span>
+                <span class="n">template</span><span class="o">.</span><span class="n">doc_kind</span><span class="p">,</span>
+                <span class="n">template</span><span class="o">.</span><span class="n">logo_path</span><span class="p">,</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">teacher_sign</span><span class="p">),</span>
+                <span class="n">template</span><span class="o">.</span><span class="n">sign_text</span><span class="p">,</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">student_line</span><span class="p">),</span>
+                <span class="n">template</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TemplateRepository.delete">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.delete">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет шаблон (правила удаляются каскадно).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TicketGenError: если по шаблону уже созданы серии билетов.</span>
+<span class="sd">        """</span>
+        <span class="n">used</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span>
+            <span class="s2">"SELECT COUNT(*) FROM tbl_series WHERE template_id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">template_id</span><span class="p">,)</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">used</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TicketGenError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Шаблон нельзя удалить: по нему создано серий билетов: </span><span class="si">{</span><span class="n">used</span><span class="si">}</span><span class="s2">. "</span>
+                <span class="s2">"Сначала удалите эти серии на вкладке «Результаты»."</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="s2">"DELETE FROM tbl_templates WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">template_id</span><span class="p">,))</span></div>
+
+
+<div class="viewcode-block" id="TemplateRepository.add_rule">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.add_rule">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">:</span> <span class="n">TemplateRule</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Добавляет правило в шаблон."""</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"INSERT INTO tbl_template_rules "</span>
+            <span class="s2">"(template_id, topic_id, difficulty_id, questions_count) "</span>
+            <span class="s2">"VALUES (?, ?, ?, ?)"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">template_id</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">topic_id</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">difficulty_id</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">questions_count</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span></div>
+
+
+<div class="viewcode-block" id="TemplateRepository.update_rule_count">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.update_rule_count">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_rule_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">questions_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Меняет количество вопросов в правиле."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"UPDATE tbl_template_rules SET questions_count = ? WHERE id = ?"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">questions_count</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TemplateRepository.update_rule_target">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.update_rule_target">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_rule_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">difficulty_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Меняет тему и сложность правила."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"UPDATE tbl_template_rules SET topic_id = ?, difficulty_id = ? "</span>
+            <span class="s2">"WHERE id = ?"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">topic_id</span><span class="p">,</span> <span class="n">difficulty_id</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TemplateRepository.delete_rule">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.TemplateRepository.delete_rule">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет правило."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="s2">"DELETE FROM tbl_template_rules WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">rule_id</span><span class="p">,))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SeriesRepository">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.SeriesRepository">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SeriesRepository</span><span class="p">(</span><span class="n">BaseRepository</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Сохранение и чтение серий билетов (tbl_series, tbl_variants, ...)."""</span>
+
+<div class="viewcode-block" id="SeriesRepository.save">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.SeriesRepository.save">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">:</span> <span class="n">Series</span><span class="p">,</span> <span class="n">variants</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variant</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Сохраняет серию со всеми билетами в одной транзакции.</span>
+
+<span class="sd">        Если на любом шаге произойдёт ошибка, в базу не попадёт ничего.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            id новой серии.</span>
+<span class="sd">        """</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">connection</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s2">"INSERT INTO tbl_series (template_id, created_at, seed, no_overlap, "</span>
+                <span class="s2">"variants_count) VALUES (?, ?, ?, ?, ?)"</span><span class="p">,</span>
+                <span class="p">(</span>
+                    <span class="n">series</span><span class="o">.</span><span class="n">template_id</span><span class="p">,</span>
+                    <span class="n">series</span><span class="o">.</span><span class="n">created_at</span><span class="p">,</span>
+                    <span class="n">series</span><span class="o">.</span><span class="n">seed</span><span class="p">,</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">no_overlap</span><span class="p">),</span>
+                    <span class="n">series</span><span class="o">.</span><span class="n">variants_count</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+            <span class="n">series_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+            <span class="k">for</span> <span class="n">variant</span> <span class="ow">in</span> <span class="n">variants</span><span class="p">:</span>
+                <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                    <span class="s2">"INSERT INTO tbl_variants (series_id, variant_no, total_score) "</span>
+                    <span class="s2">"VALUES (?, ?, ?)"</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">series_id</span><span class="p">,</span> <span class="n">variant</span><span class="o">.</span><span class="n">variant_no</span><span class="p">,</span> <span class="n">variant</span><span class="o">.</span><span class="n">total_score</span><span class="p">),</span>
+                <span class="p">)</span>
+                <span class="n">variant_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+                <span class="n">connection</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
+                    <span class="s2">"INSERT INTO tbl_variant_questions "</span>
+                    <span class="s2">"(variant_id, question_id, position) VALUES (?, ?, ?)"</span><span class="p">,</span>
+                    <span class="p">[</span>
+                        <span class="p">(</span><span class="n">variant_id</span><span class="p">,</span> <span class="n">question</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">position</span><span class="p">,</span> <span class="n">question</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">questions</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="p">],</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">series_id</span></div>
+
+
+<div class="viewcode-block" id="SeriesRepository.get_all">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.SeriesRepository.get_all">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Series</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Возвращает все серии, новые сверху."""</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span>
+            <span class="s2">"SELECT s.*, t.template_name, t.header_text FROM tbl_series s "</span>
+            <span class="s2">"JOIN tbl_templates t ON t.id = s.template_id ORDER BY s.id DESC"</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">Series</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span>
+                <span class="n">template_id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"template_id"</span><span class="p">],</span>
+                <span class="n">created_at</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"created_at"</span><span class="p">],</span>
+                <span class="n">seed</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"seed"</span><span class="p">],</span>
+                <span class="n">no_overlap</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"no_overlap"</span><span class="p">]),</span>
+                <span class="n">variants_count</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"variants_count"</span><span class="p">],</span>
+                <span class="n">template_name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"template_name"</span><span class="p">],</span>
+                <span class="n">header_text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"header_text"</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="SeriesRepository.get_variants">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.SeriesRepository.get_variants">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Variant</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Возвращает билеты серии вместе с вопросами по порядку."""</span>
+        <span class="n">variant_rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span>
+            <span class="s2">"SELECT * FROM tbl_variants WHERE series_id = ? ORDER BY variant_no"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">series_id</span><span class="p">,),</span>
+        <span class="p">)</span>
+        <span class="n">variants</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">variant_rows</span><span class="p">:</span>
+            <span class="n">question_rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span>
+                <span class="n">QUESTION_SELECT</span>
+                <span class="o">+</span> <span class="s2">" JOIN tbl_variant_questions vq ON vq.question_id = q.id "</span>
+                <span class="s2">"WHERE vq.variant_id = ? ORDER BY vq.position"</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],),</span>
+            <span class="p">)</span>
+            <span class="n">variants</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">Variant</span><span class="p">(</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span>
+                    <span class="n">series_id</span><span class="o">=</span><span class="n">series_id</span><span class="p">,</span>
+                    <span class="n">variant_no</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"variant_no"</span><span class="p">],</span>
+                    <span class="n">total_score</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">"total_score"</span><span class="p">],</span>
+                    <span class="n">questions</span><span class="o">=</span><span class="p">[</span><span class="n">_row_to_question</span><span class="p">(</span><span class="n">q_row</span><span class="p">)</span> <span class="k">for</span> <span class="n">q_row</span> <span class="ow">in</span> <span class="n">question_rows</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">variants</span></div>
+
+
+<div class="viewcode-block" id="SeriesRepository.replace_question">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.SeriesRepository.replace_question">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variant_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">old_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">new_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Заменяет вопрос в билете, порядковый номер сохраняется."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span>
+            <span class="s2">"UPDATE tbl_variant_questions SET question_id = ? "</span>
+            <span class="s2">"WHERE variant_id = ? AND question_id = ?"</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">new_id</span><span class="p">,</span> <span class="n">variant_id</span><span class="p">,</span> <span class="n">old_id</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SeriesRepository.delete">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.SeriesRepository.delete">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет серию (билеты и их вопросы удаляются каскадно)."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="s2">"DELETE FROM tbl_series WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">series_id</span><span class="p">,))</span></div>
+
+
+<div class="viewcode-block" id="SeriesRepository.count">
+<a class="viewcode-back" href="../../../api/data.html#ticketgen.data.repositories.SeriesRepository.count">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Возвращает число сохранённых серий."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query</span><span class="p">(</span><span class="s2">"SELECT COUNT(*) FROM tbl_series"</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

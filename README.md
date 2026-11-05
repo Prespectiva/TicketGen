@@ -75,11 +75,13 @@ XML или GIFT:
 
 Документация собирается Sphinx из папки `docs`: руководство пользователя,
 руководство разработчика, архитектура и справочник API из docstrings.
+Готовый HTML лежит в репозитории в папке `docs/build/html` — откройте
+`docs/build/html/index.html` в браузере.
+
+Пересобрать после изменений:
 
     poetry add --group dev sphinx sphinx-rtd-theme   # один раз
     poetry run sphinx-build -b html docs/source docs/build/html
-
-Готовая документация открывается из `docs/build/html/index.html`.
 
 ## Ссылки
 
