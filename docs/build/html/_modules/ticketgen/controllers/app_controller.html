@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ticketgen.controllers.app_controller &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/app_icon.ico"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TicketGen
+              <img src="../../../_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Справочник API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">ticketgen.controllers.app_controller</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код ticketgen.controllers.app_controller</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Контроллер (MVC)."""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt6.QtCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">QObject</span><span class="p">,</span> <span class="n">pyqtSignal</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">AppConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.data.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">Database</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.data.repositories</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DifficultyRepository</span><span class="p">,</span>
+    <span class="n">QuestionRepository</span><span class="p">,</span>
+    <span class="n">SeriesRepository</span><span class="p">,</span>
+    <span class="n">TemplateRepository</span><span class="p">,</span>
+    <span class="n">TopicRepository</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.domain.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Question</span><span class="p">,</span>
+    <span class="n">Series</span><span class="p">,</span>
+    <span class="n">Template</span><span class="p">,</span>
+    <span class="n">TemplateRule</span><span class="p">,</span>
+    <span class="n">TicketGenError</span><span class="p">,</span>
+    <span class="n">Topic</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.logic</span><span class="w"> </span><span class="kn">import</span> <span class="n">csv_importer</span><span class="p">,</span> <span class="n">moodle</span><span class="p">,</span> <span class="n">scoring</span>
+
+<span class="n">LOGO_TYPES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">".png"</span><span class="p">,</span> <span class="s2">".jpg"</span><span class="p">,</span> <span class="s2">".jpeg"</span><span class="p">,</span> <span class="s2">".bmp"</span><span class="p">,</span> <span class="s2">".gif"</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="AppController">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AppController</span><span class="p">(</span><span class="n">QObject</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Единая точка входа для всех действий пользователя."""</span>
+
+    <span class="n">questions_changed</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>
+    <span class="n">templates_changed</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>
+    <span class="n">series_changed</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Database</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Создаёт репозитории поверх подключения к базе."""</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">db</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topics</span> <span class="o">=</span> <span class="n">TopicRepository</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">=</span> <span class="n">DifficultyRepository</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions</span> <span class="o">=</span> <span class="n">QuestionRepository</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span> <span class="o">=</span> <span class="n">TemplateRepository</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series</span> <span class="o">=</span> <span class="n">SeriesRepository</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+        <span class="c1"># Если банк меняется, меняются и цифры «В банке» у шаблонов.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">)</span>
+
+    <span class="c1"># ----- Темы -----</span>
+
+<div class="viewcode-block" id="AppController.get_topics">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.get_topics">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">discipline</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Topic</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Список тем; если указан предмет — только темы этого предмета."""</span>
+        <span class="n">topics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">discipline</span><span class="p">:</span>
+            <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">topic</span> <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span> <span class="k">if</span> <span class="n">topic</span><span class="o">.</span><span class="n">discipline</span> <span class="o">==</span> <span class="n">discipline</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">topics</span></div>
+
+
+<div class="viewcode-block" id="AppController.get_disciplines">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.get_disciplines">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_disciplines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Предметы (дисциплины), по которым есть темы."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">disciplines</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.add_topic">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.add_topic">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_topic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">discipline</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Создаёт тему."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">discipline</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.rename_topic">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.rename_topic">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rename_topic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="n">Topic</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет новое название темы."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.delete_topic">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_topic">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_topic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет тему без вопросов."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">topic_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ----- Банк вопросов -----</span>
+
+<div class="viewcode-block" id="AppController.get_difficulties">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.get_difficulties">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_difficulties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Уровни сложности."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.find_questions">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.find_questions">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_questions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">filters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Question</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Поиск вопросов (фильтры передаются в репозиторий)."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="o">**</span><span class="n">filters</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AppController.save_question">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.save_question">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">:</span> <span class="n">Question</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Добавляет новый вопрос или сохраняет изменённый."""</span>
+        <span class="k">if</span> <span class="n">question</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.toggle_question">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.toggle_question">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">toggle_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">:</span> <span class="n">Question</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Включает или отключает вопрос."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">set_active</span><span class="p">(</span><span class="n">question</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="ow">not</span> <span class="n">question</span><span class="o">.</span><span class="n">is_active</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.delete_question">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_question">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет вопрос."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">question_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.import_csv">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.import_csv">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">import_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">csv_importer</span><span class="o">.</span><span class="n">ImportResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Импортирует вопросы из CSV-файла."""</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">csv_importer</span><span class="o">.</span><span class="n">import_questions</span><span class="p">(</span>
+            <span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="AppController.write_csv_template">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.write_csv_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_csv_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет пустой шаблон CSV (только заголовки) для импорта вопросов."""</span>
+        <span class="n">csv_importer</span><span class="o">.</span><span class="n">write_template</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="AppController.available_counts">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.available_counts">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">available_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Число активных вопросов по парам (тема, сложность)."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">count_by_topic_and_difficulty</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ----- Шаблоны -----</span>
+
+<div class="viewcode-block" id="AppController.get_templates">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.get_templates">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_templates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Template</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Все шаблоны с правилами."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.get_template">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.get_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Один шаблон с правилами."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">template_id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AppController.create_template">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.create_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">header</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Создаёт шаблон."""</span>
+        <span class="n">template_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">template_id</span></div>
+
+
+<div class="viewcode-block" id="AppController.update_template">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.update_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">:</span> <span class="n">Template</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет название, заголовок и оформление шаблона."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mark_logo_used</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">logo_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.logos_dir">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.logos_dir">[документация]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">logos_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Папка с копиями эмблем."""</span>
+        <span class="k">return</span> <span class="n">AppConfig</span><span class="p">()</span><span class="o">.</span><span class="n">base_dir</span> <span class="o">/</span> <span class="s2">"logos"</span></div>
+
+
+<div class="viewcode-block" id="AppController.last_logo">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.last_logo">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">last_logo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Эмблема, которой пользовались последней (по времени файла), или ""."""</span>
+        <span class="n">folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logos_dir</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">folder</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">return</span> <span class="s2">""</span>
+        <span class="n">logos</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">path</span>
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">folder</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">LOGO_TYPES</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">logos</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">""</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">logos</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">))</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mark_logo_used</span><span class="p">(</span><span class="n">logo_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Обновляет время файла эмблемы: так она становится «последней»."""</span>
+        <span class="k">if</span> <span class="n">logo_path</span> <span class="ow">and</span> <span class="n">Path</span><span class="p">(</span><span class="n">logo_path</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">utime</span><span class="p">(</span><span class="n">logo_path</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AppController.store_logo">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.store_logo">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">store_logo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Копирует картинку эмблемы в папку logos программы.</span>
+
+<span class="sd">        Копия нужна, чтобы эмблема не пропала, если исходный файл</span>
+<span class="sd">        переместят или удалят.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Путь к копии.</span>
+<span class="sd">        """</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">source</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LOGO_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TicketGenError</span><span class="p">(</span><span class="s2">"Эмблема должна быть картинкой PNG, JPG, BMP или GIF."</span><span class="p">)</span>
+        <span class="n">folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logos_dir</span><span class="p">()</span>
+        <span class="n">folder</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">folder</span> <span class="o">/</span> <span class="n">source</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="n">source</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span> <span class="o">!=</span> <span class="n">target</span><span class="o">.</span><span class="n">resolve</span><span class="p">():</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mark_logo_used</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">target</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AppController.delete_template">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет шаблон."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">template_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.add_rule">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.add_rule">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">:</span> <span class="n">TemplateRule</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Добавляет правило в шаблон."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">add_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.update_rule_count">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.update_rule_count">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_rule_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Меняет число вопросов в правиле."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">update_rule_count</span><span class="p">(</span><span class="n">rule_id</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.update_rule_target">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.update_rule_target">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_rule_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">difficulty_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Меняет тему и сложность правила."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">update_rule_target</span><span class="p">(</span><span class="n">rule_id</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">,</span> <span class="n">difficulty_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.delete_rule">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_rule">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет правило."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">delete_rule</span><span class="p">(</span><span class="n">rule_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.check_template">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.check_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">:</span> <span class="n">Template</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">no_overlap</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Проверяет шаблон: результат по каждому правилу и число билетов."""</span>
+        <span class="n">available</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_counts</span><span class="p">()</span>
+        <span class="n">checks</span> <span class="o">=</span> <span class="n">scoring</span><span class="o">.</span><span class="n">check_rules</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">rules</span><span class="p">,</span> <span class="n">available</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">no_overlap</span><span class="p">)</span>
+        <span class="n">possible</span> <span class="o">=</span> <span class="n">scoring</span><span class="o">.</span><span class="n">possible_tickets</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">rules</span><span class="p">,</span> <span class="n">available</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">checks</span><span class="p">,</span> <span class="n">possible</span></div>
+
+
+    <span class="c1"># ----- Серии -----</span>
+
+<div class="viewcode-block" id="AppController.active_pool">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.active_pool">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">active_pool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Question</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Все активные вопросы для генератора."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">only_active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AppController.save_series">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.save_series">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_series</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">:</span> <span class="n">Template</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">no_overlap</span><span class="p">,</span> <span class="n">variants</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Сохраняет созданную серию в историю."""</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">template_id</span><span class="o">=</span><span class="n">template</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M"</span><span class="p">),</span>
+            <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+            <span class="n">no_overlap</span><span class="o">=</span><span class="n">no_overlap</span><span class="p">,</span>
+            <span class="n">variants_count</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">variants</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">series_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">variants</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">series_id</span></div>
+
+
+<div class="viewcode-block" id="AppController.get_series">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.get_series">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_series</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Series</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""История серий."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.get_variants">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.get_variants">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Билеты серии."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">get_variants</span><span class="p">(</span><span class="n">series_id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AppController.replacement_candidates">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.replacement_candidates">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replacement_candidates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variant</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Question</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Вопросы той же темы и сложности, которых ещё нет в билете."""</span>
+        <span class="n">used</span> <span class="o">=</span> <span class="p">{</span><span class="n">q</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">variant</span><span class="o">.</span><span class="n">questions</span><span class="p">}</span>
+        <span class="n">same</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+            <span class="n">topic_id</span><span class="o">=</span><span class="n">question</span><span class="o">.</span><span class="n">topic_id</span><span class="p">,</span>
+            <span class="n">difficulty_id</span><span class="o">=</span><span class="n">question</span><span class="o">.</span><span class="n">difficulty_id</span><span class="p">,</span>
+            <span class="n">only_active</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">q</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">same</span> <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">used</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="AppController.export_moodle">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.export_moodle">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_moodle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variants</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет билеты для Moodle: «xml» (Moodle XML) или «gift».</span>
+
+<span class="sd">        variants — все билеты серии или один выбранный (один тест).</span>
+<span class="sd">        """</span>
+        <span class="n">moodle</span><span class="o">.</span><span class="n">save_tickets</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">title</span><span class="p">,</span> <span class="n">variants</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">file_format</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AppController.replace_question">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.replace_question">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variant_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">old_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">new_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Заменяет вопрос в билете."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">replace_question</span><span class="p">(</span><span class="n">variant_id</span><span class="p">,</span> <span class="n">old_id</span><span class="p">,</span> <span class="n">new_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AppController.delete_series">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_series">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_series</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет серию."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">series_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ----- Служебное -----</span>
+
+<div class="viewcode-block" id="AppController.stats">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.stats">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Текст для строки состояния."""</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+        <span class="n">active</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">questions</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">only_active</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"База: </span><span class="si">{</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> · Вопросов: </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> "</span>
+            <span class="sa">f</span><span class="s2">"(активных </span><span class="si">{</span><span class="n">active</span><span class="si">}</span><span class="s2">) · Шаблонов: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">get_all</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AppController.backup">
+<a class="viewcode-back" href="../../../api/controllers.html#ticketgen.controllers.app_controller.AppController.backup">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Создаёт резервную копию базы (вызывается при закрытии)."""</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">path</span> <span class="o">!=</span> <span class="s2">":memory:"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">backup</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">backup_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">backups_to_keep</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

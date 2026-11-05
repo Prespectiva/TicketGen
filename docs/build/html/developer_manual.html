@@ -1,0 +1,626 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Руководство разработчика &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="_static/app_icon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e35015f7"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Примеры использования" href="examples.html" />
+    <link rel="prev" title="Руководство пользователя" href="user_manual.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TicketGen
+              <img src="_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">Справочник API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Руководство разработчика</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Руководство разработчика<a class="headerlink" href="#id1" title="Ссылка на этот заголовок"></a></h1>
+<p>Руководство нужно разработчику, который будет сопровождать или дорабатывать
+TicketGen. Основные разделы идут по ГОСТ 19.503-79 «Руководство системного
+программиста»: общие сведения, структура, настройка, проверка,
+дополнительные возможности и сообщения. В конце описано, как новому
+разработчику быстро войти в проект.</p>
+<section id="id2">
+<h2>Общие сведения о программе<a class="headerlink" href="#id2" title="Ссылка на этот заголовок"></a></h2>
+<ul class="simple">
+<li><p>Назначение и функции описаны в разделах <a class="reference internal" href="overview.html"><span class="doc">Описание применения</span></a> и
+<a class="reference internal" href="functionality.html"><span class="doc">Функциональность</span></a>.</p></li>
+<li><p>Язык — Python 3.10–3.13. Интерфейс — PyQt6, база — SQLite через
+модуль <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> стандартной библиотеки, экспорт — python-docx
+(DOCX) и reportlab (PDF).</p></li>
+<li><p>Зависимости и виртуальное окружение — Poetry, точные версии
+зафиксированы в <code class="docutils literal notranslate"><span class="pre">poetry.lock</span></code>.</p></li>
+<li><p>Качество кода — black (форматирование, строка до 88 символов), flake8
+(стиль и ошибки), pre-commit (обе проверки перед каждым коммитом).</p></li>
+<li><p>Тесты — pytest, покрытие — coverage.py через pytest-cov, сборка
+исполняемого файла — PyInstaller.</p></li>
+<li><p>Репозиторий — <a class="reference external" href="https://github.com/Prespectiva/TicketGen">https://github.com/Prespectiva/TicketGen</a>. Основная ветка
+<code class="docutils literal notranslate"><span class="pre">main</span></code>, работа идёт в отдельных ветках через Pull Request.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>Структура программы<a class="headerlink" href="#id3" title="Ссылка на этот заголовок"></a></h2>
+<p>Слои, паттерны, схема базы и внутренний API описаны в разделе
+<a class="reference internal" href="architecture.html"><span class="doc">Архитектура</span></a>, справочник по модулям — в <a class="reference internal" href="api/index.html"><span class="doc">Справочник API</span></a>. Ключевые
+точки кода, с которых удобно начинать чтение:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 38.0%" />
+<col style="width: 62.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Файл</p></th>
+<th class="head"><p>Что в нём</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">main.py</span></code></p></td>
+<td><p>запуск: QApplication, тема, подключение к базе, главное окно</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen/controllers/app_controller.py</span></code></p></td>
+<td><p>все действия пользователя: по методам контроллера видно, что
+умеет программа</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen/logic/generator.py</span></code></p></td>
+<td><p>алгоритм генерации серии</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen/data/database.py</span></code></p></td>
+<td><p>схема базы и миграция столбцов оформления</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen/data/repositories.py</span></code></p></td>
+<td><p>весь SQL программы</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen/logic/exporters.py</span></code></p></td>
+<td><p>сборка документа из блоков и экспортёры DOCX/PDF</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ticketgen/views/main_window.py</span></code></p></td>
+<td><p>как собраны вкладки и как они связаны сигналами</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tests/conftest.py</span></code></p></td>
+<td><p>фикстуры: база в памяти и база с тестовыми данными</p></td>
+</tr>
+</tbody>
+</table>
+<p>Правила, которых держится код:</p>
+<ul class="simple">
+<li><p>окна не содержат SQL и расчётов и обращаются только к контроллеру;</p></li>
+<li><p>SQL пишется только в репозиториях и только с параметрами <code class="docutils literal notranslate"><span class="pre">?</span></code>;</p></li>
+<li><p>ошибка, которую должен увидеть пользователь, — это
+<code class="docutils literal notranslate"><span class="pre">TicketGenError</span></code> с понятным русским текстом;</p></li>
+<li><p>долгие операции выполняются в <code class="docutils literal notranslate"><span class="pre">BackgroundWorker</span></code>, виджеты трогает
+только главный поток;</p></li>
+<li><p>у каждого модуля, класса и функции есть docstring на русском в стиле
+Google (<code class="docutils literal notranslate"><span class="pre">Args</span></code>, <code class="docutils literal notranslate"><span class="pre">Returns</span></code>, <code class="docutils literal notranslate"><span class="pre">Raises</span></code>): из них собирается
+справочник API.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>Настройка программы<a class="headerlink" href="#id4" title="Ссылка на этот заголовок"></a></h2>
+<section id="id5">
+<h3>Подготовка среды разработки<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h3>
+<ol class="arabic">
+<li><p>Установите Python 3.10–3.13 (при установке отметьте «Add python.exe
+to PATH») и Git.</p></li>
+<li><p>Склонируйте репозиторий и установите зависимости:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Prespectiva</span><span class="o">/</span><span class="n">TicketGen</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">TicketGen</span>
+<span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">poetry</span>
+<span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Poetry создаст виртуальное окружение и поставит туда программу, тесты,
+black, flake8, pre-commit, coverage и PyInstaller. Если нужно, чтобы
+окружение лежало в папке проекта (<code class="docutils literal notranslate"><span class="pre">.venv</span></code>), выполните перед
+установкой <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-m</span> <span class="pre">poetry</span> <span class="pre">config</span> <span class="pre">virtualenvs.in-project</span> <span class="pre">true</span></code>.</p>
+</li>
+<li><p>Включите хуки проверки перед коммитом:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">install</span>
+</pre></div>
+</div>
+</li>
+<li><p>В VS Code выберите интерпретатор из окружения Poetry
+(<code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> → «Python: Select Interpreter»).</p></li>
+</ol>
+</section>
+<section id="id6">
+<h3>Запуск<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">ticketgen</span><span class="o">.</span><span class="n">seed_data</span>   <span class="c1"># демонстрационные данные</span>
+<span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">python</span> <span class="n">main</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">seed_data</span></code> заполняет базу четырьмя темами, 96 вопросами и шаблоном
+«Экзамен ОАиП, 2 курс». Запускать его нужно на пустой базе.</p>
+</section>
+<section id="id7">
+<h3>Настройки путей<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h3>
+<p>Все пути задаёт <a class="reference internal" href="api/app.html#ticketgen.config.AppConfig" title="ticketgen.config.AppConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></a>:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Параметр</p></th>
+<th class="head"><p>Значение</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">base_dir</span></code></p></td>
+<td><p>папка проекта, а в собранной программе — папка с
+<code class="docutils literal notranslate"><span class="pre">TicketGen.exe</span></code> (признак <code class="docutils literal notranslate"><span class="pre">sys.frozen</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db_path</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base_dir/tickets.db</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">backup_dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base_dir/backup</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">export_dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base_dir/export</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">backups_to_keep</span></code></p></td>
+<td><p>5 — сколько резервных копий хранить</p></td>
+</tr>
+</tbody>
+</table>
+<p>Веса уровней сложности хранятся в таблице <code class="docutils literal notranslate"><span class="pre">tbl_difficulty</span></code> и меняются
+методом <code class="docutils literal notranslate"><span class="pre">DifficultyRepository.update_weight</span></code>.</p>
+</section>
+</section>
+<section id="id8">
+<h2>Проверка программы<a class="headerlink" href="#id8" title="Ссылка на этот заголовок"></a></h2>
+<section id="id9">
+<h3>Автоматические тесты<a class="headerlink" href="#id9" title="Ссылка на этот заголовок"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">pytest</span>
+<span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">pytest</span> <span class="o">--</span><span class="n">cov</span><span class="o">=</span><span class="n">ticketgen</span> <span class="o">--</span><span class="n">cov</span><span class="o">-</span><span class="n">report</span><span class="o">=</span><span class="n">term</span><span class="o">-</span><span class="n">missing</span> <span class="o">--</span><span class="n">cov</span><span class="o">-</span><span class="n">report</span><span class="o">=</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>Каждый тест получает свою базу SQLite в памяти (фикстуры <code class="docutils literal notranslate"><span class="pre">db</span></code> и
+<code class="docutils literal notranslate"><span class="pre">filled_db</span></code> в <code class="docutils literal notranslate"><span class="pre">tests/conftest.py</span></code>), рабочий <code class="docutils literal notranslate"><span class="pre">tickets.db</span></code> не
+затрагивается. Отчёт о покрытии открывается из <code class="docutils literal notranslate"><span class="pre">htmlcov/index.html</span></code>.
+Слой <code class="docutils literal notranslate"><span class="pre">views</span></code> исключён из подсчёта покрытия (раздел
+<code class="docutils literal notranslate"><span class="pre">[tool.coverage.run]</span></code> в <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>) и проверяется вручную.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Файл</p></th>
+<th class="head"><p>Что проверяет</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">test_repositories.py</span></code></p></td>
+<td><p>CRUD, фильтры, запрет удаления используемых записей, защита
+от SQL-инъекций, поиск без учёта регистра</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">test_generator.py</span></code></p></td>
+<td><p>уникальность билетов, равный балл, повтор по seed, режим без
+пересечений, нехватка вопросов, скорость (30 билетов из 1000
+вопросов)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">test_scoring.py</span></code></p></td>
+<td><p>формула балла, проверка правил, число возможных билетов</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">test_csv_importer.py</span></code></p></td>
+<td><p>разбор CSV, ошибочные строки, неверный заголовок, файл
+в Windows-1251</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">test_exporters.py</span></code></p></td>
+<td><p>создание файлов, заголовок без метки <code class="docutils literal notranslate"><span class="pre">{N}</span></code> в ответах
+и ведомости, темы со счётчиком</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">test_subjects_and_style.py</span></code></p></td>
+<td><p>предметы, оформление билета, миграция старой базы, шаблон CSV,
+таблица ответов, Moodle XML и GIFT, два билета на листе</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">test_app_controller.py</span></code></p></td>
+<td><p>интеграционные тесты контроллера на настоящей базе</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">test_views_helpers.py</span></code></p></td>
+<td><p>вспомогательные функции интерфейса без окон</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id10">
+<h3>Качество кода<a class="headerlink" href="#id10" title="Ссылка на этот заголовок"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">black</span> <span class="o">--</span><span class="n">check</span> <span class="o">.</span>
+<span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">flake8</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3>Системная проверка<a class="headerlink" href="#id11" title="Ссылка на этот заголовок"></a></h3>
+<p>Скрипт <code class="docutils literal notranslate"><span class="pre">scripts/system_check.py</span></code> проверяет показатели из ТЗ на временной
+базе (банк до 10 000 вопросов, время генерации и экспорта, равный балл,
+режим без пересечений, импорт 100 вопросов, защита от SQL-инъекций,
+резервная копия) и печатает таблицу «требование → результат»:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">system_check</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>Ручная проверка<a class="headerlink" href="#id12" title="Ссылка на этот заголовок"></a></h3>
+<p>После изменений в окнах запустите программу и пройдите сценарий: импорт
+CSV → шаблон → генерация 30 билетов → замена вопроса → экспорт в DOCX
+и PDF → открытие файлов в Word → закрытие программы (в <code class="docutils literal notranslate"><span class="pre">backup</span></code>
+появилась копия, в терминале нет ошибок).</p>
+</section>
+</section>
+<section id="id13">
+<h2>Дополнительные возможности<a class="headerlink" href="#id13" title="Ссылка на этот заголовок"></a></h2>
+<section id="ticketgen-exe">
+<h3>Сборка TicketGen.exe<a class="headerlink" href="#ticketgen-exe" title="Ссылка на этот заголовок"></a></h3>
+<p>Запустите <code class="docutils literal notranslate"><span class="pre">build.bat</span></code> из корня проекта. Скрипт ставит зависимости,
+очищает прошлую сборку, собирает один файл без консоли с иконкой и
+папкой иконок внутри и копирует в <code class="docutils literal notranslate"><span class="pre">dist</span></code> тестовую базу и
+<code class="docutils literal notranslate"><span class="pre">examples</span></code>. Результат — <code class="docutils literal notranslate"><span class="pre">dist\TicketGen.exe</span></code>. Папку <code class="docutils literal notranslate"><span class="pre">dist</span></code> можно
+переносить целиком.</p>
+</section>
+<section id="id14">
+<h3>Сборка этой документации<a class="headerlink" href="#id14" title="Ссылка на этот заголовок"></a></h3>
+<p>Sphinx и тема ставятся в окружение проекта один раз:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">add</span> <span class="o">--</span><span class="n">group</span> <span class="n">dev</span> <span class="n">sphinx</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">rtd</span><span class="o">-</span><span class="n">theme</span>
+</pre></div>
+</div>
+<p>Сборка HTML:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="n">docs</span><span class="o">/</span><span class="n">source</span> <span class="n">docs</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>Результат открывается из
+<code class="docutils literal notranslate"><span class="pre">docs/build/html/index.html</span></code>. Окна PyQt6 и библиотеки экспорта для
+сборки не нужны: в <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> они заменены заглушками
+(<code class="docutils literal notranslate"><span class="pre">autodoc_mock_imports</span></code>). После изменения docstrings документацию
+нужно пересобрать, предупреждения Sphinx лучше исправлять сразу.</p>
+</section>
+<section id="id15">
+<h3>Как добавить формат экспорта<a class="headerlink" href="#id15" title="Ссылка на этот заголовок"></a></h3>
+<ol class="arabic simple">
+<li><p>В <code class="docutils literal notranslate"><span class="pre">ticketgen/logic/exporters.py</span></code> создайте наследника
+<code class="docutils literal notranslate"><span class="pre">BaseExporter</span></code> с атрибутом <code class="docutils literal notranslate"><span class="pre">extension</span></code> и методом
+<code class="docutils literal notranslate"><span class="pre">save(blocks,</span> <span class="pre">path)</span></code>. Блоки — кортежи <code class="docutils literal notranslate"><span class="pre">(вид,</span> <span class="pre">значение)</span></code>,
+их виды перечислены в начале модуля.</p></li>
+<li><p>Зарегистрируйте класс в <code class="docutils literal notranslate"><span class="pre">ExporterFactory._exporters</span></code>.</p></li>
+<li><p>Добавьте переключатель формата в <code class="docutils literal notranslate"><span class="pre">ExportDialog</span></code>
+(<code class="docutils literal notranslate"><span class="pre">views/dialogs.py</span></code>) и тест в <code class="docutils literal notranslate"><span class="pre">tests/test_exporters.py</span></code>.</p></li>
+</ol>
+</section>
+<section id="id16">
+<h3>Как добавить столбец в базу<a class="headerlink" href="#id16" title="Ссылка на этот заголовок"></a></h3>
+<p>У пользователей уже есть <code class="docutils literal notranslate"><span class="pre">tickets.db</span></code> со старой схемой. Поэтому столбец
+добавляется в <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> в <code class="docutils literal notranslate"><span class="pre">SCHEMA</span></code> и в словарь вида
+<code class="docutils literal notranslate"><span class="pre">TEMPLATE_STYLE_COLUMNS</span></code>. При открытии старой базы метод
+<code class="docutils literal notranslate"><span class="pre">_add_missing_columns</span></code> допишет его командой <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> со
+значением по умолчанию. Затем поле добавляется в сущность (<code class="docutils literal notranslate"><span class="pre">domain</span></code>),
+в чтение и запись репозитория и в тест миграции.</p>
+</section>
+<section id="git">
+<h3>Работа с Git<a class="headerlink" href="#git" title="Ссылка на этот заголовок"></a></h3>
+<ul class="simple">
+<li><p>Каждая задача — отдельная ветка от <code class="docutils literal notranslate"><span class="pre">main</span></code>: <code class="docutils literal notranslate"><span class="pre">feature/…</span></code> для новых
+функций, <code class="docutils literal notranslate"><span class="pre">fix/…</span></code> для исправлений, <code class="docutils literal notranslate"><span class="pre">docs/…</span></code> для документации.</p></li>
+<li><p>Коммит — одно законченное изменение, сообщение по-русски описывает,
+что сделано.</p></li>
+<li><p>Ветка отправляется на GitHub и сливается в <code class="docutils literal notranslate"><span class="pre">main</span></code> через Pull Request
+после проверки: тесты, black и flake8 проходят.</p></li>
+<li><p>Найденные ошибки и идеи заводятся в разделе Issues репозитория
+с меткой важности (шкала в <a class="reference internal" href="issues.html"><span class="doc">Реестр дефектов</span></a>). Уже исправленные ошибки
+собраны в реестре <a class="reference internal" href="issues.html"><span class="doc">Реестр дефектов</span></a>, план улучшений — в <a class="reference internal" href="backlog.html"><span class="doc">Бэклог продукта</span></a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id17">
+<h2>Сообщения системному программисту<a class="headerlink" href="#id17" title="Ссылка на этот заголовок"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 42.0%" />
+<col style="width: 58.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Сообщение</p></th>
+<th class="head"><p>Причина и решение</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'PyQt6'</span></code></p></td>
+<td><p>программа запущена не из окружения Poetry. Запускайте через
+<code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-m</span> <span class="pre">poetry</span> <span class="pre">run</span> <span class="pre">…</span></code> или выберите интерпретатор окружения в VS Code</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pyproject.toml</span> <span class="pre">changed</span> <span class="pre">significantly</span> <span class="pre">since</span> <span class="pre">poetry.lock</span> <span class="pre">was</span> <span class="pre">last</span> <span class="pre">generated</span></code></p></td>
+<td><p>зависимости в <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> поменяли вручную. Выполните
+<code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-m</span> <span class="pre">poetry</span> <span class="pre">lock</span></code> и <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-m</span> <span class="pre">poetry</span> <span class="pre">install</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>pre-commit не даёт сделать коммит</p></td>
+<td><p>black переформатировал файлы или flake8 нашёл ошибку. Добавьте
+исправленные файлы (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>) и повторите коммит</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sqlite3.OperationalError:</span> <span class="pre">no</span> <span class="pre">such</span> <span class="pre">column</span> <span class="pre">…</span></code></p></td>
+<td><p>новый столбец не добавлен в <code class="docutils literal notranslate"><span class="pre">TEMPLATE_STYLE_COLUMNS</span></code>, и старая
+база его не получила (см. «Как добавить столбец в базу»)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">wrapped</span> <span class="pre">C/C++</span> <span class="pre">object</span> <span class="pre">…</span> <span class="pre">has</span> <span class="pre">been</span> <span class="pre">deleted</span></code></p></td>
+<td><p>код обращается к виджету, который Qt уже удалил (обычно при
+закрытии окна). Проверяйте объект через <code class="docutils literal notranslate"><span class="pre">sip.isdeleted</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">QThread:</span> <span class="pre">Destroyed</span> <span class="pre">while</span> <span class="pre">thread</span> <span class="pre">is</span> <span class="pre">still</span> <span class="pre">running</span></code></p></td>
+<td><p>на объект потока не осталось ссылок. Запускайте фоновые задачи
+только через <code class="docutils literal notranslate"><span class="pre">BackgroundWorker.start()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Sphinx: <code class="docutils literal notranslate"><span class="pre">WARNING:</span> <span class="pre">…</span> <span class="pre">Unexpected</span> <span class="pre">indentation</span></code></p></td>
+<td><p>в docstring перед списком или блоком нет пустой строки</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sphinx: <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">theme</span> <span class="pre">named</span> <span class="pre">'sphinx_rtd_theme'</span></code></p></td>
+<td><p>тема не установлена. Поставьте <code class="docutils literal notranslate"><span class="pre">sphinx-rtd-theme</span></code> (тогда
+<code class="docutils literal notranslate"><span class="pre">conf.py</span></code> возьмёт её) или соберите со встроенной темой</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id18">
+<h2>Как новому разработчику войти в проект<a class="headerlink" href="#id18" title="Ссылка на этот заголовок"></a></h2>
+<p>Порядок, который позволяет начать работу за один день:</p>
+<ol class="arabic simple">
+<li><p><strong>Прочитать.</strong> README, затем в этой документации <a class="reference internal" href="overview.html"><span class="doc">Описание применения</span></a>,
+<a class="reference internal" href="architecture.html"><span class="doc">Архитектура</span></a> и техническое задание (приложение А отчёта по
+практике). Макет экранов — в Figma, ссылка в README.</p></li>
+<li><p><strong>Настроить окружение</strong> по разделу «Настройка программы», заполнить
+базу демонстрационными данными и запустить программу. Пройти
+сценарий из <a class="reference internal" href="user_manual.html"><span class="doc">Руководство пользователя</span></a> руками: так быстрее всего понять, что
+делает программа.</p></li>
+<li><p><strong>Запустить тесты</strong> и убедиться, что всё проходит. Это точка отсчёта:
+если после ваших изменений тест упал, виноваты изменения.</p></li>
+<li><p><strong>Прочитать код по ключевым точкам</strong> из таблицы выше: контроллер →
+генератор → репозитории → одна вкладка. Справочник <a class="reference internal" href="api/index.html"><span class="doc">Справочник API</span></a>
+помогает не открывать каждый файл.</p></li>
+<li><p><strong>Взять небольшую задачу</strong> из <a class="reference internal" href="backlog.html"><span class="doc">Бэклог продукта</span></a> (например, B-02 или
+B-03) или из Issues, сделать её в отдельной ветке с тестом и открыть
+Pull Request. На ревью проверяются правила кода
+из раздела «Структура программы».</p></li>
+</ol>
+<p>Кто передаёт проект, проверяет, что новый разработчик получил доступ
+к репозиторию и к макету в Figma, может собрать <code class="docutils literal notranslate"><span class="pre">TicketGen.exe</span></code> на
+своём компьютере и знает, где лежат техническое задание и эта
+документация.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="user_manual.html" class="btn btn-neutral float-left" title="Руководство пользователя" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Примеры использования" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="./">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Алфавитный указатель &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="_static/app_icon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e35015f7"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=cd1d70c9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="#" />
+    <link rel="search" title="Поиск" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TicketGen
+              <img src="_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">Справочник API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Алфавитный указатель</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<h1 id="index">Алфавитный указатель</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.dialogs.ExportDialog.accept">accept() (метод ticketgen.views.dialogs.ExportDialog)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.dialogs.ImportDialog.accept">(метод ticketgen.views.dialogs.ImportDialog)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.dialogs.MoodleExportDialog.accept">(метод ticketgen.views.dialogs.MoodleExportDialog)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.dialogs.QuestionDialog.accept">(метод ticketgen.views.dialogs.QuestionDialog)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.dialogs.ReplaceQuestionDialog.accept">(метод ticketgen.views.dialogs.ReplaceQuestionDialog)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.dialogs.TicketStyleDialog.accept">(метод ticketgen.views.dialogs.TicketStyleDialog)</a>
+</li>
+      </ul></li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.active_pool">active_pool() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.add">add() (метод ticketgen.data.repositories.QuestionRepository)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.add">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+        <li><a href="api/data.html#ticketgen.data.repositories.TopicRepository.add">(метод ticketgen.data.repositories.TopicRepository)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.add_many">add_many() (метод ticketgen.data.repositories.QuestionRepository)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.add_question">add_question() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.add_rule">add_rule() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.add_rule">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.add_rule">(метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+      </ul></li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.add_topic">add_topic() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.AnimatedTabBar">AnimatedTabBar (класс в ticketgen.views.widgets)</a>
+</li>
+      <li><a href="api/app.html#ticketgen.config.AppConfig">AppConfig (класс в ticketgen.config)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController">AppController (класс в ticketgen.controllers.app_controller)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.styles.apply_light_theme">apply_light_theme() (в модуле ticketgen.views.styles)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.available_counts">available_counts() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/workers.html#ticketgen.workers.background_worker.BackgroundWorker">BackgroundWorker (класс в ticketgen.workers.background_worker)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.backup">backup() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.database.Database.backup">(метод ticketgen.data.database.Database)</a>
+</li>
+      </ul></li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.BaseExporter">BaseExporter (класс в ticketgen.logic.exporters)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/data.html#ticketgen.data.repositories.BaseRepository">BaseRepository (класс в ticketgen.data.repositories)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.build_answers">build_answers() (в модуле ticketgen.logic.exporters)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.build_dialog">build_dialog() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.build_summary">build_summary() (в модуле ticketgen.logic.exporters)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.build_tickets">build_tickets() (в модуле ticketgen.logic.exporters)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.cancel_generation">cancel_generation() (метод ticketgen.views.generation_tab.GenerationTab)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.scoring.check_rules">check_rules() (в модуле ticketgen.logic.scoring)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.check_template">check_template() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.MoodleExportDialog.chosen_variants">chosen_variants() (метод ticketgen.views.dialogs.MoodleExportDialog)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.database.Database.close">close() (метод ticketgen.data.database.Database)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.main_window.MainWindow.closeEvent">closeEvent() (метод ticketgen.views.main_window.MainWindow)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.ComboPopupStyler">ComboPopupStyler (класс в ticketgen.views.widgets)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.confirm">confirm() (в модуле ticketgen.views.common)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.common.ConfirmDialog">ConfirmDialog (класс в ticketgen.views.common)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.count">count() (метод ticketgen.data.repositories.QuestionRepository)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.SeriesRepository.count">(метод ticketgen.data.repositories.SeriesRepository)</a>
+</li>
+      </ul></li>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.count_by_topic_and_difficulty">count_by_topic_and_difficulty() (метод ticketgen.data.repositories.QuestionRepository)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.ExporterFactory.create">create() (метод класса ticketgen.logic.exporters.ExporterFactory)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.create_template">create_template() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.current_series">current_series() (метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.current_template">current_template() (метод ticketgen.views.generation_tab.GenerationTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.current_variant">current_variant() (метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/data.html#ticketgen.data.database.Database">Database (класс в ticketgen.data.database)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.MoodleExportDialog.default_name">default_name() (метод ticketgen.views.dialogs.MoodleExportDialog)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.delete">delete() (метод ticketgen.data.repositories.QuestionRepository)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.SeriesRepository.delete">(метод ticketgen.data.repositories.SeriesRepository)</a>
+</li>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.delete">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+        <li><a href="api/data.html#ticketgen.data.repositories.TopicRepository.delete">(метод ticketgen.data.repositories.TopicRepository)</a>
+</li>
+      </ul></li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_question">delete_question() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.delete_question">(метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+      </ul></li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_rule">delete_rule() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.delete_rule">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.delete_rule">(метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_series">delete_series() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.delete_series">(метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+      </ul></li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_template">delete_template() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.delete_template">(метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+      </ul></li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.delete_topic">delete_topic() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/domain.html#ticketgen.domain.models.Difficulty">Difficulty (класс в ticketgen.domain.models)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.DifficultyRepository">DifficultyRepository (класс в ticketgen.data.repositories)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.TopicRepository.disciplines">disciplines() (метод ticketgen.data.repositories.TopicRepository)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.divider">divider() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.DocxExporter">DocxExporter (класс в ticketgen.logic.exporters)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.edit_question">edit_question() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.edit_style">edit_style() (метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.ComboPopupStyler.eventFilter">eventFilter() (метод ticketgen.views.widgets.ComboPopupStyler)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.widgets.RowHoverHighlighter.eventFilter">(метод ticketgen.views.widgets.RowHoverHighlighter)</a>
+</li>
+      </ul></li>
+      <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.export">export() (метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.export_moodle">export_moodle() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.export_moodle">(метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+      </ul></li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.export_series">export_series() (в модуле ticketgen.logic.exporters)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.ExportDialog">ExportDialog (класс в ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.ExporterFactory">ExporterFactory (класс в ticketgen.logic.exporters)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/workers.html#ticketgen.workers.background_worker.BackgroundWorker.failed">failed (атрибут ticketgen.workers.background_worker.BackgroundWorker)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.fill_combo">fill_combo() (в модуле ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/app.html#ticketgen.seed_data.fill_database">fill_database() (в модуле ticketgen.seed_data)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.fill_table">fill_table() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.filters_changed">filters_changed() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.find">find() (метод ticketgen.data.repositories.QuestionRepository)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.find_questions">find_questions() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/workers.html#ticketgen.workers.background_worker.BackgroundWorker.finished_ok">finished_ok (атрибут ticketgen.workers.background_worker.BackgroundWorker)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.format_dt">format_dt() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.ExportDialog.formats">formats() (метод ticketgen.views.dialogs.ExportDialog)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.found_questions">found_questions() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/logic.html#ticketgen.logic.generator.generate_variants">generate_variants() (в модуле ticketgen.logic.generator)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab">GenerationTab (класс в ticketgen.views.generation_tab)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.get">get() (метод ticketgen.data.repositories.QuestionRepository)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.get">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+      </ul></li>
+      <li><a href="api/data.html#ticketgen.data.repositories.DifficultyRepository.get_all">get_all() (метод ticketgen.data.repositories.DifficultyRepository)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.SeriesRepository.get_all">(метод ticketgen.data.repositories.SeriesRepository)</a>
+</li>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.get_all">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+        <li><a href="api/data.html#ticketgen.data.repositories.TopicRepository.get_all">(метод ticketgen.data.repositories.TopicRepository)</a>
+</li>
+      </ul></li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.get_difficulties">get_difficulties() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.get_disciplines">get_disciplines() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.TopicRepository.get_or_create">get_or_create() (метод ticketgen.data.repositories.TopicRepository)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.get_rules">get_rules() (метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.get_series">get_series() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.get_template">get_template() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.get_templates">get_templates() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.get_topics">get_topics() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.get_variants">get_variants() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.SeriesRepository.get_variants">(метод ticketgen.data.repositories.SeriesRepository)</a>
+</li>
+      </ul></li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.go_to_page">go_to_page() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.common.icon">icon() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.import_csv">import_csv() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.import_csv">(метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+      </ul></li>
+      <li><a href="api/logic.html#ticketgen.logic.csv_importer.import_questions">import_questions() (в модуле ticketgen.logic.csv_importer)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.dialogs.ImportDialog">ImportDialog (класс в ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.csv_importer.ImportResult">ImportResult (класс в ticketgen.logic.csv_importer)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.install_combo_styler">install_combo_styler() (в модуле ticketgen.views.widgets)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.database.Database.instance">instance() (метод класса ticketgen.data.database.Database)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/domain.html#ticketgen.domain.models.kind_number_word">kind_number_word() (в модуле ticketgen.domain.models)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.last_logo">last_logo() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.AnimatedTabBar.leaveEvent">leaveEvent() (метод ticketgen.views.widgets.AnimatedTabBar)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.common.left_cell">left_cell() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.logo_file">logo_file() (в модуле ticketgen.logic.exporters)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.logos_dir">logos_dir() (статический метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    main
+
+      <ul>
+        <li><a href="api/app.html#module-main">module</a>
+</li>
+      </ul></li>
+      <li><a href="api/app.html#main.main">main() (в модуле main)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.main_window.MainWindow">MainWindow (класс в ticketgen.views.main_window)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.make_button">make_button() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.make_chip">make_chip() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.make_table">make_table() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.scoring.RuleCheck.missing">missing (свойство ticketgen.logic.scoring.RuleCheck)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="api/app.html#module-main">main</a>
+</li>
+        <li><a href="api/app.html#module-ticketgen.config">ticketgen.config</a>
+</li>
+        <li><a href="api/controllers.html#module-ticketgen.controllers.app_controller">ticketgen.controllers.app_controller</a>
+</li>
+        <li><a href="api/data.html#module-ticketgen.data.database">ticketgen.data.database</a>
+</li>
+        <li><a href="api/data.html#module-ticketgen.data.repositories">ticketgen.data.repositories</a>
+</li>
+        <li><a href="api/domain.html#module-ticketgen.domain.models">ticketgen.domain.models</a>
+</li>
+        <li><a href="api/logic.html#module-ticketgen.logic.csv_importer">ticketgen.logic.csv_importer</a>
+</li>
+        <li><a href="api/logic.html#module-ticketgen.logic.exporters">ticketgen.logic.exporters</a>
+</li>
+        <li><a href="api/logic.html#module-ticketgen.logic.generator">ticketgen.logic.generator</a>
+</li>
+        <li><a href="api/logic.html#module-ticketgen.logic.moodle">ticketgen.logic.moodle</a>
+</li>
+        <li><a href="api/logic.html#module-ticketgen.logic.scoring">ticketgen.logic.scoring</a>
+</li>
+        <li><a href="api/app.html#module-ticketgen.seed_data">ticketgen.seed_data</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.common">ticketgen.views.common</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.dialogs">ticketgen.views.dialogs</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.generation_tab">ticketgen.views.generation_tab</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.main_window">ticketgen.views.main_window</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.question_tab">ticketgen.views.question_tab</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.results_tab">ticketgen.views.results_tab</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.styles">ticketgen.views.styles</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.template_tab">ticketgen.views.template_tab</a>
+</li>
+        <li><a href="api/views.html#module-ticketgen.views.widgets">ticketgen.views.widgets</a>
+</li>
+        <li><a href="api/workers.html#module-ticketgen.workers.background_worker">ticketgen.workers.background_worker</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.dialogs.MoodleExportDialog">MoodleExportDialog (класс в ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.AnimatedTabBar.mouseMoveEvent">mouseMoveEvent() (метод ticketgen.views.widgets.AnimatedTabBar)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.template_tab.need_text">need_text() (в модуле ticketgen.views.template_tab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.new_template">new_template() (метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/domain.html#ticketgen.domain.models.NotEnoughQuestionsError">NotEnoughQuestionsError</a>
+</li>
+      <li><a href="api/domain.html#ticketgen.domain.models.Template.number_word">number_word (свойство ticketgen.domain.models.Template)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/logic.html#ticketgen.logic.scoring.RuleCheck.ok">ok (свойство ticketgen.logic.scoring.RuleCheck)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.ok_cancel_buttons">ok_cancel_buttons() (в модуле ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.on_failed">on_failed() (метод ticketgen.views.generation_tab.GenerationTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.on_generated">on_generated() (метод ticketgen.views.generation_tab.GenerationTab)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.on_item_changed">on_item_changed() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.on_progress">on_progress() (метод ticketgen.views.generation_tab.GenerationTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.open_series">open_series (атрибут ticketgen.views.generation_tab.GenerationTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.open_topics">open_topics() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.question_tab.page_numbers">page_numbers() (в модуле ticketgen.views.question_tab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.AnimatedTabBar.paintEvent">paintEvent() (метод ticketgen.views.widgets.AnimatedTabBar)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.csv_importer.parse_csv">parse_csv() (в модуле ticketgen.logic.csv_importer)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.csv_importer.ParsedRow">ParsedRow (класс в ticketgen.logic.csv_importer)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.PdfExporter">PdfExporter (класс в ticketgen.logic.exporters)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.dialogs.ReplaceQuestionDialog.pick_random">pick_random() (метод ticketgen.views.dialogs.ReplaceQuestionDialog)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.generator.plain_header">plain_header() (в модуле ticketgen.logic.generator)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.plural">plural() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.scoring.possible_tickets">possible_tickets() (в модуле ticketgen.logic.scoring)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.SummaryDialog.print_summary">print_summary() (метод ticketgen.views.dialogs.SummaryDialog)</a>
+</li>
+      <li><a href="api/workers.html#ticketgen.workers.background_worker.BackgroundWorker.progress">progress (атрибут ticketgen.workers.background_worker.BackgroundWorker)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/domain.html#ticketgen.domain.models.Question">Question (класс в ticketgen.domain.models)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.QuestionDialog">QuestionDialog (класс в ticketgen.views.dialogs)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository">QuestionRepository (класс в ticketgen.data.repositories)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab">QuestionTab (класс в ticketgen.views.question_tab)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/logic.html#ticketgen.logic.generator.random_seed">random_seed() (в модуле ticketgen.logic.generator)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.csv_importer.read_text">read_text() (в модуле ticketgen.logic.csv_importer)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.refresh">refresh() (метод ticketgen.views.generation_tab.GenerationTab)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.refresh">(метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.refresh">(метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.refresh">(метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+      </ul></li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.refresh_table">refresh_table() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.ExportDialog.reject">reject() (метод ticketgen.views.dialogs.ExportDialog)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.rename_topic">rename_topic() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.replace_question">replace_question() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.SeriesRepository.replace_question">(метод ticketgen.data.repositories.SeriesRepository)</a>
+</li>
+        <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.replace_question">(метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.replacement_candidates">replacement_candidates() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.ReplaceQuestionDialog">ReplaceQuestionDialog (класс в ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.RowHoverHighlighter.reset">reset() (метод ticketgen.views.widgets.RowHoverHighlighter)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.reset_filters">reset_filters() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.AnimatedTabBar.resizeEvent">resizeEvent() (метод ticketgen.views.widgets.AnimatedTabBar)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab">ResultsTab (класс в ticketgen.views.results_tab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.RowHoverHighlighter">RowHoverHighlighter (класс в ticketgen.views.widgets)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.scoring.RuleCheck">RuleCheck (класс в ticketgen.logic.scoring)</a>
+</li>
+      <li><a href="api/workers.html#ticketgen.workers.background_worker.BackgroundWorker.run">run() (метод ticketgen.workers.background_worker.BackgroundWorker)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/data.html#ticketgen.data.repositories.SeriesRepository.save">save() (метод ticketgen.data.repositories.SeriesRepository)</a>
+
+      <ul>
+        <li><a href="api/logic.html#ticketgen.logic.exporters.BaseExporter.save">(метод ticketgen.logic.exporters.BaseExporter)</a>
+</li>
+        <li><a href="api/logic.html#ticketgen.logic.exporters.DocxExporter.save">(метод ticketgen.logic.exporters.DocxExporter)</a>
+</li>
+        <li><a href="api/logic.html#ticketgen.logic.exporters.PdfExporter.save">(метод ticketgen.logic.exporters.PdfExporter)</a>
+</li>
+      </ul></li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.save_csv_template">save_csv_template() (метод ticketgen.views.question_tab.QuestionTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.SummaryDialog.save_docx">save_docx() (метод ticketgen.views.dialogs.SummaryDialog)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.save_question">save_question() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.save_series">save_series() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.save_template">save_template() (метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.moodle.save_tickets">save_tickets() (в модуле ticketgen.logic.moodle)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.scoring.score_formula">score_formula() (в модуле ticketgen.logic.scoring)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.select_series">select_series() (метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+      <li><a href="api/domain.html#ticketgen.domain.models.Series">Series (класс в ticketgen.domain.models)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.SeriesRepository">SeriesRepository (класс в ticketgen.data.repositories)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.set_active">set_active() (метод ticketgen.data.repositories.QuestionRepository)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.set_error">set_error() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.moodle.short_name">short_name() (в модуле ticketgen.logic.moodle)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.main_window.MainWindow.show_about">show_about() (метод ticketgen.views.main_window.MainWindow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.common.show_error">show_error() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.common.show_info">show_info() (в модуле ticketgen.views.common)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.show_series">show_series() (метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.show_summary">show_summary() (метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.show_template">show_template() (метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.results_tab.ResultsTab.show_variant">show_variant() (метод ticketgen.views.results_tab.ResultsTab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.AnimatedTabBar.showEvent">showEvent() (метод ticketgen.views.widgets.AnimatedTabBar)</a>
+</li>
+      <li><a href="api/workers.html#ticketgen.workers.background_worker.BackgroundWorker.start">start() (метод ticketgen.workers.background_worker.BackgroundWorker)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.start_generation">start_generation() (метод ticketgen.views.generation_tab.GenerationTab)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.stats">stats() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.store_logo">store_logo() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.widgets.style_combo_popup">style_combo_popup() (в модуле ticketgen.views.widgets)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.style_preview_html">style_preview_html() (в модуле ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.QuestionTab.subject_changed">subject_changed() (метод ticketgen.views.question_tab.QuestionTab)</a>
+
+      <ul>
+        <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab.subject_changed">(метод ticketgen.views.template_tab.TemplateTab)</a>
+</li>
+      </ul></li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.suggested_header">suggested_header() (в модуле ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.SummaryDialog.summary_text">summary_text() (статический метод ticketgen.views.dialogs.SummaryDialog)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.SummaryDialog">SummaryDialog (класс в ticketgen.views.dialogs)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.widgets.AnimatedTabBar.tabLayoutChange">tabLayoutChange() (метод ticketgen.views.widgets.AnimatedTabBar)</a>
+</li>
+      <li><a href="api/domain.html#ticketgen.domain.models.Template">Template (класс в ticketgen.domain.models)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.template_tab.template_kind_line">template_kind_line() (в модуле ticketgen.views.template_tab)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.template_tab.template_summary">template_summary() (в модуле ticketgen.views.template_tab)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository">TemplateRepository (класс в ticketgen.data.repositories)</a>
+</li>
+      <li><a href="api/domain.html#ticketgen.domain.models.TemplateRule">TemplateRule (класс в ticketgen.domain.models)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.template_tab.TemplateTab">TemplateTab (класс в ticketgen.views.template_tab)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.moodle.ticket_groups">ticket_groups() (в модуле ticketgen.logic.moodle)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.ticket_heights">ticket_heights() (в модуле ticketgen.logic.exporters)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.scoring.ticket_score">ticket_score() (в модуле ticketgen.logic.scoring)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.generator.ticket_title">ticket_title() (в модуле ticketgen.logic.generator)</a>
+</li>
+      <li>
+    ticketgen.config
+
+      <ul>
+        <li><a href="api/app.html#module-ticketgen.config">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.controllers.app_controller
+
+      <ul>
+        <li><a href="api/controllers.html#module-ticketgen.controllers.app_controller">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.data.database
+
+      <ul>
+        <li><a href="api/data.html#module-ticketgen.data.database">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.data.repositories
+
+      <ul>
+        <li><a href="api/data.html#module-ticketgen.data.repositories">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.domain.models
+
+      <ul>
+        <li><a href="api/domain.html#module-ticketgen.domain.models">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.logic.csv_importer
+
+      <ul>
+        <li><a href="api/logic.html#module-ticketgen.logic.csv_importer">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.logic.exporters
+
+      <ul>
+        <li><a href="api/logic.html#module-ticketgen.logic.exporters">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.logic.generator
+
+      <ul>
+        <li><a href="api/logic.html#module-ticketgen.logic.generator">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.logic.moodle
+
+      <ul>
+        <li><a href="api/logic.html#module-ticketgen.logic.moodle">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.logic.scoring
+
+      <ul>
+        <li><a href="api/logic.html#module-ticketgen.logic.scoring">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.seed_data
+
+      <ul>
+        <li><a href="api/app.html#module-ticketgen.seed_data">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    ticketgen.views.common
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.common">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.views.dialogs
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.dialogs">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.views.generation_tab
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.generation_tab">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.views.main_window
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.main_window">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.views.question_tab
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.question_tab">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.views.results_tab
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.results_tab">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.views.styles
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.styles">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.views.template_tab
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.template_tab">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.views.widgets
+
+      <ul>
+        <li><a href="api/views.html#module-ticketgen.views.widgets">module</a>
+</li>
+      </ul></li>
+      <li>
+    ticketgen.workers.background_worker
+
+      <ul>
+        <li><a href="api/workers.html#module-ticketgen.workers.background_worker">module</a>
+</li>
+      </ul></li>
+      <li><a href="api/domain.html#ticketgen.domain.models.TicketGenError">TicketGenError</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.TicketStyleDialog">TicketStyleDialog (класс в ticketgen.views.dialogs)</a>
+</li>
+      <li><a href="api/domain.html#ticketgen.domain.models.Topic.title">title (свойство ticketgen.domain.models.Topic)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.moodle.to_gift">to_gift() (в модуле ticketgen.logic.moodle)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.moodle.to_moodle_xml">to_moodle_xml() (в модуле ticketgen.logic.moodle)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.toggle_question">toggle_question() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/domain.html#ticketgen.domain.models.Topic">Topic (класс в ticketgen.domain.models)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.question_tab.topic_column_text">topic_column_text() (в модуле ticketgen.views.question_tab)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.TopicRepository">TopicRepository (класс в ticketgen.data.repositories)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.exporters.topics_text">topics_text() (в модуле ticketgen.logic.exporters)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.TopicsDialog">TopicsDialog (класс в ticketgen.views.dialogs)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/data.html#ticketgen.data.repositories.QuestionRepository.update">update() (метод ticketgen.data.repositories.QuestionRepository)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.update">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+        <li><a href="api/data.html#ticketgen.data.repositories.TopicRepository.update">(метод ticketgen.data.repositories.TopicRepository)</a>
+</li>
+      </ul></li>
+      <li><a href="api/views.html#ticketgen.views.generation_tab.GenerationTab.update_check">update_check() (метод ticketgen.views.generation_tab.GenerationTab)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.update_rule_count">update_rule_count() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.update_rule_count">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.update_rule_target">update_rule_target() (метод ticketgen.controllers.app_controller.AppController)</a>
+
+      <ul>
+        <li><a href="api/data.html#ticketgen.data.repositories.TemplateRepository.update_rule_target">(метод ticketgen.data.repositories.TemplateRepository)</a>
+</li>
+      </ul></li>
+      <li><a href="api/views.html#ticketgen.views.main_window.MainWindow.update_status">update_status() (метод ticketgen.views.main_window.MainWindow)</a>
+</li>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.update_template">update_template() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/data.html#ticketgen.data.repositories.DifficultyRepository.update_weight">update_weight() (метод ticketgen.data.repositories.DifficultyRepository)</a>
+</li>
+      <li><a href="api/views.html#ticketgen.views.dialogs.used_text">used_text() (в модуле ticketgen.views.dialogs)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/domain.html#ticketgen.domain.models.Variant">Variant (класс в ticketgen.domain.models)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/views.html#ticketgen.views.widgets.RowHoverHighlighter.watch">watch() (метод ticketgen.views.widgets.RowHoverHighlighter)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/controllers.html#ticketgen.controllers.app_controller.AppController.write_csv_template">write_csv_template() (метод ticketgen.controllers.app_controller.AppController)</a>
+</li>
+      <li><a href="api/logic.html#ticketgen.logic.csv_importer.write_template">write_template() (в модуле ticketgen.logic.csv_importer)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ticketgen.views.template_tab &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/app_icon.ico"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TicketGen
+              <img src="../../../_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Справочник API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/views.html">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/views.html#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Код модуля</a></li>
+      <li class="breadcrumb-item active">ticketgen.views.template_tab</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Исходный код ticketgen.views.template_tab</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Вкладка «Шаблоны»: список шаблонов, правила, балл, проверка банка."""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt6.QtCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">QSize</span><span class="p">,</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">QTimer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt6.QtGui</span><span class="w"> </span><span class="kn">import</span> <span class="n">QBrush</span><span class="p">,</span> <span class="n">QColor</span><span class="p">,</span> <span class="n">QFont</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt6.QtWidgets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">QComboBox</span><span class="p">,</span>
+    <span class="n">QFrame</span><span class="p">,</span>
+    <span class="n">QHBoxLayout</span><span class="p">,</span>
+    <span class="n">QLabel</span><span class="p">,</span>
+    <span class="n">QLineEdit</span><span class="p">,</span>
+    <span class="n">QListWidget</span><span class="p">,</span>
+    <span class="n">QListWidgetItem</span><span class="p">,</span>
+    <span class="n">QSpinBox</span><span class="p">,</span>
+    <span class="n">QTableWidgetItem</span><span class="p">,</span>
+    <span class="n">QVBoxLayout</span><span class="p">,</span>
+    <span class="n">QWidget</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.domain.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemplateRule</span><span class="p">,</span> <span class="n">TicketGenError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.logic.scoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">score_formula</span><span class="p">,</span> <span class="n">ticket_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.views.common</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">confirm</span><span class="p">,</span>
+    <span class="n">icon</span><span class="p">,</span>
+    <span class="n">make_button</span><span class="p">,</span>
+    <span class="n">make_table</span><span class="p">,</span>
+    <span class="n">plural</span><span class="p">,</span>
+    <span class="n">show_error</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.views.dialogs</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">QuestionDialog</span><span class="p">,</span>
+    <span class="n">TicketStyleDialog</span><span class="p">,</span>
+    <span class="n">fill_combo</span><span class="p">,</span>
+    <span class="n">suggested_header</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ticketgen.views.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">RowHoverHighlighter</span>
+
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"№"</span><span class="p">,</span> <span class="s2">"Тема"</span><span class="p">,</span> <span class="s2">"Сложность"</span><span class="p">,</span> <span class="s2">"Кол-во вопросов"</span><span class="p">,</span> <span class="s2">"Баллы всего"</span><span class="p">,</span> <span class="s2">"В банке"</span><span class="p">,</span> <span class="s2">""</span><span class="p">]</span>
+<span class="n">TOPIC_COLUMN</span><span class="p">,</span> <span class="n">LEVEL_COLUMN</span><span class="p">,</span> <span class="n">COUNT_COLUMN</span><span class="p">,</span> <span class="n">POINTS_COLUMN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span>
+<span class="n">BANK_COLUMN</span><span class="p">,</span> <span class="n">DELETE_COLUMN</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span>
+<span class="n">COLUMN_WIDTHS</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="mi">80</span><span class="p">}</span>
+<span class="n">LEVEL_COMBO_WIDTH</span> <span class="o">=</span> <span class="mi">168</span>
+<span class="n">GREEN</span><span class="p">,</span> <span class="n">ORANGE</span> <span class="o">=</span> <span class="s2">"#16A34A"</span><span class="p">,</span> <span class="s2">"#D97706"</span>
+<span class="n">NEW_NAME</span> <span class="o">=</span> <span class="s2">"Новый шаблон"</span>
+<span class="n">ALL_SUBJECTS</span> <span class="o">=</span> <span class="s2">"Любой предмет"</span>
+
+
+<div class="viewcode-block" id="template_summary">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.template_summary">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">template_summary</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Подпись шаблона в списке: «4 правила · 5 вопросов · 9 баллов»."""</span>
+    <span class="n">rules</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">rules</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rules</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"Правил пока нет"</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">questions_count</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plural</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rules</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">'правило'</span><span class="p">,</span><span class="w"> </span><span class="s1">'правила'</span><span class="p">,</span><span class="w"> </span><span class="s1">'правил'</span><span class="p">))</span><span class="si">}</span><span class="s2"> · "</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plural</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="s1">'вопрос'</span><span class="p">,</span><span class="w"> </span><span class="s1">'вопроса'</span><span class="p">,</span><span class="w"> </span><span class="s1">'вопросов'</span><span class="p">))</span><span class="si">}</span><span class="s2"> · "</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plural</span><span class="p">(</span><span class="n">ticket_score</span><span class="p">(</span><span class="n">rules</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">'балл'</span><span class="p">,</span><span class="w"> </span><span class="s1">'балла'</span><span class="p">,</span><span class="w"> </span><span class="s1">'баллов'</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="template_kind_line">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.template_kind_line">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">template_kind_line</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Вторая подпись в списке: «ОАиП · Контрольная работа»."""</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">template</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span> <span class="n">template</span><span class="o">.</span><span class="n">doc_kind</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">" · "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">part</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span> <span class="k">if</span> <span class="n">part</span><span class="p">)</span></div>
+
+
+
+<span class="n">ADJECTIVES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"лёгкий"</span><span class="p">:</span> <span class="s2">"лёгких"</span><span class="p">,</span> <span class="s2">"средний"</span><span class="p">:</span> <span class="s2">"средних"</span><span class="p">,</span> <span class="s2">"сложный"</span><span class="p">:</span> <span class="s2">"сложных"</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="need_text">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.need_text">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">need_text</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""«2 сложных вопроса», «5 средних вопросов», «1 сложный вопрос»."""</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">!=</span> <span class="mi">11</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2"> вопрос"</span>
+    <span class="n">adjective</span> <span class="o">=</span> <span class="n">ADJECTIVES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plural</span><span class="p">(</span>
+        <span class="n">count</span><span class="p">,</span> <span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">adjective</span><span class="si">}</span><span class="s2"> вопрос"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">adjective</span><span class="si">}</span><span class="s2"> вопроса"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">adjective</span><span class="si">}</span><span class="s2"> вопросов"</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="TemplateTab">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TemplateTab</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Шаблоны билетов (View)."""</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Строит список шаблонов слева и редактор правил справа."""</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">controller</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">new_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"+ Новый"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span> <span class="o">=</span> <span class="n">QListWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"templates"</span><span class="p">)</span>
+        <span class="n">list_card</span> <span class="o">=</span> <span class="n">QFrame</span><span class="p">()</span>
+        <span class="n">list_card</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"card"</span><span class="p">)</span>
+        <span class="n">list_card</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">360</span><span class="p">)</span>
+        <span class="c1"># Тот же вид, что у «Серий билетов» на вкладке «Результаты»:</span>
+        <span class="c1"># скруглённые карточки с отступом, у выбранной синяя линия слева.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"seriesList"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">setHorizontalScrollBarPolicy</span><span class="p">(</span>
+            <span class="n">Qt</span><span class="o">.</span><span class="n">ScrollBarPolicy</span><span class="o">.</span><span class="n">ScrollBarAlwaysOff</span>
+        <span class="p">)</span>
+        <span class="n">list_header</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">list_header</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">list_header</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="s2">"Шаблоны"</span><span class="p">,</span> <span class="s2">"h2"</span><span class="p">))</span>
+        <span class="n">list_header</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="n">list_header</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">new_button</span><span class="p">)</span>
+        <span class="n">list_inset</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">list_inset</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">list_inset</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="p">)</span>
+        <span class="n">list_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="n">list_card</span><span class="p">)</span>
+        <span class="n">list_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="n">list_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">list_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">list_header</span><span class="p">)</span>
+        <span class="n">list_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">list_inset</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name_edit</span> <span class="o">=</span> <span class="n">QLineEdit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header_edit</span> <span class="o">=</span> <span class="n">QLineEdit</span><span class="p">()</span>
+        <span class="c1"># Предмет шаблона: в правилах предлагаются только его темы.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">240</span><span class="p">)</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">caption</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">stretch</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s2">"Название шаблона *"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_edit</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Предмет"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Заголовок билета"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">header_edit</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">):</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="n">caption</span><span class="p">,</span> <span class="s2">"hint"</span><span class="p">))</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">stretch</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span>
+            <span class="s2">"Оформление билета…"</span><span class="p">,</span>
+            <span class="n">tooltip</span><span class="o">=</span><span class="s2">"Вид документа (экзамен, контрольная…), эмблема, подписи"</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">add_rule_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"+ Добавить правило"</span><span class="p">)</span>
+        <span class="n">rules_header</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">rules_header</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="s2">"Правила билета"</span><span class="p">,</span> <span class="s2">"h2"</span><span class="p">))</span>
+        <span class="n">rules_header</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="n">rules_header</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style_button</span><span class="p">)</span>
+        <span class="n">rules_header</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">add_rule_button</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rules_table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
+            <span class="n">HEADERS</span><span class="p">,</span> <span class="n">stretch_column</span><span class="o">=</span><span class="n">TOPIC_COLUMN</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="n">COLUMN_WIDTHS</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rules_table</span><span class="o">.</span><span class="n">verticalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setDefaultSectionSize</span><span class="p">(</span><span class="mi">48</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_hover</span> <span class="o">=</span> <span class="n">RowHoverHighlighter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules_table</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score_label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"valueBlue"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">formula_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">QFrame</span><span class="p">()</span>
+        <span class="n">summary</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"card"</span><span class="p">)</span>
+        <span class="n">summary_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+        <span class="n">summary_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">caption</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s2">"Вопросов в билете"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions_label</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Суммарный балл"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">score_label</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Как считается"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula_label</span><span class="p">),</span>
+        <span class="p">):</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="n">caption</span><span class="p">,</span> <span class="s2">"hint"</span><span class="p">))</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">holder</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+            <span class="n">holder</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+            <span class="n">holder</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">320</span><span class="p">)</span>
+            <span class="n">summary_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">holder</span><span class="p">)</span>
+        <span class="n">summary_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">banner</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">banner</span><span class="o">.</span><span class="n">setWordWrap</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_questions_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"Добавить вопросы →"</span><span class="p">,</span> <span class="s2">"link"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span> <span class="o">=</span> <span class="n">QFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">56</span><span class="p">)</span>
+        <span class="n">banner_row</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span><span class="p">)</span>
+        <span class="n">banner_row</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">banner_row</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">banner_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">banner</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">banner_row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_questions_button</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"Удалить шаблон"</span><span class="p">,</span> <span class="s2">"danger"</span><span class="p">)</span>
+        <span class="n">cancel_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"Отменить"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">"Сохранить"</span><span class="p">,</span> <span class="s2">"primary"</span><span class="p">)</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">bottom</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span><span class="p">)</span>
+        <span class="n">bottom</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="n">bottom</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">cancel_button</span><span class="p">)</span>
+        <span class="n">bottom</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_button</span><span class="p">)</span>
+
+        <span class="n">right</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">right</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">right</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+        <span class="n">right</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">rules_header</span><span class="p">)</span>
+        <span class="n">right</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules_table</span><span class="p">)</span>
+        <span class="n">right</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+        <span class="n">right</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span><span class="p">)</span>
+        <span class="n">right</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="n">right</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">bottom</span><span class="p">)</span>
+
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">list_card</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">currentRowChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">show_template</span><span class="p">)</span>
+        <span class="n">new_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_template</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_template</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_template</span><span class="p">)</span>
+        <span class="n">cancel_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_row</span><span class="p">()))</span>
+        <span class="n">add_rule_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_rule</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edit_style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">activated</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject_changed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_questions_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="k">lambda</span><span class="p">:</span> <span class="n">QuestionDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">controller</span><span class="o">.</span><span class="n">templates_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">)</span>
+        <span class="n">controller</span><span class="o">.</span><span class="n">questions_changed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_label</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QLabel</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Подпись с именем стиля (hint, h2, value...)."""</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">label</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_row</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Номер строки выбранного шаблона в списке (−1, если нет)."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">currentRow</span><span class="p">()</span>
+
+<div class="viewcode-block" id="TemplateTab.refresh">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.refresh">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Перечитывает шаблоны, сохраняя выбранный.</span>
+
+<span class="sd">        Несохранённые название, заголовок и предмет не теряются: правила</span>
+<span class="sd">        сохраняются сразу, после этого список перечитывается, и без этого</span>
+<span class="sd">        поля вернулись бы к значениям из базы.</span>
+<span class="sd">        """</span>
+        <span class="n">selected_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">unsaved</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name_edit</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">header_edit</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">currentData</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_templates</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">ALL_SUBJECTS</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_disciplines</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">template</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_list_item</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">template</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">template</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="p">]</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">ids</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">selected_id</span><span class="p">)</span> <span class="k">if</span> <span class="n">selected_id</span> <span class="ow">in</span> <span class="n">ids</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">setCurrentRow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_template</span><span class="p">(</span><span class="n">row</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unsaved</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">selected_id</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_restore_unsaved</span><span class="p">(</span><span class="o">*</span><span class="n">unsaved</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_restore_unsaved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Возвращает в поля то, что пользователь ввёл, но ещё не сохранил."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name_edit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header_edit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">findData</span><span class="p">(</span><span class="n">subject</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">subject</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">subject</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subject_changed</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_add_list_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Добавляет в список карточку шаблона: название и подпись."""</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">QListWidgetItem</span><span class="p">()</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">setSizeHint</span><span class="p">(</span><span class="n">QSize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">86</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">holder</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">holder</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"listItem"</span><span class="p">)</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="n">holder</span><span class="p">)</span>
+        <span class="n">column</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="n">column</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">column</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">template_name</span><span class="p">,</span> <span class="s2">"itemTitle"</span><span class="p">))</span>
+        <span class="n">column</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="n">template_kind_line</span><span class="p">(</span><span class="n">template</span><span class="p">),</span> <span class="s2">"hint"</span><span class="p">))</span>
+        <span class="n">column</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_label</span><span class="p">(</span><span class="n">template_summary</span><span class="p">(</span><span class="n">template</span><span class="p">),</span> <span class="s2">"hint"</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">setItemWidget</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">holder</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TemplateTab.show_template">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.show_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Показывает правила, балл и сообщение о банке для шаблона."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name_edit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">template_name</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header_edit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">header_text</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="n">subject</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">subject</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="s2">""</span>
+        <span class="k">if</span> <span class="n">subject</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">findData</span><span class="p">(</span><span class="n">subject</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># У предмета не осталось тем, но шаблон его помнит.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">findData</span><span class="p">(</span><span class="n">subject</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">template</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">rules</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">rules</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="n">checks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">check_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="p">([],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fill_rules</span><span class="p">(</span><span class="n">checks</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">questions_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">questions_count</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">))</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="s2">""</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ticket_score</span><span class="p">(</span><span class="n">rules</span><span class="p">))</span> <span class="k">if</span> <span class="n">template</span> <span class="k">else</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">formula_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">score_formula</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span> <span class="k">if</span> <span class="n">rules</span> <span class="k">else</span> <span class="s2">"—"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">rules</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">template</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_banner</span><span class="p">(</span><span class="n">checks</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_show_banner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checks</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сообщение под итогами: хватает ли вопросов в банке."""</span>
+        <span class="n">problems</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">"Правило </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">: нужно </span><span class="si">{</span><span class="n">need_text</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">required</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">level_name</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+            <span class="sa">f</span><span class="s2">"по теме «</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">», в банке только </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">available</span><span class="si">}</span><span class="s2">."</span>
+            <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">checks</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">ok</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_questions_button</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">problems</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">checks</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">problems</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"warningBox"</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">"⚠ "</span>
+                <span class="o">+</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">problems</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">" Добавьте вопросы или уменьшите количество."</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">checks</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">check</span> <span class="o">=</span> <span class="n">checks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"successBox"</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">"✓ Вопросов в банке хватает: нужно "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">need_text</span><span class="p">(</span><span class="n">check</span><span class="o">.</span><span class="n">required</span><span class="p">,</span><span class="w"> </span><span class="n">check</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">level_name</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"по теме «</span><span class="si">{</span><span class="n">check</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">topic_name</span><span class="si">}</span><span class="s2">», в банке </span><span class="si">{</span><span class="n">check</span><span class="o">.</span><span class="n">available</span><span class="si">}</span><span class="s2">."</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"successBox"</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="s2">"✓ Вопросов в банке хватает по всем правилам"</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">banner</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">banner_box</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">banner</span><span class="p">):</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">unpolish</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">polish</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fill_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checks</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Заполняет таблицу правил: поля прямо в строках, как в макете."""</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_hover</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">clearContents</span><span class="p">()</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">clearSpans</span><span class="p">()</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">checks</span><span class="p">)))</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">42</span> <span class="o">+</span> <span class="mi">48</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">checks</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">checks</span><span class="p">:</span>
+            <span class="n">hint</span> <span class="o">=</span> <span class="n">QTableWidgetItem</span><span class="p">(</span>
+                <span class="s2">"Правил пока нет. Нажмите «+ Добавить правило» и выберите тему, "</span>
+                <span class="s2">"сложность и количество вопросов."</span>
+            <span class="p">)</span>
+            <span class="n">hint</span><span class="o">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemFlag</span><span class="o">.</span><span class="n">NoItemFlags</span><span class="p">)</span>
+            <span class="n">hint</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignmentFlag</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+            <span class="n">hint</span><span class="o">.</span><span class="n">setForeground</span><span class="p">(</span><span class="n">QBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="s2">"#64748B"</span><span class="p">)))</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">setSpan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">HEADERS</span><span class="p">))</span>
+            <span class="k">return</span>
+        <span class="n">levels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_difficulties</span><span class="p">()</span>
+        <span class="n">subject_topics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">subject</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">check</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">checks</span><span class="p">):</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="n">check</span><span class="o">.</span><span class="n">rule</span>
+            <span class="k">if</span> <span class="n">check</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+                <span class="n">bank_text</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">check</span><span class="o">.</span><span class="n">available</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">GREEN</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bank_text</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"⚠ </span><span class="si">{</span><span class="n">check</span><span class="o">.</span><span class="n">available</span><span class="si">}</span><span class="s2"> из </span><span class="si">{</span><span class="n">check</span><span class="o">.</span><span class="n">required</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">ORANGE</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="mi">0</span><span class="p">:</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">POINTS_COLUMN</span><span class="p">:</span> <span class="n">rule</span><span class="o">.</span><span class="n">questions_count</span> <span class="o">*</span> <span class="n">rule</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
+                <span class="n">BANK_COLUMN</span><span class="p">:</span> <span class="n">bank_text</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">HEADERS</span><span class="p">)):</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">column</span><span class="p">])</span> <span class="k">if</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">else</span> <span class="s2">""</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+            <span class="n">bank_item</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">BANK_COLUMN</span><span class="p">)</span>
+            <span class="n">bank_item</span><span class="o">.</span><span class="n">setForeground</span><span class="p">(</span><span class="n">QBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="n">color</span><span class="p">)))</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">(</span><span class="n">bank_item</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
+            <span class="n">font</span><span class="o">.</span><span class="n">setBold</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">bank_item</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+
+            <span class="n">topic_combo</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
+            <span class="n">topic_combo</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="s2">"plainCombo"</span><span class="p">)</span>
+            <span class="n">topics</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">subject_topics</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">topic_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="n">topic</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">}:</span>
+                <span class="c1"># Тема из другого предмета: оставляем её в списке, чтобы</span>
+                <span class="c1"># правило не поменялось само.</span>
+                <span class="n">topics</span> <span class="o">+=</span> <span class="p">[</span>
+                    <span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_topics</span><span class="p">()</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">rule</span><span class="o">.</span><span class="n">topic_id</span>
+                <span class="p">]</span>
+            <span class="n">fill_combo</span><span class="p">(</span>
+                <span class="n">topic_combo</span><span class="p">,</span>
+                <span class="n">topics</span><span class="p">,</span>
+                <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">topic_name</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">subject</span> <span class="k">else</span> <span class="n">t</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">topic_combo</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">topic_combo</span><span class="o">.</span><span class="n">findData</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">topic_id</span><span class="p">)))</span>
+            <span class="n">level_combo</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
+            <span class="n">level_combo</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="n">LEVEL_COMBO_WIDTH</span><span class="p">)</span>
+            <span class="n">fill_combo</span><span class="p">(</span><span class="n">level_combo</span><span class="p">,</span> <span class="n">levels</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">level_name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>
+            <span class="n">level_combo</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span>
+                <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">level_combo</span><span class="o">.</span><span class="n">findData</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">difficulty_id</span><span class="p">))</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="p">(</span><span class="n">topic_combo</span><span class="p">,</span> <span class="n">level_combo</span><span class="p">):</span>
+                <span class="n">combo</span><span class="o">.</span><span class="n">activated</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">rule</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">topic_combo</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">level_combo</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_target_edited</span><span class="p">(</span>
+                        <span class="n">r</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">currentData</span><span class="p">(),</span> <span class="n">v</span><span class="o">.</span><span class="n">currentData</span><span class="p">()</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span>
+                <span class="n">row</span><span class="p">,</span> <span class="n">TOPIC_COLUMN</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cell</span><span class="p">(</span><span class="n">topic_combo</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span>
+                <span class="n">row</span><span class="p">,</span> <span class="n">LEVEL_COLUMN</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cell</span><span class="p">(</span><span class="n">level_combo</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="n">spin</span> <span class="o">=</span> <span class="n">QSpinBox</span><span class="p">()</span>
+            <span class="n">spin</span><span class="o">.</span><span class="n">setRange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+            <span class="n">spin</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">questions_count</span><span class="p">)</span>
+            <span class="n">spin</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+            <span class="n">spin</span><span class="o">.</span><span class="n">setButtonSymbols</span><span class="p">(</span><span class="n">QSpinBox</span><span class="o">.</span><span class="n">ButtonSymbols</span><span class="o">.</span><span class="n">NoButtons</span><span class="p">)</span>
+            <span class="n">spin</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">r</span><span class="o">=</span><span class="n">rule</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">spin</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count_edited</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
+            <span class="p">)</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">COUNT_COLUMN</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cell</span><span class="p">(</span><span class="n">spin</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">))</span>
+            <span class="n">delete_button</span> <span class="o">=</span> <span class="n">make_button</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"link"</span><span class="p">,</span> <span class="s2">"Удалить правило"</span><span class="p">)</span>
+            <span class="n">delete_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">(</span><span class="s2">"trash"</span><span class="p">))</span>
+            <span class="n">delete_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">rule</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete_rule</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">DELETE_COLUMN</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cell</span><span class="p">(</span><span class="n">delete_button</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">stretch</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QWidget</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Оборачивает поле в ячейку.</span>
+
+<span class="sd">        Своих отступов нет: Qt сам ставит поле с отступом ячейки (16 px из</span>
+<span class="sd">        стилей), поэтому поле начинается ровно под заголовком колонки.</span>
+<span class="sd">        """</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">cell_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+        <span class="n">cell_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">cell_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stretch</span><span class="p">:</span>
+            <span class="n">cell_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">row_hover</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">row_hover</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cell</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Выполняет действие контроллера и показывает ошибку, если она есть."""</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">action</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">TicketGenError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">show_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_count_edited</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет новое количество вопросов (после выхода из обработчика)."""</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">!=</span> <span class="n">rule</span><span class="o">.</span><span class="n">questions_count</span><span class="p">:</span>
+            <span class="n">QTimer</span><span class="o">.</span><span class="n">singleShot</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span>
+                    <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update_rule_count</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_target_edited</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">difficulty_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет новую тему или сложность правила."""</span>
+        <span class="n">QTimer</span><span class="o">.</span><span class="n">singleShot</span><span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span>
+                <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update_rule_target</span><span class="p">(</span>
+                    <span class="n">rule</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">,</span> <span class="n">difficulty_id</span>
+                <span class="p">)</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="TemplateTab.new_template">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.new_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">new_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Создаёт шаблон «Новый шаблон» и выбирает его."""</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">{</span><span class="n">template</span><span class="o">.</span><span class="n">template_name</span> <span class="k">for</span> <span class="n">template</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="p">}</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="n">NEW_NAME</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">NEW_NAME</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">subject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">currentData</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">subject</span><span class="p">:</span>
+            <span class="n">subjects</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_disciplines</span><span class="p">()</span>
+            <span class="n">subject</span> <span class="o">=</span> <span class="n">subjects</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">subjects</span> <span class="k">else</span> <span class="s2">""</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">suggested_header</span><span class="p">(</span><span class="s2">"Экзаменационный билет"</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">template_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">create_template</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">TicketGenError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">show_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+            <span class="k">return</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">template</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">template</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_list</span><span class="o">.</span><span class="n">setCurrentRow</span><span class="p">(</span><span class="n">ids</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">template_id</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TemplateTab.save_template">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.save_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сохраняет название и заголовок."""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_edit</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">show_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"Введите название шаблона."</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">template_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">header_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header_edit</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">subject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">currentData</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TemplateTab.subject_changed">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.subject_changed">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">subject_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Сменили предмет: в правилах сразу предлагаются его темы.</span>
+
+<span class="sd">        В базу предмет попадает по кнопке «Сохранить».</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">subject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">currentData</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">""</span>
+            <span class="n">checks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">check_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fill_rules</span><span class="p">(</span><span class="n">checks</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TemplateTab.edit_style">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.edit_style">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">edit_style</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Открывает окно оформления билета для выбранного шаблона."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">:</span>
+            <span class="n">TicketStyleDialog</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">header_edit</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="bp">self</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TemplateTab.delete_template">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.delete_template">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет выбранный шаблон."""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Удалить шаблон?</span><span class="se">\n\n</span><span class="s2">Шаблон «</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">template_name</span><span class="si">}</span><span class="s2">» и его "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plural</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">rules</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">'правило'</span><span class="p">,</span><span class="w"> </span><span class="s1">'правила'</span><span class="p">,</span><span class="w"> </span><span class="s1">'правил'</span><span class="p">))</span><span class="si">}</span><span class="s2"> "</span>
+            <span class="s2">"будут удалены. Если по шаблону уже создавались серии билетов, "</span>
+            <span class="s2">"сначала удалите их на вкладке «Результаты»."</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">confirm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+            <span class="n">template_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">id</span>
+            <span class="c1"># Выбор обновится сам после сигнала контроллера; при ошибке</span>
+            <span class="c1"># шаблон остаётся выбранным.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">delete_template</span><span class="p">(</span><span class="n">template_id</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TemplateTab.add_rule">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.add_rule">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Добавляет правило: первая свободная пара «тема + сложность»."""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">used</span> <span class="o">=</span> <span class="p">{(</span><span class="n">r</span><span class="o">.</span><span class="n">topic_id</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">difficulty_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">rules</span><span class="p">}</span>
+        <span class="n">subject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject_combo</span><span class="o">.</span><span class="n">currentData</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_difficulties</span><span class="p">():</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">topic</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">level</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">used</span><span class="p">:</span>
+                    <span class="n">rule</span> <span class="o">=</span> <span class="n">TemplateRule</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">topic</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">level</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">add_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">))</span>
+                    <span class="k">return</span>
+        <span class="n">show_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"Все сочетания темы и сложности уже есть в шаблоне."</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TemplateTab.delete_rule">
+<a class="viewcode-back" href="../../../api/views.html#ticketgen.views.template_tab.TemplateTab.delete_rule">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Удаляет правило после подтверждения."""</span>
+        <span class="k">if</span> <span class="n">confirm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"Удалить правило?"</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">delete_rule</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">id</span><span class="p">))</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

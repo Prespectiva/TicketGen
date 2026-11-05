@@ -1,0 +1,1353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Интерфейс (views) &mdash; TicketGen 1.0 — документация</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=641ca69b" />
+
+  
+    <link rel="shortcut icon" href="../_static/app_icon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=e35015f7"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" />
+    <link rel="next" title="Настройки, запуск и тестовые данные" href="app.html" />
+    <link rel="prev" title="Фоновые потоки (workers)" href="workers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            TicketGen
+              <img src="../_static/app_icon.png" class="logo" alt="Логотип"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <p class="caption" role="heading"><span class="caption-text">Общие сведения</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Описание применения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id3">Условия применения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id4">Описание задачи</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#id5">Входные и выходные данные</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../functionality.html">Функциональность</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id2">Банк вопросов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id3">Шаблоны</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id4">Генерация</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id5">Результаты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functionality.html#id6">Служебные функции</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Архитектура</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id2">Слои приложения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id3">Паттерны проектирования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id4">Сценарий «сгенерировать серию»</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id5">База данных</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#api">Внутренний API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id6">Потоки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../architecture.html#id7">Структура проекта</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Руководства</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_manual.html">Руководство пользователя</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id2">Назначение программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id3">Условия выполнения программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id4">Выполнение программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id5">Запуск и завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id6">Шаг 1. Заполнить банк вопросов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id7">Шаг 2. Создать шаблон билета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id8">Шаг 3. Сгенерировать серию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id9">Шаг 4. Проверить и сохранить билеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_manual.html#id10">Перенос и резервные копии</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_manual.html#id11">Сообщения оператору</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_manual.html">Руководство разработчика</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id2">Общие сведения о программе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id3">Структура программы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id4">Настройка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id5">Подготовка среды разработки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id6">Запуск</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id7">Настройки путей</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id8">Проверка программы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id9">Автоматические тесты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id10">Качество кода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id11">Системная проверка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id12">Ручная проверка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id13">Дополнительные возможности</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#ticketgen-exe">Сборка TicketGen.exe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id14">Сборка этой документации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id15">Как добавить формат экспорта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#id16">Как добавить столбец в базу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_manual.html#git">Работа с Git</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id17">Сообщения системному программисту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_manual.html#id18">Как новому разработчику войти в проект</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Примеры использования</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id2">Типовые сценарии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id3">Генерация серии</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#id4">Проверка банка перед генерацией</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#csv">Импорт вопросов из CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#docx-pdf-moodle">Экспорт в DOCX, PDF и Moodle</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Сопровождение</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Реестр дефектов</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id2">Шкала важности</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id3">Реестр</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#id4">Итоги</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../backlog.html">Бэклог продукта</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id2">Ближайший выпуск (1.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id3">Следующие выпуски (1.2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id4">Долгосрочные идеи (2.0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backlog.html#id5">Не планируется</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Справочник</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Справочник API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="domain.html">Слой сущностей (domain)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="domain.html#module-ticketgen.domain.models">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.domain.models</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Слой данных (data)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-ticketgen.data.database">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.database</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-ticketgen.data.repositories">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.data.repositories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="logic.html">Слой бизнес-логики (logic)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.generator">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.generator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.scoring">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.scoring</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.csv_importer">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.csv_importer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.exporters">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.exporters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="logic.html#module-ticketgen.logic.moodle">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.logic.moodle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="controllers.html">Контроллер (controllers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="controllers.html#module-ticketgen.controllers.app_controller">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.controllers.app_controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workers.html">Фоновые потоки (workers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workers.html#module-ticketgen.workers.background_worker">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.workers.background_worker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Интерфейс (views)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.main_window">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.question_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.template_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.generation_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.results_tab">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.dialogs">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.common">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.widgets">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ticketgen.views.styles">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="app.html">Настройки, запуск и тестовые данные</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-main">Модуль <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-ticketgen.config">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-ticketgen.seed_data">Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.seed_data</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TicketGen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Справочник API</a></li>
+      <li class="breadcrumb-item active">Интерфейс (views)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="views">
+<h1>Интерфейс (views)<a class="headerlink" href="#views" title="Ссылка на этот заголовок"></a></h1>
+<p>Окна, вкладки и диалоги на PyQt6 (View в MVC). Здесь нет SQL и расчётов: представление только показывает данные и передаёт действия пользователя контроллеру.</p>
+<section id="module-ticketgen.views.main_window">
+<span id="ticketgen-views-main-window"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.main_window</span></code><a class="headerlink" href="#module-ticketgen.views.main_window" title="Ссылка на этот заголовок"></a></h2>
+<p>Главное окно: заголовок, четыре вкладки, строка состояния, меню.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.main_window.MainWindow">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.main_window.</span></span><span class="sig-name descname"><span class="pre">MainWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/main_window.html#MainWindow"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.main_window.MainWindow" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
+<p>Однооконный интерфейс с вкладками (по ТЗ, раздел 4.1.6).</p>
+<p>Создаёт вкладки и подключает строку состояния.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.main_window.MainWindow.update_status">
+<span class="sig-name descname"><span class="pre">update_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/main_window.html#MainWindow.update_status"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.main_window.MainWindow.update_status" title="Ссылка на это определение"></a></dt>
+<dd><p>Обновляет строку состояния.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.main_window.MainWindow.show_about">
+<span class="sig-name descname"><span class="pre">show_about</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/main_window.html#MainWindow.show_about"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.main_window.MainWindow.show_about" title="Ссылка на это определение"></a></dt>
+<dd><p>Окно «О программе».</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.main_window.MainWindow.closeEvent">
+<span class="sig-name descname"><span class="pre">closeEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/main_window.html#MainWindow.closeEvent"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.main_window.MainWindow.closeEvent" title="Ссылка на это определение"></a></dt>
+<dd><p>При закрытии окна делает резервную копию базы.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.views.question_tab">
+<span id="ticketgen-views-question-tab"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.question_tab</span></code><a class="headerlink" href="#module-ticketgen.views.question_tab" title="Ссылка на этот заголовок"></a></h2>
+<p>Вкладка «Банк вопросов»: поиск, фильтры, таблица, страницы, импорт.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.topic_column_text">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.question_tab.</span></span><span class="sig-name descname"><span class="pre">topic_column_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#topic_column_text"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.topic_column_text" title="Ссылка на это определение"></a></dt>
+<dd><p>Текст столбца «Предмет / тема»: «ОАиП / Циклы».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.page_numbers">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.question_tab.</span></span><span class="sig-name descname"><span class="pre">page_numbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pages</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#page_numbers"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.page_numbers" title="Ссылка на это определение"></a></dt>
+<dd><p>Номера кнопок страниц; None обозначает многоточие.</p>
+<p>Пример: page_numbers(1, 17) → [1, 2, 3, None, 17].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>current</strong> (<em>int</em>)</p></li>
+<li><p><strong>pages</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.question_tab.</span></span><span class="sig-name descname"><span class="pre">QuestionTab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Банк вопросов (View). Данные получает только через контроллер.</p>
+<p>Строит элементы вкладки и подписывается на сигналы контроллера.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.refresh">
+<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.refresh"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.refresh" title="Ссылка на это определение"></a></dt>
+<dd><p>Обновляет списки фильтров и таблицу (вызывается по сигналу).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.subject_changed">
+<span class="sig-name descname"><span class="pre">subject_changed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.subject_changed"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.subject_changed" title="Ссылка на это определение"></a></dt>
+<dd><p>Сменили предмет: перестраиваем список тем и таблицу.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.filters_changed">
+<span class="sig-name descname"><span class="pre">filters_changed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.filters_changed"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.filters_changed" title="Ссылка на это определение"></a></dt>
+<dd><p>Любой фильтр изменился: возвращаемся на первую страницу.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.reset_filters">
+<span class="sig-name descname"><span class="pre">reset_filters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.reset_filters"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.reset_filters" title="Ссылка на это определение"></a></dt>
+<dd><p>Сбрасывает поиск и все фильтры.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.found_questions">
+<span class="sig-name descname"><span class="pre">found_questions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.found_questions"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.found_questions" title="Ссылка на это определение"></a></dt>
+<dd><p>Все вопросы, подходящие под текущие поиск и фильтры (без страниц).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.refresh_table">
+<span class="sig-name descname"><span class="pre">refresh_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.refresh_table"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.refresh_table" title="Ссылка на это определение"></a></dt>
+<dd><p>Ищет вопросы по фильтрам и заполняет таблицу текущей страницы.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.go_to_page">
+<span class="sig-name descname"><span class="pre">go_to_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.go_to_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.go_to_page" title="Ссылка на это определение"></a></dt>
+<dd><p>Переходит на страницу таблицы.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>number</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.on_item_changed">
+<span class="sig-name descname"><span class="pre">on_item_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.on_item_changed"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.on_item_changed" title="Ссылка на это определение"></a></dt>
+<dd><p>Флажок «Активен» в таблице: включает или отключает вопрос.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.open_topics">
+<span class="sig-name descname"><span class="pre">open_topics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.open_topics"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.open_topics" title="Ссылка на это определение"></a></dt>
+<dd><p>Открывает окно управления темами.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.add_question">
+<span class="sig-name descname"><span class="pre">add_question</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.add_question"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.add_question" title="Ссылка на это определение"></a></dt>
+<dd><p>Открывает окно нового вопроса.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.edit_question">
+<span class="sig-name descname"><span class="pre">edit_question</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.edit_question"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.edit_question" title="Ссылка на это определение"></a></dt>
+<dd><p>Открывает окно изменения вопроса из строки row.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.delete_question">
+<span class="sig-name descname"><span class="pre">delete_question</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.delete_question"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.delete_question" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет вопрос из строки row после подтверждения.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.import_csv">
+<span class="sig-name descname"><span class="pre">import_csv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.import_csv"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.import_csv" title="Ссылка на это определение"></a></dt>
+<dd><p>Открывает окно импорта вопросов из CSV.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.question_tab.QuestionTab.save_csv_template">
+<span class="sig-name descname"><span class="pre">save_csv_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/question_tab.html#QuestionTab.save_csv_template"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.question_tab.QuestionTab.save_csv_template" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет пустой шаблон CSV и открывает его (обычно в Excel).</p>
+<p>В шаблоне только строка заголовков: остаётся вписать вопросы.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.views.template_tab">
+<span id="ticketgen-views-template-tab"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.template_tab</span></code><a class="headerlink" href="#module-ticketgen.views.template_tab" title="Ссылка на этот заголовок"></a></h2>
+<p>Вкладка «Шаблоны»: список шаблонов, правила, балл, проверка банка.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.template_summary">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.template_tab.</span></span><span class="sig-name descname"><span class="pre">template_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#template_summary"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.template_summary" title="Ссылка на это определение"></a></dt>
+<dd><p>Подпись шаблона в списке: «4 правила · 5 вопросов · 9 баллов».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.template_kind_line">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.template_tab.</span></span><span class="sig-name descname"><span class="pre">template_kind_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#template_kind_line"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.template_kind_line" title="Ссылка на это определение"></a></dt>
+<dd><p>Вторая подпись в списке: «ОАиП · Контрольная работа».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.need_text">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.template_tab.</span></span><span class="sig-name descname"><span class="pre">need_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#need_text"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.need_text" title="Ссылка на это определение"></a></dt>
+<dd><p>«2 сложных вопроса», «5 средних вопросов», «1 сложный вопрос».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>count</strong> (<em>int</em>)</p></li>
+<li><p><strong>level</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.template_tab.</span></span><span class="sig-name descname"><span class="pre">TemplateTab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Шаблоны билетов (View).</p>
+<p>Строит список шаблонов слева и редактор правил справа.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.refresh">
+<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.refresh"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.refresh" title="Ссылка на это определение"></a></dt>
+<dd><p>Перечитывает шаблоны, сохраняя выбранный.</p>
+<p>Несохранённые название, заголовок и предмет не теряются: правила
+сохраняются сразу, после этого список перечитывается, и без этого
+поля вернулись бы к значениям из базы.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.show_template">
+<span class="sig-name descname"><span class="pre">show_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.show_template"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.show_template" title="Ссылка на это определение"></a></dt>
+<dd><p>Показывает правила, балл и сообщение о банке для шаблона.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.new_template">
+<span class="sig-name descname"><span class="pre">new_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.new_template"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.new_template" title="Ссылка на это определение"></a></dt>
+<dd><p>Создаёт шаблон «Новый шаблон» и выбирает его.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.save_template">
+<span class="sig-name descname"><span class="pre">save_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.save_template"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.save_template" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет название и заголовок.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.subject_changed">
+<span class="sig-name descname"><span class="pre">subject_changed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.subject_changed"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.subject_changed" title="Ссылка на это определение"></a></dt>
+<dd><p>Сменили предмет: в правилах сразу предлагаются его темы.</p>
+<p>В базу предмет попадает по кнопке «Сохранить».</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.edit_style">
+<span class="sig-name descname"><span class="pre">edit_style</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.edit_style"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.edit_style" title="Ссылка на это определение"></a></dt>
+<dd><p>Открывает окно оформления билета для выбранного шаблона.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.delete_template">
+<span class="sig-name descname"><span class="pre">delete_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.delete_template"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.delete_template" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет выбранный шаблон.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.add_rule">
+<span class="sig-name descname"><span class="pre">add_rule</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.add_rule"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.add_rule" title="Ссылка на это определение"></a></dt>
+<dd><p>Добавляет правило: первая свободная пара «тема + сложность».</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.template_tab.TemplateTab.delete_rule">
+<span class="sig-name descname"><span class="pre">delete_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/template_tab.html#TemplateTab.delete_rule"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.template_tab.TemplateTab.delete_rule" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет правило после подтверждения.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.views.generation_tab">
+<span id="ticketgen-views-generation-tab"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.generation_tab</span></code><a class="headerlink" href="#module-ticketgen.views.generation_tab" title="Ссылка на этот заголовок"></a></h2>
+<p>Вкладка «Генерация»: параметры серии, проверка банка, запуск, предпросмотр.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.generation_tab.</span></span><span class="sig-name descname"><span class="pre">GenerationTab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Генерация серии билетов (View).</p>
+<p>Строит карточку параметров слева и предпросмотр справа.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.open_series">
+<span class="sig-name descname"><span class="pre">open_series</span></span><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.open_series" title="Ссылка на это определение"></a></dt>
+<dd><p>псевдоним для <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.refresh">
+<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab.refresh"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.refresh" title="Ссылка на это определение"></a></dt>
+<dd><p>Обновляет список шаблонов (по сигналу контроллера).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.current_template">
+<span class="sig-name descname"><span class="pre">current_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab.current_template"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.current_template" title="Ссылка на это определение"></a></dt>
+<dd><p>Выбранный шаблон или None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.update_check">
+<span class="sig-name descname"><span class="pre">update_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab.update_check"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.update_check" title="Ссылка на это определение"></a></dt>
+<dd><p>Пересчитывает блок «Проверка банка» и текст кнопки.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.start_generation">
+<span class="sig-name descname"><span class="pre">start_generation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab.start_generation"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.start_generation" title="Ссылка на это определение"></a></dt>
+<dd><p>Запускает генерацию в фоновом потоке.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.on_progress">
+<span class="sig-name descname"><span class="pre">on_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">percent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab.on_progress"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.on_progress" title="Ссылка на это определение"></a></dt>
+<dd><p>Показывает ход генерации.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>percent</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.cancel_generation">
+<span class="sig-name descname"><span class="pre">cancel_generation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab.cancel_generation"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.cancel_generation" title="Ссылка на это определение"></a></dt>
+<dd><p>Отменяет результат текущей генерации.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.on_generated">
+<span class="sig-name descname"><span class="pre">on_generated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variants</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab.on_generated"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.on_generated" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет серию в базу и показывает первый билет.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.generation_tab.GenerationTab.on_failed">
+<span class="sig-name descname"><span class="pre">on_failed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/generation_tab.html#GenerationTab.on_failed"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.generation_tab.GenerationTab.on_failed" title="Ссылка на это определение"></a></dt>
+<dd><p>Показывает ошибку генерации.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.views.results_tab">
+<span id="ticketgen-views-results-tab"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.results_tab</span></code><a class="headerlink" href="#module-ticketgen.views.results_tab" title="Ссылка на этот заголовок"></a></h2>
+<p>Вкладка «Результаты»: история серий, билеты, замена вопроса, экспорт.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.results_tab.</span></span><span class="sig-name descname"><span class="pre">ResultsTab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Просмотр и выгрузка сохранённых серий (View).</p>
+<p>Строит три белые карточки: серии, билеты, состав билета.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.current_series">
+<span class="sig-name descname"><span class="pre">current_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.current_series"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.current_series" title="Ссылка на это определение"></a></dt>
+<dd><p>Выбранная серия или None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.current_variant">
+<span class="sig-name descname"><span class="pre">current_variant</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.current_variant"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.current_variant" title="Ссылка на это определение"></a></dt>
+<dd><p>Выбранный билет или None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.refresh">
+<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.refresh"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.refresh" title="Ссылка на это определение"></a></dt>
+<dd><p>Перечитывает историю, сохраняя выбранную серию и билет.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.show_series">
+<span class="sig-name descname"><span class="pre">show_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.show_series"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.show_series" title="Ссылка на это определение"></a></dt>
+<dd><p>Показывает билеты выбранной серии.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.show_variant">
+<span class="sig-name descname"><span class="pre">show_variant</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.show_variant"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.show_variant" title="Ссылка на это определение"></a></dt>
+<dd><p>Показывает вопросы выбранного билета карточками.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.replace_question">
+<span class="sig-name descname"><span class="pre">replace_question</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.replace_question"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.replace_question" title="Ссылка на это определение"></a></dt>
+<dd><p>Заменяет вопрос билета на другой той же темы и сложности.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.delete_series">
+<span class="sig-name descname"><span class="pre">delete_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.delete_series"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.delete_series" title="Ссылка на это определение"></a></dt>
+<dd><p>Удаляет выбранную серию.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.show_summary">
+<span class="sig-name descname"><span class="pre">show_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.show_summary"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.show_summary" title="Ссылка на это определение"></a></dt>
+<dd><p>Открывает сводную ведомость серии.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.select_series">
+<span class="sig-name descname"><span class="pre">select_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.select_series"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.select_series" title="Ссылка на это определение"></a></dt>
+<dd><p>Выбирает серию по id (после генерации); при export открывает экспорт.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>series_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>export</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.export"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.export" title="Ссылка на это определение"></a></dt>
+<dd><p>Спрашивает параметры экспорта и сохраняет файлы в фоновом потоке.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.results_tab.ResultsTab.export_moodle">
+<span class="sig-name descname"><span class="pre">export_moodle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/results_tab.html#ResultsTab.export_moodle"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.results_tab.ResultsTab.export_moodle" title="Ссылка на это определение"></a></dt>
+<dd><p>Выгружает в Moodle все билеты серии или только выбранный.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.views.dialogs">
+<span id="ticketgen-views-dialogs"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.dialogs</span></code><a class="headerlink" href="#module-ticketgen.views.dialogs" title="Ссылка на этот заголовок"></a></h2>
+<p>Диалоговые окна: вопрос, темы, импорт, замена, экспорт, ведомость.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.fill_combo">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">fill_combo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">combo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_of</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#fill_combo"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.fill_combo" title="Ссылка на это определение"></a></dt>
+<dd><p>Заполняет выпадающий список; id объекта хранится в userData.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>combo</strong> (<em>PyQt6.QtWidgets.QComboBox</em>)</p></li>
+<li><p><strong>first_item</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ok_cancel_buttons">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">ok_cancel_buttons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dialog</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ok_cancel_buttons"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ok_cancel_buttons" title="Ссылка на это определение"></a></dt>
+<dd><p>Кнопки «ОК» и «Отмена», подключённые к диалогу.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dialog</strong> (<em>PyQt6.QtWidgets.QDialog</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>PyQt6.QtWidgets.QDialogButtonBox</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.QuestionDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">QuestionDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#QuestionDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.QuestionDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Добавление и изменение вопроса.</p>
+<p>Строит форму; если question передан — заполняет её.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>question</strong> (<a class="reference internal" href="domain.html#ticketgen.domain.models.Question" title="ticketgen.domain.models.Question"><em>Question</em></a><em> | </em><em>None</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.QuestionDialog.accept">
+<span class="sig-name descname"><span class="pre">accept</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#QuestionDialog.accept"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.QuestionDialog.accept" title="Ссылка на это определение"></a></dt>
+<dd><p>Проверяет поля и сохраняет вопрос.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.TopicsDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">TopicsDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#TopicsDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.TopicsDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Предметы и темы: добавить, переименовать, удалить (CRUD tbl_topics).</p>
+<p>Предмет (дисциплина) хранится у каждой темы. Новый предмет появляется,
+когда в него добавлена первая тема.</p>
+<p>Строит список тем и поля ввода.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ImportDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">ImportDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ImportDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ImportDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Импорт вопросов из CSV: выбор файла, загрузка и отчёт в одном окне.</p>
+<p>Строит окно выбора файла; отчёт появляется ниже после загрузки.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ImportDialog.accept">
+<span class="sig-name descname"><span class="pre">accept</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ImportDialog.accept"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ImportDialog.accept" title="Ссылка на это определение"></a></dt>
+<dd><p>Загружает файл; при удаче показывает отчёт, и кнопка становится «Готово».</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.used_text">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">used_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#used_text"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.used_text" title="Ссылка на это определение"></a></dt>
+<dd><p>«не используется», «в 1 билете», «в 4 билетах».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ReplaceQuestionDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">ReplaceQuestionDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ReplaceQuestionDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ReplaceQuestionDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Выбор вопроса для замены; usage — в скольких билетах серии он уже есть.</p>
+<p>Показывает вопросы той же темы и сложности с числом использований.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ReplaceQuestionDialog.pick_random">
+<span class="sig-name descname"><span class="pre">pick_random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ReplaceQuestionDialog.pick_random"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ReplaceQuestionDialog.pick_random" title="Ссылка на это определение"></a></dt>
+<dd><p>Выбирает случайный вопрос из списка.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ReplaceQuestionDialog.accept">
+<span class="sig-name descname"><span class="pre">accept</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ReplaceQuestionDialog.accept"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ReplaceQuestionDialog.accept" title="Ссылка на это определение"></a></dt>
+<dd><p>Запоминает выбранный вопрос.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ExportDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">ExportDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ExportDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ExportDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Настройки экспорта серии: формат, что сохранить, папка.</p>
+<p>Строит окно экспорта; сам запускает сохранение файлов в потоке.</p>
+<p>template — шаблон серии: по нему оформляются билеты (эмблема,
+вид документа, подписи). Может быть None, если шаблон удалён.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder</strong> (<em>Path</em>)</p></li>
+<li><p><strong>base_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>subtitle</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ExportDialog.formats">
+<span class="sig-name descname"><span class="pre">formats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ExportDialog.formats"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ExportDialog.formats" title="Ссылка на это определение"></a></dt>
+<dd><p>Выбранные форматы.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ExportDialog.accept">
+<span class="sig-name descname"><span class="pre">accept</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ExportDialog.accept"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ExportDialog.accept" title="Ссылка на это определение"></a></dt>
+<dd><p>Запускает экспорт; после успеха кнопка превращается в «Готово».</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.ExportDialog.reject">
+<span class="sig-name descname"><span class="pre">reject</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#ExportDialog.reject"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.ExportDialog.reject" title="Ссылка на это определение"></a></dt>
+<dd><p>Не даёт закрыть окно, пока идёт сохранение.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.SummaryDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">SummaryDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#SummaryDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.SummaryDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Сводная ведомость серии: состав и баллы всех билетов.</p>
+<p>Показывает таблицу по всем билетам, итог проверки и кнопки.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.SummaryDialog.summary_text">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">summary_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variants</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#SummaryDialog.summary_text"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.SummaryDialog.summary_text" title="Ссылка на это определение"></a></dt>
+<dd><p>Итог: одинаковые ли баллы и нет ли билетов с одним составом.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.SummaryDialog.print_summary">
+<span class="sig-name descname"><span class="pre">print_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#SummaryDialog.print_summary"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.SummaryDialog.print_summary" title="Ссылка на это определение"></a></dt>
+<dd><p>Отправляет ведомость на принтер.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.SummaryDialog.save_docx">
+<span class="sig-name descname"><span class="pre">save_docx</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#SummaryDialog.save_docx"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.SummaryDialog.save_docx" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет ведомость в файл DOCX.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.style_preview_html">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">style_preview_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#style_preview_html"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.style_preview_html" title="Ссылка на это определение"></a></dt>
+<dd><p>HTML-предпросмотр билета по настройкам оформления (номер 1).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>header</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.suggested_header">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">suggested_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_kind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#suggested_header"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.suggested_header" title="Ссылка на это определение"></a></dt>
+<dd><p>Заголовок по виду документа: «Контрольная работа по дисциплине «ОАиП»».</p>
+<p>Номер в заголовок не входит: он выводится второй строкой
+(«Билет № 1» или «Вариант № 1»).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>doc_kind</strong> (<em>str</em>)</p></li>
+<li><p><strong>subject</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.TicketStyleDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">TicketStyleDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#TicketStyleDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.TicketStyleDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Оформление билета: вид документа, заголовок, эмблема, подписи.</p>
+<p>Справа сразу видно, как будет выглядеть первый билет.</p>
+<p>Заполняет поля из шаблона; header — текущий текст заголовка.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>header</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.TicketStyleDialog.accept">
+<span class="sig-name descname"><span class="pre">accept</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#TicketStyleDialog.accept"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.TicketStyleDialog.accept" title="Ссылка на это определение"></a></dt>
+<dd><p>Сохраняет оформление в шаблон.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.MoodleExportDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.dialogs.</span></span><span class="sig-name descname"><span class="pre">MoodleExportDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#MoodleExportDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.MoodleExportDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Выгрузка билетов в Moodle: вся серия или один выбранный билет.</p>
+<p>Каждый билет становится категорией вопросов, из которой в Moodle
+собирается тест: вся серия — по тесту на каждый билет, один билет —
+один тест.</p>
+<p>title — заголовок серии без номера; current — выбранный билет.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.MoodleExportDialog.chosen_variants">
+<span class="sig-name descname"><span class="pre">chosen_variants</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#MoodleExportDialog.chosen_variants"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.MoodleExportDialog.chosen_variants" title="Ссылка на это определение"></a></dt>
+<dd><p>Билеты для выгрузки: вся серия или один выбранный.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.MoodleExportDialog.default_name">
+<span class="sig-name descname"><span class="pre">default_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#MoodleExportDialog.default_name"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.MoodleExportDialog.default_name" title="Ссылка на это определение"></a></dt>
+<dd><p>Имя файла по умолчанию.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.dialogs.MoodleExportDialog.accept">
+<span class="sig-name descname"><span class="pre">accept</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/dialogs.html#MoodleExportDialog.accept"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.dialogs.MoodleExportDialog.accept" title="Ссылка на это определение"></a></dt>
+<dd><p>Спрашивает файл и сохраняет билеты.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.views.common">
+<span id="ticketgen-views-common"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.common</span></code><a class="headerlink" href="#module-ticketgen.views.common" title="Ссылка на этот заголовок"></a></h2>
+<p>Окно/виджеты: common.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.make_button">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">make_button</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tooltip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#make_button"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.make_button" title="Ссылка на это определение"></a></dt>
+<dd><p>Создаёт кнопку нужного вида: «», «primary», «danger» или «link».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>)</p></li>
+<li><p><strong>kind</strong> (<em>str</em>)</p></li>
+<li><p><strong>tooltip</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>PyQt6.QtWidgets.QPushButton</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.plural">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">plural</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#plural"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.plural" title="Ссылка на это определение"></a></dt>
+<dd><p>Подбирает форму слова по числу: plural(2, («билет», «билета», «билетов»)).</p>
+<p>Возвращает строку вида «2 билета».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number</strong> (<em>int</em>)</p></li>
+<li><p><strong>forms</strong> (<em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>, </em><em>str</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.set_error">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">set_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_error</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#set_error"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.set_error" title="Ссылка на это определение"></a></dt>
+<dd><p>Включает или выключает красную рамку у поля ввода.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>has_error</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.make_table">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">make_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stretch_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#make_table"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.make_table" title="Ссылка на это определение"></a></dt>
+<dd><p>Создаёт таблицу только для чтения с выделением целых строк.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>headers</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>stretch_column</strong> (<em>int</em>)</p></li>
+<li><p><strong>widths</strong> (<em>dict</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>PyQt6.QtWidgets.QTableWidget</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.icon">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">icon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#icon"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.icon" title="Ссылка на это определение"></a></dt>
+<dd><p>Иконка из папки views/icons (например, icon(«pencil»)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>PyQt6.QtGui.QIcon</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.fill_table">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">fill_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#fill_table"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.fill_table" title="Ссылка на это определение"></a></dt>
+<dd><p>Заполняет таблицу строками значений (всё приводится к тексту).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table</strong> (<em>PyQt6.QtWidgets.QTableWidget</em>)</p></li>
+<li><p><strong>rows</strong> (<em>list</em><em>[</em><em>list</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.show_error">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">show_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#show_error"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.show_error" title="Ссылка на это определение"></a></dt>
+<dd><p>Показывает окно с ошибкой.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.show_info">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">show_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#show_info"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.show_info" title="Ссылка на это определение"></a></dt>
+<dd><p>Показывает информационное окно.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.divider">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">divider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#divider"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.divider" title="Ссылка на это определение"></a></dt>
+<dd><p>Тонкая горизонтальная линия.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>PyQt6.QtWidgets.QFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.common.ConfirmDialog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">ConfirmDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#ConfirmDialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.ConfirmDialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>Окно подтверждения из макета: заголовок, текст, две кнопки.</p>
+<p>Крестик закрытия уже есть в рамке окна Windows, второй не нужен.</p>
+<p>title — крупный заголовок, body — пояснение, ok_text — красная кнопка.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>)</p></li>
+<li><p><strong>body</strong> (<em>str</em>)</p></li>
+<li><p><strong>ok_text</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.build_dialog">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">build_dialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dialog</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">footer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#build_dialog"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.build_dialog" title="Ссылка на это определение"></a></dt>
+<dd><p>Каркас окна из макета: заголовок, линия, тело, линия, нижние кнопки.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.confirm">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">confirm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#confirm"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.confirm" title="Ссылка на это определение"></a></dt>
+<dd><p>Спрашивает подтверждение. Первая строка текста — заголовок вопроса.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.format_dt">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">format_dt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#format_dt"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.format_dt" title="Ссылка на это определение"></a></dt>
+<dd><p>Дата из базы «2026-10-20 14:05» → «20.10.2026 14:05».</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.make_chip">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">make_chip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">difficulty_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#make_chip"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.make_chip" title="Ссылка на это определение"></a></dt>
+<dd><p>Метка сложности в виде «пилюли» (как Chip в макете).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>difficulty_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>PyQt6.QtWidgets.QLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.common.left_cell">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.common.</span></span><span class="sig-name descname"><span class="pre">left_cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/common.html#left_cell"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.common.left_cell" title="Ссылка на это определение"></a></dt>
+<dd><p>Ячейка таблицы: виджет у левого края с отступами 16px.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>PyQt6.QtWidgets.QWidget</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.views.widgets">
+<span id="ticketgen-views-widgets"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.widgets</span></code><a class="headerlink" href="#module-ticketgen.views.widgets" title="Ссылка на этот заголовок"></a></h2>
+<p>Свои виджеты: вкладки с анимированной линией и скруглённые выпадающие списки.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.AnimatedTabBar">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.widgets.</span></span><span class="sig-name descname"><span class="pre">AnimatedTabBar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#AnimatedTabBar"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.AnimatedTabBar" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QTabBar</span></code></p>
+<p>Панель вкладок с анимированной нижней линией.</p>
+<ul class="simple">
+<li><p>При наведении под вкладкой из центра вырастает светло-синяя линия,
+а когда курсор уходит, она плавно сжимается.</p></li>
+<li><p>Синяя линия выбранной вкладки не перескакивает, а плавно переезжает
+к новой вкладке.</p></li>
+</ul>
+<p>Линии рисуются в <code class="docutils literal notranslate"><span class="pre">paintEvent</span></code> поверх стандартной отрисовки, поэтому
+в стилях у вкладок нет своей нижней границы.</p>
+<p>Настраивает две анимации: переезд линии и рост линии наведения.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.AnimatedTabBar.tabLayoutChange">
+<span class="sig-name descname"><span class="pre">tabLayoutChange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#AnimatedTabBar.tabLayoutChange"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.AnimatedTabBar.tabLayoutChange" title="Ссылка на это определение"></a></dt>
+<dd><p>Вкладки перестроились: линия переезжает вслед за ними.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.AnimatedTabBar.resizeEvent">
+<span class="sig-name descname"><span class="pre">resizeEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#AnimatedTabBar.resizeEvent"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.AnimatedTabBar.resizeEvent" title="Ссылка на это определение"></a></dt>
+<dd><p>После изменения размера линия встаёт под выбранную вкладку.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.AnimatedTabBar.showEvent">
+<span class="sig-name descname"><span class="pre">showEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#AnimatedTabBar.showEvent"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.AnimatedTabBar.showEvent" title="Ссылка на это определение"></a></dt>
+<dd><p>При первом показе линия сразу стоит под выбранной вкладкой.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.AnimatedTabBar.mouseMoveEvent">
+<span class="sig-name descname"><span class="pre">mouseMoveEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#AnimatedTabBar.mouseMoveEvent"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.AnimatedTabBar.mouseMoveEvent" title="Ссылка на это определение"></a></dt>
+<dd><p>Следит, над какой вкладкой курсор.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.AnimatedTabBar.leaveEvent">
+<span class="sig-name descname"><span class="pre">leaveEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#AnimatedTabBar.leaveEvent"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.AnimatedTabBar.leaveEvent" title="Ссылка на это определение"></a></dt>
+<dd><p>Курсор ушёл с панели — линия наведения сжимается.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.AnimatedTabBar.paintEvent">
+<span class="sig-name descname"><span class="pre">paintEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#AnimatedTabBar.paintEvent"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.AnimatedTabBar.paintEvent" title="Ссылка на это определение"></a></dt>
+<dd><p>Рисует вкладки, затем линию наведения и синюю линию выбора.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.RowHoverHighlighter">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.widgets.</span></span><span class="sig-name descname"><span class="pre">RowHoverHighlighter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#RowHoverHighlighter"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.RowHoverHighlighter" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QObject</span></code></p>
+<p>Подсвечивает серым всю строку таблицы под курсором (как в макете).</p>
+<p>Стили Qt умеют подсвечивать только одну ячейку, а в строке правила
+есть поля ввода, которые сами перехватывают мышь. Поэтому строка
+вычисляется по движению мыши над таблицей и по входу в каждое поле.</p>
+<p>Подключается к таблице table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.RowHoverHighlighter.watch">
+<span class="sig-name descname"><span class="pre">watch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#RowHoverHighlighter.watch"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.RowHoverHighlighter.watch" title="Ссылка на это определение"></a></dt>
+<dd><p>Поле ввода в ячейке: при наведении на него подсвечивается строка row.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.RowHoverHighlighter.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#RowHoverHighlighter.reset"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.RowHoverHighlighter.reset" title="Ссылка на это определение"></a></dt>
+<dd><p>Снимает подсветку (перед перезаполнением таблицы).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.RowHoverHighlighter.eventFilter">
+<span class="sig-name descname"><span class="pre">eventFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#RowHoverHighlighter.eventFilter"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.RowHoverHighlighter.eventFilter" title="Ссылка на это определение"></a></dt>
+<dd><p>Следит за мышью над таблицей и над полями в ячейках.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.ComboPopupStyler">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ticketgen.views.widgets.</span></span><span class="sig-name descname"><span class="pre">ComboPopupStyler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#ComboPopupStyler"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.ComboPopupStyler" title="Ссылка на это определение"></a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">QObject</span></code></p>
+<p>Делает выпадающие списки всех QComboBox скруглёнными, как в макете.</p>
+<p>Окно списка в Qt по умолчанию квадратное, с рамкой и тенью Windows.
+Фильтр событий ловит каждый новый QComboBox и один раз убирает у окна
+списка рамку и фон, а скругление и цвета задаются в стилях (styles.py).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>Any</em>)</p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.ComboPopupStyler.eventFilter">
+<span class="sig-name descname"><span class="pre">eventFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#ComboPopupStyler.eventFilter"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.ComboPopupStyler.eventFilter" title="Ссылка на это определение"></a></dt>
+<dd><p>При первой «полировке» выпадающего списка настраивает его окно.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.style_combo_popup">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.widgets.</span></span><span class="sig-name descname"><span class="pre">style_combo_popup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">combo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#style_combo_popup"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.style_combo_popup" title="Ссылка на это определение"></a></dt>
+<dd><p>Убирает у окна списка рамку, тень и фон; пункты рисует делегат стилей.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>combo</strong> (<em>PyQt6.QtWidgets.QComboBox</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.widgets.install_combo_styler">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.widgets.</span></span><span class="sig-name descname"><span class="pre">install_combo_styler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/widgets.html#install_combo_styler"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.widgets.install_combo_styler" title="Ссылка на это определение"></a></dt>
+<dd><p>Включает скруглённые выпадающие списки во всём приложении.</p>
+</dd></dl>
+
+</section>
+<section id="module-ticketgen.views.styles">
+<span id="ticketgen-views-styles"></span>
+<h2>Модуль <code class="docutils literal notranslate"><span class="pre">ticketgen.views.styles</span></code><a class="headerlink" href="#module-ticketgen.views.styles" title="Ссылка на этот заголовок"></a></h2>
+<p>Окно/виджеты: styles.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ticketgen.views.styles.apply_light_theme">
+<span class="sig-prename descclassname"><span class="pre">ticketgen.views.styles.</span></span><span class="sig-name descname"><span class="pre">apply_light_theme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ticketgen/views/styles.html#apply_light_theme"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#ticketgen.views.styles.apply_light_theme" title="Ссылка на это определение"></a></dt>
+<dd><p>Светлая тема всегда, даже если в Windows включена тёмная.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="workers.html" class="btn btn-neutral float-left" title="Фоновые потоки (workers)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="app.html" class="btn btn-neutral float-right" title="Настройки, запуск и тестовые данные" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Авторские права 2026, Репенко Я. А., группа ИСП-341, ГБПОУ НСО «НЭМК». 
+      <span class="lastupdated">Обновлено: 05.11.2026.
+      </span></p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
