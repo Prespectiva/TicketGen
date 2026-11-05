@@ -374,7 +374,23 @@ class ImportDialog(QDialog):
         footer.addWidget(self.cancel_button)
         footer.addWidget(self.load_button)
         build_dialog(self, "Импорт вопросов из CSV", body, footer)
-        self.setFixedHeight(252)
+        self._fit_height()
+
+    def _fit_height(self):
+        """Подгоняет высоту окна под видимое содержимое.
+
+        Высота не задаётся числом: после показа баннеров и таблицы ошибок
+        окно само становится нужного размера, и Windows не выводит
+        предупреждение ``QWindowsWindow::setGeometry``.
+        """
+        self.setMinimumHeight(0)
+        self.setMaximumHeight(16777215)
+        layout = self.layout()
+        layout.activate()
+        height = self.sizeHint().height()
+        if layout.hasHeightForWidth():  # баннеры с переносом строк
+            height = max(height, layout.totalHeightForWidth(self.width()))
+        self.setFixedHeight(height)
 
     def _browse(self):
         """Диалог выбора файла."""
@@ -389,7 +405,7 @@ class ImportDialog(QDialog):
         set_error(self.path_edit, False)
         self.error_banner.setVisible(False)
         self.load_button.setEnabled(bool(self.path_edit.text().strip()))
-        self.setFixedHeight(252)
+        self._fit_height()
 
     def accept(self):
         """Загружает файл; при удаче показывает отчёт, и кнопка становится «Готово»."""
@@ -411,7 +427,7 @@ class ImportDialog(QDialog):
             )
             self.error_banner.setVisible(True)
             self.load_button.setEnabled(False)
-            self.setFixedHeight(336)
+            self._fit_height()
             return
         self._show_report()
 
@@ -433,7 +449,7 @@ class ImportDialog(QDialog):
         self.cancel_button.setVisible(False)
         self.load_button.setText("Готово")
         self.load_button.setEnabled(True)
-        self.setFixedHeight(524 if result.errors else 300)
+        self._fit_height()
 
     def _save_report(self):
         """Сохраняет список ошибок в текстовый файл."""
